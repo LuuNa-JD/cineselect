@@ -1,0 +1,2 @@
+class SeancesController < ApplicationController
+end
