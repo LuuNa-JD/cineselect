@@ -1,2 +1,16 @@
-<h1>Profiles#show</h1>
-<p>Find me in app/views/profiles/show.html.erb</p>
+<div class="container mt-2 p-4 ">
+  <div class="row justify-content-center align-items-center">
+    <div class="col-md-4 border shadow-sm p-4">
+      <h1 class="text-center">Mon Profile</h1>
+    </div>
+    <div class="text-center mt-4">
+      <%= image_tag(current_user.avatar, class: "avatar-large", alt: "avatar")%>
+    </div>
+    <div class="edit-profile text-center mt-3">
+      <%= link_to "Modifier le profile", edit_user_registration_path, class: "btn btn-primary rounded" %>
+    </div>
+    <div class="logout text-center mt-3">
+      <%= link_to "Se deconnecter", destroy_user_session_path, data: {turbo_method: :delete}, class: "btn btn-primary rounded" %>
+    </div>
+  </div>
+</div>
