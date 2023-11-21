@@ -1,0 +1,21 @@
+GENRES = {
+  Action: 28,
+  Aventure: 12,
+  Animation: 16,
+  Comédie: 35,
+  Crime: 80,
+  Documentaire: 99,
+  Drame: 18,
+  Familial: 10751,
+  Fantastique: 14,
+  Histoire: 36,
+  Horreur: 27,
+  Musique: 10402,
+  Mystère: 9648,
+  Romance: 10749,
+  Science_Fiction: 878,
+  Téléfilm: 10770,
+  Thriller: 53,
+  Guerre: 10752,
+  Western: 37
+}.freeze
