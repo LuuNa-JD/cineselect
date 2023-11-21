@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_11_20_222658) do
+ActiveRecord::Schema[7.0].define(version: 2023_11_21_152612) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -69,6 +69,10 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_20_222658) do
     t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "keyword"
+    t.string "seance_type"
+    t.string "watch_provider"
+    t.string "watch_region"
     t.index ["user_id"], name: "index_seances_on_user_id"
   end
 
