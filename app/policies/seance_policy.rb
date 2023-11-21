@@ -1,6 +1,10 @@
 class SeancePolicy < ApplicationPolicy
   class Scope < Scope
 
+    def default_action?
+      true
+    end
+
     def resolve
       scope.all
     end
