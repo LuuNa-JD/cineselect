@@ -11,6 +11,7 @@ class SeancesController < ApplicationController
     @user_platforms = UserPlatform.where(user: current_user)
     @favorites = Favorite.where(user: current_user)
     @movie_recommendations = session[:movie_recommendations]
+    @series_recommendations = session[:series_recommendations]
     authorize @seance
   end
 
@@ -80,7 +81,7 @@ class SeancesController < ApplicationController
   def map_watch_provider_to_id(provider_name)
     watch_providers = {
       'Netflix' => 8,
-      'Amazon Prime Video' => 9,
+      'Amazon Prime Video' => 119,
       'Disney+' => 337
     }
     watch_providers[provider_name]
