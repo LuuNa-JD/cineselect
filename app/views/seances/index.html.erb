@@ -1,8 +1,9 @@
-<% if session[:movie_recommendations] %>
-  <% session[:movie_recommendations].each do |movie| %>
+<% if session[:recommendations] %>
+  <% session[:recommendations].each do |movie| %>
     <div class="movie">
       <h2><%= movie["title"] %></h2>
       <p>Date de sortie: <%= movie["release_date"] %></p>
+      <p>Popularité: <%= movie["popularity"] %></p>
       <img src="<%= "https://image.tmdb.org/t/p/w500/#{movie["poster_path"]}" %>" alt="<%= movie["title"] %> poster">
     </div>
   <% end %>
