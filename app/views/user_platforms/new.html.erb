@@ -1,0 +1,5 @@
+<%= simple_form_for @user_platform do |f| %>
+  <%= f.collection_select :platform_id, @platforms, :id, :name, prompt: 'Select a platform' %>
+
+  <%= f.button :submit %>
+<% end %>

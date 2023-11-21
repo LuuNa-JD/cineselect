@@ -1,7 +1,5 @@
 class SeancesController < ApplicationController
 
-
-
   def index
     @seances = Seance.all
     authorize @seances
@@ -21,6 +19,7 @@ class SeancesController < ApplicationController
     @seance = Seance.new
     authorize @seance
   end
+
 
 
   def create
@@ -65,4 +64,5 @@ class SeancesController < ApplicationController
   def seance_params
     params.require(:seance).permit(:genre, :user_id) # Liste des attributs permis
   end
+
 end

@@ -3,8 +3,13 @@
     <div class="col-md-4 border shadow-sm mt-4 p-4">
       <h1 class="text-center">Ouvrir une seance</h1>
       <%= simple_form_for @seance, html: { class: 'custom-form' } do |f| %>
-        <%= f.input :genre, input_html: { class: 'form-control' } %>
-        <%= f.hidden_field :user_id, value: current_user.id %>
+        <%= f.select :genre, options_for_select(GENRES.map { |genre, id| [genre.to_s.capitalize, id] }), { prompt: 'Sélectionnez un genre' }, { class: 'form-control' } %>
+        <%# <%= f.input :origin_country, input_html: { class: 'form-control' } %>
+        <%= f.input :release_date, input_html: { class: 'form-control' } %>
+        <%= f.input :distributor, input_html: { class: 'form-control' } %>
+        <%= f.input :runtime, input_html: { class: 'form-control' } %>
+        <%= f.input :variety, input_html: { class: 'form-control' } %>
+        <%= f.input :tag, input_html: { class: 'form-control' } %>
         <%= f.submit "Submit", class: "btn btn-primary" %>
       <% end %>
     </div>

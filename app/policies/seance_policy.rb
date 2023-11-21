@@ -1,5 +1,6 @@
 class SeancePolicy < ApplicationPolicy
   class Scope < Scope
+
     def resolve
       scope.all
     end
@@ -12,6 +13,7 @@ class SeancePolicy < ApplicationPolicy
   def create?
     true
   end
+
 
   def index?
     true

@@ -7,6 +7,6 @@ class ProfilePolicy < ApplicationPolicy
   end
 
   def show?
-    true
+   @user == @record
   end
 end
