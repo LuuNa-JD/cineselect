@@ -9,4 +9,5 @@ Rails.application.routes.draw do
   resources :favorites, only: [:new, :create, :index, :destroy]
   resources :profiles, only: [:show]
   resources :user_platforms, only: [:new, :create, :destroy]
+
 end
