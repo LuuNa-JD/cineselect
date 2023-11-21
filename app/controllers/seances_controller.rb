@@ -5,16 +5,33 @@ class SeancesController < ApplicationController
     authorize @seances
   end
 
-
   def show
-    @seance = Seance.find(params[:id])
-    @user_platforms = UserPlatform.where(user: current_user)
-    @favorites = Favorite.where(user: current_user)
-    @movie_recommendations = session[:movie_recommendations]
-    @series_recommendations = session[:series_recommendations]
-    authorize @seance
-  end
+    item_id = params[:id]
+    tmdb_service = ThemoviedbService.new(api_key)
+    seance_type = params[:type]
 
+    if seance_type == 'film'
+      @item_details = tmdb_service.get_movie_details(item_id)
+      if @item_details
+        authorize :movie, :show?
+      else
+        redirect_to seances_path, alert: "Ce film n'existe pas."
+        return
+      end
+    elsif seance_type == 'série'
+      @item_details = tmdb_service.get_series_details(item_id)
+      if @item_details
+        authorize :series, :show?
+      else
+        redirect_to seances_path, alert: "Cette série n'existe pas."
+        return
+      end
+    else
+      authorize :seance, :show?
+      redirect_to seances_path, alert: "Type de média non spécifié ou non valide."
+      return
+    end
+  end
 
   def new
     @seance = Seance.new
@@ -39,9 +56,13 @@ class SeancesController < ApplicationController
 
 
     if params[:seance][:seance_type] == 'Film'
-      session[:recommendations] = tmdb_service.recommend_movies(preferences, watch_provider_name, watch_region).first(10)
+      session[:recommendations] = tmdb_service.recommend_movies(preferences, watch_provider_name, watch_region).first(20).map do |recommendation|
+        recommendation.merge({ "media_type" => "film" })
+      end
     elsif params[:seance][:seance_type] == 'Série'
-      session[:recommendations] = tmdb_service.recommend_series(preferences, watch_provider_name, watch_region).first(10)
+      session[:recommendations] = tmdb_service.recommend_series(preferences, watch_provider_name, watch_region).first(20).map do |recommendation|
+        recommendation.merge({ "media_type" => "série" })
+      end
     end
 
     redirect_to seances_path, notice: 'Seance was successfully created.'
@@ -86,6 +107,4 @@ class SeancesController < ApplicationController
     }
     watch_providers[provider_name]
   end
-
-
 end

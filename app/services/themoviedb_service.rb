@@ -18,7 +18,7 @@ class ThemoviedbService
 
     if response.success?
       movies = response.parsed_response["results"]
-      movies.first(10)
+      movies.first(20)
     else
       []
     end
@@ -33,10 +33,20 @@ class ThemoviedbService
 
     if response.success?
       series = response.parsed_response["results"]
-      series.first(10)
+      series.first(20)
     else
       []
     end
+  end
+
+  def get_movie_details(movie_id)
+    response = self.class.get("/movie/#{movie_id}", query: { api_key: @api_key })
+    response.success? ? response.parsed_response : nil
+  end
+
+  def get_series_details(series_id)
+    response = self.class.get("/tv/#{series_id}", query: { api_key: @api_key })
+    response.success? ? response.parsed_response : nil
   end
 
   # def get_streaming_info(movie_id)
