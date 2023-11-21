@@ -24,7 +24,7 @@ class ThemoviedbService
     end
   end
 
-  def recommend_series(preferences, watch_provider = nil, watch_region = nil, sort_by = 'popularity.desc')
+  def recommend_series(preferences, watch_provider, watch_region, sort_by = 'popularity.desc')
     query_params = { api_key: @api_key, sort_by: sort_by, watch_region: watch_region }
     query_params.merge!(map_preferences_to_query(preferences))
     query_params[:with_watch_providers] = map_watch_provider_to_id(watch_provider) if watch_provider.present?
@@ -55,7 +55,7 @@ class ThemoviedbService
   def map_watch_provider_to_id(provider_name)
     watch_providers = {
       'Netflix' => '8',
-      'Amazon Prime Video' => '9',
+      'Amazon Prime Video' => '119',
       'Disney+' => '337'
     }
     watch_providers[provider_name]
