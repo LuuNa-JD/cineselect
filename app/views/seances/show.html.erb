@@ -1,4 +1,3 @@
-
 <div class="container">
   <div class="row mt-4">
     <div class="col">
@@ -6,11 +5,11 @@
 
 <% if @item_details.present? %>
   <% if @item_details["title"].present? %>
-    <!-- Affichage pour les films -->
+
     <h1><%= @item_details["title"] %></h1>
     <p><%= @item_details["overview"] %></p>
   <% elsif @item_details["name"].present? %>
-    <!-- Affichage pour les séries -->
+
     <h1><%= @item_details["name"] %></h1>
     <p><%= @item_details["overview"] %></p>
   <% else %>
