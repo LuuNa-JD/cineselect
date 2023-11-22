@@ -1,3 +1,7 @@
+
+<div class="container">
+  <div class="row mt-4">
+    <div class="col">
 <% Rails.logger.debug "Item Details: #{@item_details}" %>
 
 <% if @item_details.present? %>
@@ -15,3 +19,7 @@
 <% else %>
   <p>Détails non disponibles.</p>
 <% end %>
+  <%= link_to "Ajouter à mes favoris", new_favorite_path(@movie), class: "btn btn-secondary mt-3" %>
+    </div>
+  </div>
+</div>

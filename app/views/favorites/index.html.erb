@@ -1,0 +1,7 @@
+<% @movies.each do |movie| %>
+  <%= form_tag("/favorites", method: "post") do %>
+    <%= hidden_field_tag 'movie_id', movie.id %>
+    <!-- Autres champs du formulaire -->
+    <%= submit_tag "Ajouter aux favoris" %>
+  <% end %>
+<% end %>
