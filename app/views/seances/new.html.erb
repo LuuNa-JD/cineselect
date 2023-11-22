@@ -16,6 +16,8 @@
         <%# <%= f.input :variety, input_html: { class: 'form-control' } %>
         <%= f.submit "Submit", class: "btn btn-primary" %>
       <% end %>
+
+      <%= link_to 'Profile', profile_path(current_user), class: "btn btn-secondary custom-button mt-2" %>
     </div>
   </div>
 </div>
