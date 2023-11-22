@@ -1,4 +1,6 @@
 class UserPlatformsController < ApplicationController
+  include PlatformHelper
+
   def new
     @user_platform = UserPlatform.new
     @platforms = Platform.all
@@ -6,22 +8,23 @@ class UserPlatformsController < ApplicationController
   end
 
   def create
-  @user_platform = UserPlatform.new(user_platform_params)
-  authorize @user_platform
+    platform_names = params[:user][:selected_platforms].reject(&:blank?)
+    selected_platforms = platform_names.map do |name|
+      { name: name, id: map_watch_provider_to_id(name) }
+    end
 
-  @user_platform.user = current_user
-
-  if @user_platform.save
-    redirect_to new_seance_path, notice: "Plateforme enregistrer avec succes"
-  else
-    render :new
+    current_user.update(selected_platforms: selected_platforms)
+    if current_user.save
+      redirect_to profile_path(current_user), notice: "Vos sélections de plateformes ont été enregistrées."
+    else
+      render :new
+    end
+    authorize current_user, :create?
   end
-end
-
 
   private
 
   def user_platform_params
-    params.require(:user_platform).permit(:platform_id)
+    params.require(:user).permit(platform_ids: [])
   end
 end

@@ -10,7 +10,6 @@ class User < ApplicationRecord
   has_one_attached :avatar
   after_commit :add_default_avatar, on: %i[create update]
 
-
   private
 
   def add_default_avatar
