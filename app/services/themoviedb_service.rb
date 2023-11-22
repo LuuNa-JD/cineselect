@@ -9,10 +9,15 @@ class ThemoviedbService
     @api_key = api_key
   end
 
-  def recommend_movies(preferences, watch_provider, watch_region, sort_by = 'popularity.desc')
-    query_params = { api_key: @api_key, sort_by: sort_by, watch_region: watch_region }
+  def recommend_movies(preferences, user, watch_region, watch_provider_ids, sort_by = 'popularity.desc')
+    query_params = {
+      api_key: @api_key,
+      sort_by: sort_by,
+      watch_region: watch_region,
+      with_watch_providers: watch_provider_ids.join('|')
+    }
+
     query_params.merge!(map_preferences_to_query(preferences))
-    query_params[:with_watch_providers] = map_watch_provider_to_id(watch_provider) if watch_provider.present?
 
     response = self.class.get("/discover/movie", query: query_params)
 
@@ -24,10 +29,16 @@ class ThemoviedbService
     end
   end
 
-  def recommend_series(preferences, watch_provider, watch_region, sort_by = 'popularity.desc')
-    query_params = { api_key: @api_key, sort_by: sort_by, watch_region: watch_region }
+  def recommend_series(preferences, user, watch_region, watch_provider_ids, sort_by = 'popularity.desc')
+    query_params = {
+      api_key: @api_key,
+      sort_by: sort_by,
+      watch_region: watch_region,
+      with_watch_providers: watch_provider_ids.join('|')
+    }
+
     query_params.merge!(map_preferences_to_query(preferences))
-    query_params[:with_watch_providers] = map_watch_provider_to_id(watch_provider) if watch_provider.present?
+
 
     response = self.class.get("/discover/tv", query: query_params)
 

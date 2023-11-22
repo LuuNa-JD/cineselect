@@ -1,5 +1,7 @@
-<%= simple_form_for @user_platform do |f| %>
-  <%= f.collection_select :platform_id, @platforms, :id, :name, prompt: 'Select a platform' %>
-
-  <%= f.button :submit %>
+<%= form_with(model: current_user, url: user_platforms_path, method: :post, local: true) do |f| %>
+  <% ['Netflix', 'Amazon Prime Video', 'Disney+'].each do |provider_name| %>
+    <%= f.check_box :selected_platforms, { multiple: true }, provider_name, nil %>
+    <%= f.label :selected_platforms, provider_name %>
+  <% end %>
+  <%= f.submit "Enregistrer les plateformes" %>
 <% end %>

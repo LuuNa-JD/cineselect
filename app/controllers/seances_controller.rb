@@ -45,25 +45,28 @@ class SeancesController < ApplicationController
     @seance = Seance.new(seance_params)
     tmdb_service = ThemoviedbService.new(api_key)
     preferences = build_preferences_hash(params[:seance])
+    user = current_user
 
     query_params = {}
 
-    watch_provider_name = params[:seance][:watch_provider]
     watch_region = params[:seance][:watch_region]
 
-    watch_provider_id = tmdb_service.map_watch_provider_to_id(watch_provider_name)
-    query_params[:with_watch_providers] = watch_provider_id if watch_provider_id.present?
-
+    watch_provider_ids = user.selected_platforms.map do |platform|
+      hash = eval(platform)
+      hash[:id]
+    end
 
     if params[:seance][:seance_type] == 'Film'
-      session[:recommendations] = tmdb_service.recommend_movies(preferences, watch_provider_name, watch_region).first(20).map do |recommendation|
+      session[:recommendations] = tmdb_service.recommend_movies(preferences, user, watch_region, watch_provider_ids).first(20).map do |recommendation|
         recommendation.merge({ "media_type" => "film" })
       end
     elsif params[:seance][:seance_type] == 'Série'
-      session[:recommendations] = tmdb_service.recommend_series(preferences, watch_provider_name, watch_region).first(20).map do |recommendation|
+      session[:recommendations] = tmdb_service.recommend_series(preferences, user, watch_region, watch_provider_ids).first(20).map do |recommendation|
         recommendation.merge({ "media_type" => "série" })
       end
     end
+
+    watch_providers_param = watch_provider_ids.join('|')
 
     redirect_to seances_path, notice: 'Seance was successfully created.'
     authorize @seance
