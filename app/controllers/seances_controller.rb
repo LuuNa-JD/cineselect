@@ -17,8 +17,8 @@ class SeancesController < ApplicationController
       else
         redirect_to seances_path, alert: "Ce film n'existe pas."
         return
-      ende
-    elsif seance_type == 'séri'
+      end
+    elsif seance_type == 'série'
       @item_details = tmdb_service.get_series_details(item_id)
       if @item_details
         authorize :series, :show?
