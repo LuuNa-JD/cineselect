@@ -1,0 +1,10 @@
+<% if @available_platforms.any? %>
+  <h2>Available Streaming Platforms</h2>
+  <ul>
+    <% @available_platforms.each do |platform| %>
+      <li><%= platform["name"] %></li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>No streaming platforms are available for this content.</p>
+<% end %>

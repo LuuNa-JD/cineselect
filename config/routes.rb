@@ -9,5 +9,5 @@ Rails.application.routes.draw do
   resources :favorites, only: [:new, :create, :index, :destroy]
   resources :profiles, only: [:show]
   resources :user_platforms, only: [:new, :create, :destroy]
-
+  get 'seances/:id/:type/streaming_platforms', to: 'seances#show_streaming_platforms', as: :streaming_platforms
 end

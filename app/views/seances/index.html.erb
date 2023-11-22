@@ -1,7 +1,7 @@
 <% if session[:recommendations] %>
   <% session[:recommendations].each do |movie| %>
     <div class="movie">
-      <h2><%= movie["title"] || movie["name"] %></h2>
+      <%= link_to movie["title"] || movie["name"], streaming_platforms_path(id: movie["id"], type: movie["media_type"]) %>
       <p>Date de sortie: <%= movie["release_date"] %></p>
       <p>Popularité: <%= movie["popularity"] %></p>
       <%= link_to image_tag("https://image.tmdb.org/t/p/w500/#{movie["poster_path"]}", alt: "#{movie["title"] || movie["name"]} poster"), seance_path(id: movie["id"], type: movie["media_type"]) %>

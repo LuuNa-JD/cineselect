@@ -76,7 +76,35 @@ class SeancesController < ApplicationController
   end
 
 
+  def show_streaming_platforms
+    item_id = params[:id]
+    seance_type = params[:type] == 'film' ? 'movie' : 'tv'
+    tmdb_service = ThemoviedbService.new(api_key)
+
+    @item_details = seance_type == 'movie' ? tmdb_service.get_movie_details(item_id) : tmdb_service.get_series_details(item_id)
+
+    if @item_details
+      @streaming_providers = tmdb_service.get_streaming_providers(item_id, seance_type)
+
+      user_streaming_ids = current_user.selected_platforms.map do |platform_string|
+        platform_hash = eval(platform_string)
+        platform_hash[:id]
+      end
+
+      @available_platforms = @streaming_providers.select do |provider|
+        user_streaming_ids.include?(provider["provider_id"].to_i)
+      end
+
+      @available_platforms.uniq! { |platform| platform["provider_id"] }
+      authorize Seance
+    else
+      redirect_to seances_path, alert: 'Détails non trouvés.'
+      return
+    end
+  end
+
   private
+
 
   def fetch_genres
     tmdb_service = ThemoviedbService.new(api_key)
@@ -102,7 +130,7 @@ class SeancesController < ApplicationController
 
 
   def seance_params
-    params.require(:seance).permit(:genre, :keyword, :user_id, :seance_type, :watch_provider, :watch_region)
+    params.require(:seance).permit(:genre, :keyword, :user_id, :seance_type)
   end
 
   def map_watch_provider_to_id(provider_name)

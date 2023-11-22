@@ -18,7 +18,6 @@ class ThemoviedbService
     }
 
     query_params.merge!(map_preferences_to_query(preferences))
-
     response = self.class.get("/discover/movie", query: query_params)
 
     if response.success?
@@ -38,8 +37,6 @@ class ThemoviedbService
     }
 
     query_params.merge!(map_preferences_to_query(preferences))
-
-
     response = self.class.get("/discover/tv", query: query_params)
 
     if response.success?
@@ -60,10 +57,6 @@ class ThemoviedbService
     response.success? ? response.parsed_response : nil
   end
 
-  # def get_streaming_info(movie_id)
-  #   self.class.get("/movie/#{movie_id}/watch/providers", query: { api_key: @api_key })
-  # end
-
   def get_all_genres
     response = self.class.get("/genre/movie/list", query: { api_key: @api_key })
     if response.success?
@@ -75,14 +68,31 @@ class ThemoviedbService
 
   def map_watch_provider_to_id(provider_name)
     watch_providers = {
-      'Netflix' => '8',
-      'Amazon Prime Video' => '119',
-      'Disney+' => '337'
+      'Netflix' => 8,
+      'Amazon Prime Video' => 119,
+      'Disney+' => 337
     }
     watch_providers[provider_name]
   end
 
+  def get_streaming_providers(item_id, type)
+    response = self.class.get("/#{type}/#{item_id}/watch/providers", query: { api_key: @api_key })
+    if response.success? && response.parsed_response['results']
+      response.parsed_response['results'].each_with_object([]) do |(_country, data), array|
+        next unless data['flatrate']
+
+        data['flatrate'].each do |provider|
+          array << { "provider_id" => provider["provider_id"].to_s, "name" => provider["provider_name"] }
+        end
+      end
+    else
+      []
+    end
+  end
+
+
   private
+
 
   def map_keywords_to_ids(keyword)
     keyword_ids = []
@@ -95,6 +105,7 @@ class ThemoviedbService
     keyword_ids
   end
 
+    # Mappage Generale
   def map_preferences_to_query(preferences)
     query_params = {}
 
@@ -107,16 +118,16 @@ class ThemoviedbService
       query_params[:with_keywords] = keyword_ids.join(',') if keyword_ids.any?
     end
 
-    # Mappage de l'acteur
-    if preferences[:actor].present?
-      actor_id = get_person_id(preferences[:actor])
-      query_params[:with_cast] = actor_id if actor_id
-    end
+    # # Mappage de l'acteur
+    # if preferences[:actor].present?
+    #   actor_id = get_person_id(preferences[:actor])
+    #   query_params[:with_cast] = actor_id if actor_id
+    # end
 
-    # Mappage de l'année
-    if preferences[:year].present?
-      query_params[:year] = preferences[:year]
-    end
+    # # Mappage de l'année
+    # if preferences[:year].present?
+    #   query_params[:year] = preferences[:year]
+    # end
 
     query_params
   end
