@@ -130,7 +130,7 @@ class SeancesController < ApplicationController
 
 
   def seance_params
-    params.require(:seance).permit(:genre, :keyword, :user_id, :seance_type)
+    params.require(:seance).permit(:genre, :keyword, :user_id, :seance_type, :actor, :year, :watch_region)
   end
 
   def map_watch_provider_to_id(provider_name)
