@@ -1,3 +1,5 @@
+require 'httparty'
+
 class SeancesController < ApplicationController
 
   def index
@@ -46,6 +48,7 @@ class SeancesController < ApplicationController
     tmdb_service = ThemoviedbService.new(api_key)
     preferences = build_preferences_hash(params[:seance])
     user = current_user
+    user_region = detect_user_region
 
     query_params = {}
 
@@ -57,11 +60,11 @@ class SeancesController < ApplicationController
     end
 
     if params[:seance][:seance_type] == 'Film'
-      session[:recommendations] = tmdb_service.recommend_movies(preferences, user, watch_region, watch_provider_ids).first(20).map do |recommendation|
+      session[:recommendations] = tmdb_service.recommend_movies(preferences, user, user_region, watch_provider_ids).first(20).map do |recommendation|
         recommendation.merge({ "media_type" => "film" })
       end
     elsif params[:seance][:seance_type] == 'Série'
-      session[:recommendations] = tmdb_service.recommend_series(preferences, user, watch_region, watch_provider_ids).first(20).map do |recommendation|
+      session[:recommendations] = tmdb_service.recommend_series(preferences, user, user_region, watch_provider_ids).first(20).map do |recommendation|
         recommendation.merge({ "media_type" => "série" })
       end
     end
@@ -109,5 +112,14 @@ class SeancesController < ApplicationController
       'Disney+' => 337
     }
     watch_providers[provider_name]
+  end
+
+  def detect_user_region
+    response = HTTParty.get("https://ipapi.co/json/")
+    if response.success?
+      JSON.parse(response.body)['country_code']
+    else
+      'US'
+    end
   end
 end
