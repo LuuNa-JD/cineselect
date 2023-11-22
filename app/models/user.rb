@@ -3,10 +3,10 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
-  has_many :favorite
-  has_many :seance
-  has_many :user_platform
-  has_many :platform, through: :user_platform
+  has_many :favorites
+  has_many :seances
+  has_many :user_platforms
+  has_many :platforms, through: :user_platforms
   has_one_attached :avatar
   after_commit :add_default_avatar, on: %i[create update]
 
@@ -25,4 +25,5 @@ class User < ApplicationRecord
       )
     end
   end
+
 end
