@@ -3,7 +3,7 @@ module PlatformHelper
     watch_providers = {
       'Netflix' => 8,
       'Amazon Prime Video' => 119,
-      'Disney+' => 337
+      'Disney' => 337
     }
     watch_providers[provider_name]
   end
@@ -13,7 +13,7 @@ module PlatformHelper
     id_to_watch_providers = {
       8 => 'Netflix',
       119 => 'Amazon Prime Video',
-      337 => 'Disney+'
+      337 => 'Disney'
     }
     id_to_watch_providers[provider_id]
   end
