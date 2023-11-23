@@ -17,7 +17,7 @@ class SeancesController < ApplicationController
       if @item_details
         authorize :movie, :show?
       else
-        redirect_to seances_path, alert: "Ce film n'existe pas."
+        redirect_to seances_path, alert: "Pas de resulat concluant."
         return
       end
     elsif seance_type == 'série'
@@ -25,7 +25,7 @@ class SeancesController < ApplicationController
       if @item_details
         authorize :series, :show?
       else
-        redirect_to seances_path, alert: "Cette série n'existe pas."
+        redirect_to seances_path, alert: "Pas de resulat concluant."
         return
       end
     else
@@ -54,10 +54,7 @@ class SeancesController < ApplicationController
 
     watch_region = params[:seance][:watch_region]
 
-    watch_provider_ids = user.selected_platforms.map do |platform|
-      hash = eval(platform)
-      hash[:id]
-    end
+    watch_provider_ids = user.platforms.pluck(:provider_id)
 
     if params[:seance][:seance_type] == 'Film'
       session[:recommendations] = tmdb_service.recommend_movies(preferences, user, user_region, watch_provider_ids).first(20).map do |recommendation|
