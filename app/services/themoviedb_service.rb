@@ -2,6 +2,8 @@ require 'httparty'
 
 class ThemoviedbService
   include HTTParty
+  include PlatformHelper
+
   base_uri 'api.themoviedb.org/3'
   debug_output $stdout
 
@@ -86,14 +88,14 @@ class ThemoviedbService
     end
   end
 
-  def map_watch_provider_to_id(provider_name)
-    watch_providers = {
-      'Netflix' => 8,
-      'Amazon Prime Video' => 119,
-      'Disney+' => 337
-    }
-    watch_providers[provider_name]
-  end
+  # def map_watch_provider_to_id(provider_name)
+  #   watch_providers = {
+  #     'Netflix' => 8,
+  #     'Amazon Prime Video' => 119,
+  #     'Disney+' => 337
+  #   }
+  #   watch_providers[provider_name]
+  # end
 
   def get_streaming_providers(item_id, type)
     response = self.class.get("/#{type}/#{item_id}/watch/providers", query: { api_key: @api_key })

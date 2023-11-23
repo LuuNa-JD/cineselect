@@ -3,6 +3,7 @@ class UserPlatformsController < ApplicationController
 
   def new
     @user_platform = UserPlatform.new
+    set_user_streaming_ids
     @platforms = Platform.all
     authorize @user_platform
   end

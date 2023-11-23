@@ -1,7 +1,29 @@
 <%= form_with(model: current_user, url: user_platforms_path, method: :post, local: true) do |f| %>
-  <% ['Netflix', 'Amazon Prime Video', 'Disney+'].each do |provider_name| %>
-    <%= f.check_box :selected_platforms, { multiple: true }, provider_name, nil %>
-    <%= f.label :selected_platforms, provider_name %>
+  <% ['Netflix', 'Amazon Prime Video', 'Disney+'].each_with_index do |provider_name, index| %>
+    <div class="platform-selection">
+      <%= image_tag "#{provider_name.downcase.gsub(' ', '_')}_logo.png",
+                    alt: "#{provider_name} logo",
+                    class: "platform-logo #{'selected' if @user_streaming_ids.include?(provider_name)}",
+                    data: { platform: provider_name, target: "hiddenField#{index}" } %>
+      <%= f.hidden_field :selected_platforms,
+                        name: 'user[selected_platforms][]',
+                        value: provider_name,
+                        id: "hiddenField#{index}",
+                        disabled: !@user_streaming_ids.include?(provider_name) %>
+    </div>
   <% end %>
   <%= f.submit "Enregistrer les plateformes" %>
 <% end %>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  document.querySelectorAll('.platform-logo').forEach(function(logo) {
+    logo.addEventListener('click', function() {
+      this.classList.toggle('selected');
+      var targetFieldId = this.dataset.target;
+      var hiddenField = document.getElementById(targetFieldId);
+      hiddenField.disabled = !hiddenField.disabled;
+    });
+  });
+});
+</script>
