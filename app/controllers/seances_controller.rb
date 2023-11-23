@@ -164,14 +164,7 @@ class SeancesController < ApplicationController
     params.require(:seance).permit(:genre, :keyword, :user_id, :seance_type, :actor, :year, :watch_region, :runtime, :origin_country)
   end
 
-  # def map_watch_provider_to_id(provider_name)
-  #   watch_providers = {
-  #     'Netflix' => 8,
-  #     'Amazon Prime Video' => 119,
-  #     'Disney+' => 337
-  #   }
-  #   watch_providers[provider_name]
-  # end
+
 
   def detect_user_region
     response = HTTParty.get("https://ipapi.co/json/")

@@ -27,7 +27,7 @@
         <%= f.input :year, as: :integer, input_html: { class: 'form-control', min: 1980, max: Time.now.year } %>
         <%= f.input :actor, collection: @actors, prompt: 'Sélectionnez un acteur', input_html: { class: 'form-control' } %>
         <%= f.input :runtime, collection: [['Moins de 60 min', 60], ['Moins de 90 min', 90], ['Moins de 120 min', 120]], prompt: 'Sélectionnez une durée', input_html: { class: 'form-control' } %>
-        <%= f.input :origin_country, label: 'Pays d\'origine', collection: @origin_country, prompt: 'Sélectionnez un pays', input_html: { class: 'form-control' } %>
+        <%= f.input :origin_country, label: 'Pays d'origine', collection: @origin_country, prompt: 'Sélectionnez un pays', input_html: { class: 'form-control' } %>
 
         <%= f.submit "Submit", class: "btn btn-primary" %>
       <% end %>
