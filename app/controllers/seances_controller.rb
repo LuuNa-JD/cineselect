@@ -52,7 +52,6 @@ class SeancesController < ApplicationController
 
     query_params = {}
 
-    watch_region = params[:seance][:watch_region]
 
     watch_provider_ids = user.platforms.pluck(:provider_id)
 
@@ -83,10 +82,7 @@ class SeancesController < ApplicationController
     if @item_details
       @streaming_providers = tmdb_service.get_streaming_providers(item_id, seance_type)
 
-      user_streaming_ids = current_user.selected_platforms.map do |platform_string|
-        platform_hash = eval(platform_string)
-        platform_hash[:id]
-      end
+      user_streaming_ids = current_user.platforms.pluck(:provider_id)
 
       @available_platforms = @streaming_providers.select do |provider|
         user_streaming_ids.include?(provider["provider_id"].to_i)
@@ -127,17 +123,9 @@ class SeancesController < ApplicationController
 
 
   def seance_params
-    params.require(:seance).permit(:genre, :keyword, :user_id, :seance_type, :actor, :year, :watch_region)
+    params.require(:seance).permit(:genre, :keyword, :user_id, :seance_type, :actor, :year)
   end
 
-  def map_watch_provider_to_id(provider_name)
-    watch_providers = {
-      'Netflix' => 8,
-      'Amazon Prime Video' => 119,
-      'Disney+' => 337
-    }
-    watch_providers[provider_name]
-  end
 
   def detect_user_region
     response = HTTParty.get("https://ipapi.co/json/")

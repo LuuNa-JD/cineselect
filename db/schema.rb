@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_11_23_010838) do
+ActiveRecord::Schema[7.0].define(version: 2023_11_23_013608) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -61,7 +61,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_23_010838) do
   create_table "seances", force: :cascade do |t|
     t.string "genre"
     t.string "origin_country"
-    t.date "release_date"
     t.string "distributor"
     t.integer "runtime"
     t.bigint "user_id", null: false
@@ -69,6 +68,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_23_010838) do
     t.datetime "updated_at", null: false
     t.string "keyword"
     t.string "seance_type"
+    t.integer "year"
     t.index ["user_id"], name: "index_seances_on_user_id"
   end
 
