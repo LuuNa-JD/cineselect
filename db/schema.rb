@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_11_22_142850) do
+ActiveRecord::Schema[7.0].define(version: 2023_11_23_163410) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -43,7 +43,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_22_142850) do
   end
 
   create_table "favorites", force: :cascade do |t|
-    t.integer "reelgood_id"
+    t.integer "tmdb_id"
     t.integer "variety"
     t.bigint "user_id", null: false
     t.datetime "created_at", null: false
@@ -53,7 +53,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_22_142850) do
 
   create_table "platforms", force: :cascade do |t|
     t.string "name"
-    t.integer "reelgood_service_id"
+    t.integer "provider_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -61,18 +61,17 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_22_142850) do
   create_table "seances", force: :cascade do |t|
     t.string "genre"
     t.string "origin_country"
-    t.date "release_date"
     t.string "distributor"
     t.integer "runtime"
-    t.integer "variety"
-    t.string "tag"
     t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "keyword"
     t.string "seance_type"
-    t.string "watch_provider"
-    t.string "watch_region"
+    t.integer "year"
+    t.string "production_companies"
+    t.string "actor"
+    t.string "search_type"
     t.index ["user_id"], name: "index_seances_on_user_id"
   end
 

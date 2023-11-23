@@ -2,6 +2,7 @@ require 'httparty'
 
 class SeancesController < ApplicationController
 
+
   def index
     @seances = Seance.all
     authorize @seances
@@ -35,9 +36,15 @@ class SeancesController < ApplicationController
     end
   end
 
+
+
   def new
     @seance = Seance.new
+    flash.now[:alert] = flash[:alert] if flash[:alert].present?
     @genres = fetch_genres
+    @origin_country = fetch_origin_countries
+    @actors = fetch_popular_actors
+    @runtime = []
     authorize @seance
   end
 
@@ -49,7 +56,7 @@ class SeancesController < ApplicationController
     preferences = build_preferences_hash(params[:seance])
     user = current_user
     user_region = detect_user_region
-
+    authorize @seance
     query_params = {}
 
     watch_region = params[:seance][:watch_region]
@@ -69,10 +76,14 @@ class SeancesController < ApplicationController
       end
     end
 
+    if session[:recommendations].empty?
+      redirect_to new_seance_path, flash: { alert: "Nous n'avons pas trouvé votre bonheur... Veuillez réessayer" }
+      return
+    end
+  # "Nous n'avons pas trouvé votre bonheur... Veuillez réessayer"
     watch_providers_param = watch_provider_ids.join('|')
 
     redirect_to seances_path, notice: 'Seance was successfully created.'
-    authorize @seance
   end
 
 
@@ -103,6 +114,14 @@ class SeancesController < ApplicationController
     end
   end
 
+  def search_actors
+    search_query = params[:query]
+    tmdb_service = ThemoviedbService.new(ENV['TMDB_API_KEY'])
+    actors = tmdb_service.search_actors(query)
+    render json: actors
+  end
+
+
   private
 
 
@@ -111,12 +130,24 @@ class SeancesController < ApplicationController
     tmdb_service.get_all_genres
   end
 
+  def fetch_popular_actors
+    tmdb_service = ThemoviedbService.new(api_key)
+    tmdb_service.get_popular_actors
+  end
+
+  def fetch_origin_countries
+    tmdb_service = ThemoviedbService.new(api_key)
+    tmdb_service.get_countries
+  end
+
   def build_preferences_hash(seance_params)
     {
       genre: seance_params[:genre],
       keyword: seance_params[:keyword],
       actor: seance_params[:actor],
-      year: seance_params[:year]
+      year: seance_params[:year],
+      origin_country: seance_params[:origin_country],
+      runtime: seance_params[:runtime],
     }
   end
 
@@ -130,7 +161,7 @@ class SeancesController < ApplicationController
 
 
   def seance_params
-    params.require(:seance).permit(:genre, :keyword, :user_id, :seance_type, :actor, :year, :watch_region)
+    params.require(:seance).permit(:genre, :keyword, :user_id, :seance_type, :actor, :year, :watch_region, :runtime, :origin_country)
   end
 
   def map_watch_provider_to_id(provider_name)

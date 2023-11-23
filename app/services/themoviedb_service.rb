@@ -66,6 +66,26 @@ class ThemoviedbService
     end
   end
 
+  def get_popular_actors
+    response = self.class.get("/person/popular", query: { api_key: @api_key })
+    if response.success?
+      response.parsed_response["results"].map { |actor| [actor["name"], actor["id"]] }
+    else
+      []
+    end
+  end
+
+  def get_countries
+    response = self.class.get("/configuration/countries", query: { api_key: @api_key })
+    if response.success?
+      countries_data = response.parsed_response
+      country_names = countries_data.map { |country| [country['english_name'], country['iso_3166_1']] }
+      return country_names
+    else
+      return []
+    end
+  end
+
   def map_watch_provider_to_id(provider_name)
     watch_providers = {
       'Netflix' => 8,
@@ -118,16 +138,17 @@ class ThemoviedbService
       query_params[:with_keywords] = keyword_ids.join(',') if keyword_ids.any?
     end
 
+    # Mappage des pays d'origine
+    query_params[:with_origin_country] = preferences[:origin_country] if preferences[:origin_country].present?
+
+    # Mappage de la durée
+    query_params['with_runtime.lte'] = preferences[:runtime] if preferences[:runtime].present?
+
     # # Mappage de l'acteur
-    # if preferences[:actor].present?
-    #   actor_id = get_person_id(preferences[:actor])
-    #   query_params[:with_cast] = actor_id if actor_id
-    # end
+    query_params[:with_cast] = preferences[:actor] if preferences[:actor].present?
 
     # # Mappage de l'année
-    # if preferences[:year].present?
-    #   query_params[:year] = preferences[:year]
-    # end
+    query_params[:year] = preferences[:year] if preferences[:year].present?
 
     query_params
   end
