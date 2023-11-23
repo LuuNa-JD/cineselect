@@ -1,7 +1,7 @@
 <%= form_with(model: current_user, url: user_platforms_path, method: :post, local: true) do |f| %>
   <% ['Netflix', 'Amazon Prime Video', 'Disney+'].each_with_index do |provider_name, index| %>
     <div class="platform-selection">
-      <%= image_tag "#{provider_name.downcase.gsub(' ', '_')}_logo.png",
+      <%= image_tag "#{providername.downcase.gsub(' ', '')}_logo.png",
                     alt: "#{provider_name} logo",
                     class: "platform-logo #{'selected' if @user_streaming_ids.include?(provider_name)}",
                     data: { platform: provider_name, target: "hiddenField#{index}" } %>
@@ -26,5 +26,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
 });
+
 </script>
 #hi
+
