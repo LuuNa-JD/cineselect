@@ -10,7 +10,8 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_11_23_013608) do
+ActiveRecord::Schema[7.0].define(version: 2023_11_23_163410) do
+
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -69,6 +70,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_23_013608) do
     t.string "keyword"
     t.string "seance_type"
     t.integer "year"
+    t.string "production_companies"
+    t.string "actor"
+    t.string "search_type"
     t.index ["user_id"], name: "index_seances_on_user_id"
   end
 

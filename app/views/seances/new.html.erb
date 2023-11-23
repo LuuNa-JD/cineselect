@@ -4,12 +4,31 @@
       <h1 class="text-center">Ouvrir une seance</h1>
       <%= simple_form_for @seance, html: { class: 'custom-form' } do |f| %>
         <%= f.input :seance_type, collection: ['Film', 'Série'], prompt: 'Sélectionnez un type', input_html: { class: 'form-control' } %>
-        <%= f.input :genre, collection: @genres, prompt: 'Sélectionnez un genre', input_html: { class: 'form-control' } %>
-        <%= f.input :keyword, input_html: { class: 'form-control' },  disabled: true  %>
-        <%# <%= f.input :origin_country, input_html: { class: 'form-control' } %>
-        <%# <%= f.input :release_date, as: :date, input_html: { class: 'form-control' } %>
-        <%# <%= f.input :distributor, input_html: { class: 'form-control' } %>
-        <%# <%= f.input :runtime, input_html: { class: 'form-control' } %>
+        <div class="form-check">
+          <%= f.radio_button :search_type, 'genre', id: 'search-by-genre', checked: true %>
+          <%= f.label :search_type_genre, 'Rechercher par genre' %>
+        </div>
+        <div class="form-check">
+          <%= f.radio_button :search_type, 'keyword', id: 'search-by-keyword' %>
+          <%= f.label :search_type_keyword, 'Rechercher par mot-clé' %>
+        </div>
+
+        <!-- Genre input -->
+        <div id="genre-input">
+          <%= f.input :genre, collection: @genres, prompt: 'Sélectionnez un genre', input_html: { class: 'form-control' } %>
+        </div>
+
+        <!-- Keyword input -->
+        <div id="keyword-input" style="display: none;">
+          <%= f.input :keyword, input_html: { class: 'form-control' } %>
+        </div>
+
+        <!-- Other inputs -->
+        <%= f.input :year, as: :integer, input_html: { class: 'form-control', min: 1980, max: Time.now.year } %>
+        <%= f.input :actor, collection: @actors, prompt: 'Sélectionnez un acteur', input_html: { class: 'form-control' } %>
+        <%= f.input :runtime, collection: [['Moins de 60 min', 60], ['Moins de 90 min', 90], ['Moins de 120 min', 120]], prompt: 'Sélectionnez une durée', input_html: { class: 'form-control' } %>
+        <%= f.input :origin_country, label: 'Pays d'origine', collection: @origin_country, prompt: 'Sélectionnez un pays', input_html: { class: 'form-control' } %>
+
         <%= f.submit "Submit", class: "btn btn-primary" %>
       <% end %>
 
@@ -17,3 +36,29 @@
     </div>
   </div>
 </div>
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+  $(document).ready(function () {
+    function toggleInputs() {
+      if ($('#search-by-genre').is(':checked')) {
+        $('#genre-input').show();
+        $('#keyword-input').hide();
+        $('#seance_keyword').prop('disabled', false);
+      } else {
+        $('#genre-input').hide();
+        $('#keyword-input').show();
+        $('#seance_genre').prop('disabled', false);
+      }
+    }
+
+
+    toggleInputs();
+
+
+    $('input[name="seance[search_type]"]').change(function () {
+      toggleInputs();
+    });
+  });
+</script>

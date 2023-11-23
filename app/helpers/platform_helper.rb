@@ -17,4 +17,11 @@ module PlatformHelper
     }
     id_to_watch_providers[provider_id]
   end
+
+  def set_user_streaming_ids
+    @user_streaming_ids = current_user.selected_platforms.map do |platform_string|
+      platform_hash = eval(platform_string)
+      platform_hash[:id]
+    end
+  end
 end
