@@ -51,18 +51,13 @@ class ThemoviedbService
 
   def get_movie_details(movie_id)
     response = self.class.get("/movie/#{movie_id}", query: { api_key: @api_key })
-    parsed_response = response.success? ? response.parsed_response : nil
-    sleep(0.50)
-    parsed_response
+    response.success? ? response.parsed_response : nil
   end
 
   def get_series_details(series_id)
     response = self.class.get("/tv/#{series_id}", query: { api_key: @api_key })
-    parsed_response = response.success? ? response.parsed_response : nil
-    sleep(0.50)
-    parsed_response
+    response.success? ? response.parsed_response : nil
   end
-
 
   def get_all_genres
     response = self.class.get("/genre/movie/list", query: { api_key: @api_key })
@@ -93,11 +88,10 @@ class ThemoviedbService
     end
   end
 
-
+  
 
   def get_streaming_providers(item_id, type)
     response = self.class.get("/#{type}/#{item_id}/watch/providers", query: { api_key: @api_key })
-    sleep(0.25)
     if response.success? && response.parsed_response['results']
       response.parsed_response['results'].each_with_object([]) do |(_country, data), array|
         next unless data['flatrate']
@@ -109,30 +103,6 @@ class ThemoviedbService
     else
       []
     end
-  end
-
-  def search_movies(query, watch_provider_ids)
-    query_params = {
-      api_key: @api_key,
-      query: query,
-      with_watch_providers: watch_provider_ids.join('|')
-    }
-
-    response = self.class.get("/search/movie", query: query_params)
-    sleep(0.25)
-    return response
-  end
-
-  def search_tv_shows(query, watch_provider_ids)
-    query_params = {
-      api_key: @api_key,
-      query: query,
-      with_watch_providers: watch_provider_ids.join('|')
-    }
-
-    response = self.class.get("/search/tv", query: query_params)
-    sleep(0.25)
-    return response
   end
 
 

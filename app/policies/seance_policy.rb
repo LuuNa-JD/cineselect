@@ -30,8 +30,4 @@ class SeancePolicy < ApplicationPolicy
   def show_streaming_platforms?
     true
   end
-
-  def search?
-    true
-  end
 end

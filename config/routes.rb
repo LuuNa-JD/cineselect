@@ -4,11 +4,7 @@ Rails.application.routes.draw do
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Defines the root path route ("/")
-  resources :seances do
-    collection do
-      get 'search'
-    end
-  end
+  # root "articles#index"
   resources :seances, only: [:new, :create, :index, :show]
   resources :favorites, only: [:new, :create, :index, :destroy]
   resources :profiles, only: [:show]

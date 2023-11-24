@@ -1,48 +1,28 @@
 <div class="container">
-  <h2>Favorites Movies</h2>
   <table class="table table-bordered">
+    <thead class="thead-dark">
+      <tr>
+        <th>Titre</th>
+        <th>Aperçu</th>
+      </tr>
+    </thead>
     <tbody>
-      <% @favorites_movies.each do |movie| %>
-        <tr>
-          <td>
-            <h3><%= movie["title"] %></h3>
-            <p><%= movie["overview"] %></p>
-          </td>
-          <td>
-            <% if movie[:tmdb_id].present? %>
-              <%= link_to streaming_platforms_path(id: movie[:tmdb_id], type: 'film') do %>
-                <%= image_tag "https://image.tmdb.org/t/p/w500/#{movie["poster_path"]}", alt: "#{movie["title"]} poster", class: "img-fluid rounded" %>
+      <% @favorites_details.each do |favorite_detail| %>
+        <% if favorite_detail.present? %>
+          <tr>
+            <td>
+              <% if favorite_detail["title"].present? || favorite_detail["name"].present? %>
+                <h3><%= favorite_detail["title"] || favorite_detail["name"] %></h3>
+              <% else %>
+                <p class="text-muted">Détails non disponibles.</p>
               <% end %>
-            <% end %>
-            <%= form_with(url: favorite_path(movie[:favorite_id]), method: :delete) do %>
-              <%= submit_tag 'Delete', data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
-            <% end %>
-          </td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
-
-  <h2>Favorites Series</h2>
-  <table class="table table-bordered">
-    <tbody>
-      <% @favorites_series.each do |series| %>
-        <tr>
-          <td>
-            <h3><%= series["title"] %></h3>
-            <p><%= series["overview"] %></p>
-          </td>
-          <td>
-            <% if series[:tmdb_id].present? %>
-              <%= link_to streaming_platforms_path(id: series[:tmdb_id], type: 'series') do %>
-                <%= image_tag "https://image.tmdb.org/t/p/w500/#{series["poster_path"]}", alt: "#{series["title"]} poster", class: "img-fluid rounded" %>
-              <% end %>
-            <% end %>
-            <%= form_with(url: favorite_path(series[:favorite_id]), method: :delete) do %>
-              <%= submit_tag 'Delete', data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
-            <% end %>
-          </td>
-        </tr>
+              <p><%= favorite_detail["overview"] %></p>
+            </td>
+            <td>
+              <%= image_tag "https://image.tmdb.org/t/p/w500/#{favorite_detail["poster_path"]}", alt: "#{favorite_detail["title"] || favorite_detail["name"]} poster", class: "img-fluid rounded" %>
+            </td>
+          </tr>
+        <% end %>
       <% end %>
     </tbody>
   </table>

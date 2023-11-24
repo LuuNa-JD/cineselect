@@ -70,7 +70,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_24_002005) do
     t.string "keyword"
     t.string "seance_type"
     t.integer "year"
-    t.string "production_companies"
     t.string "actor"
     t.string "search_type"
     t.index ["user_id"], name: "index_seances_on_user_id"
