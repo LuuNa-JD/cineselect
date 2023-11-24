@@ -1,0 +1,22 @@
+<!-- Votre formulaire de recherche actuel -->
+<%= form_with url: search_seances_path, method: :get, local: true do |form| %>
+  <%= form.label :query, 'Recherche de films ou séries:' %>
+  <%= form.text_field :query %>
+
+  <%= form.label :type, 'Choisir un type:' %>
+  <%= form.select :type, [['Film', 'movie'], ['Série', 'tv']] %>
+
+  <%= form.submit 'Rechercher' %>
+<% end %>
+
+<div id="search-results">
+  <% if @results.present? %>
+    <ul>
+      <% @results.each do |result| %>
+        <li><%= result.title || result.name %> - <%= result.release_date || result.first_air_date %></li>
+      <% end %>
+    </ul>
+  <% else %>
+    <p>Aucun résultat trouvé.</p>
+  <% end %>
+</div>
