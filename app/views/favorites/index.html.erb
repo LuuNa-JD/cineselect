@@ -1,7 +1,16 @@
-<% @movies.each do |movie| %>
-  <%= form_tag("/favorites", method: "post") do %>
-    <%= hidden_field_tag 'movie_id', movie.id %>
-    <!-- Autres champs du formulaire -->
-    <%= submit_tag "Ajouter aux favoris" %>
+<% @favorites_details.each do |favorite_detail| %>
+  <% if favorite_detail.present? %>
+    <div class="favorite">
+      <% if favorite_detail["title"].present? %>
+        <h3><%= favorite_detail["title"] %></h3>
+        <p><%= favorite_detail["overview"] %></p>
+      <% elsif favorite_detail["name"].present? %>
+        <h3><%= favorite_detail["name"] %></h3>
+        <p><%= favorite_detail["overview"] %></p>
+      <% else %>
+        <p>Détails non disponibles.</p>
+      <% end %>
+      <%= image_tag "https://image.tmdb.org/t/p/w500/#{favorite_detail["poster_path"]}", alt: "#{favorite_detail["title"] || favorite_detail["name"]} poster" %>
+    </div>
   <% end %>
 <% end %>
