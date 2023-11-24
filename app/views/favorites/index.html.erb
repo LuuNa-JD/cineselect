@@ -1,29 +1,35 @@
 <div class="container">
-  <table class="table table-bordered">
-    <thead class="thead-dark">
-      <tr>
-        <th>Titre</th>
-        <th>Aperçu</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @favorites_details.each do |favorite_detail| %>
-        <% if favorite_detail.present? %>
-          <tr>
-            <td>
-              <% if favorite_detail["title"].present? || favorite_detail["name"].present? %>
-                <h3><%= favorite_detail["title"] || favorite_detail["name"] %></h3>
-              <% else %>
-                <p class="text-muted">Détails non disponibles.</p>
-              <% end %>
-              <p><%= favorite_detail["overview"] %></p>
-            </td>
-            <td>
-              <%= image_tag "https://image.tmdb.org/t/p/w500/#{favorite_detail["poster_path"]}", alt: "#{favorite_detail["title"] || favorite_detail["name"]} poster", class: "img-fluid rounded" %>
-            </td>
-          </tr>
+  <div class="table-responsive">
+    <table class="table table-bordered">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">Titre</th>
+          <th scope="col">Aperçu</th>
+          <th scope="col">Détails</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @favorites_details.each do |favorite_detail| %>
+          <% if favorite_detail.present? %>
+            <tr>
+              <td>
+                <% if favorite_detail["title"].present? || favorite_detail["name"].present? %>
+                  <h5><%= favorite_detail["title"] || favorite_detail["name"] %></h5>
+                <% else %>
+                  <p class="text-muted">Détails non disponibles.</p>
+                <% end %>
+                <p><%= favorite_detail["overview"] %></p>
+              </td>
+              <td>
+                <%= image_tag "https://image.tmdb.org/t/p/w500/#{favorite_detail["poster_path"]}", alt: "#{favorite_detail["title"] || favorite_detail["name"]} poster", class: "img-fluid rounded" %>
+              </td>
+              <td class="text-center">
+                <a href="<%= seance_path(id: favorite_detail["id"], type: "film") %>" class="btn btn-primary btn-sm" style="max-width: 200px; width: 100%;">Voir les détails</a>
+              </td>
+            </tr>
+          <% end %>
         <% end %>
-      <% end %>
-    </tbody>
-  </table>
+      </tbody>
+    </table>
+  </div>
 </div>
