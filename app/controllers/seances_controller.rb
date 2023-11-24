@@ -80,7 +80,6 @@ class SeancesController < ApplicationController
       redirect_to new_seance_path, flash: { alert: "Nous n'avons pas trouvé votre bonheur... Veuillez réessayer" }
       return
     end
-  # "Nous n'avons pas trouvé votre bonheur... Veuillez réessayer"
     watch_providers_param = watch_provider_ids.join('|')
 
     redirect_to seances_path, notice: 'Seance was successfully created.'
@@ -114,13 +113,48 @@ class SeancesController < ApplicationController
     end
   end
 
-  def search_actors
-    search_query = params[:query]
-    tmdb_service = ThemoviedbService.new(ENV['TMDB_API_KEY'])
-    actors = tmdb_service.search_actors(query)
-    render json: actors
-  end
+  def search
+    query = params[:query]
+    search_type = params[:type] || 'movie'
 
+    user_streaming_platforms = current_user.selected_platforms.map do |platform_str|
+      eval(platform_str)[:id]
+    end
+
+    Rails.logger.debug("Query: #{query}")
+    Rails.logger.debug("Search Type: #{search_type}")
+    Rails.logger.debug("User Streaming Platforms: #{user_streaming_platforms}")
+
+    if query.present? && user_streaming_platforms.any?
+      tmdb_service = ThemoviedbService.new(api_key)
+      if search_type == 'tv'
+        response = tmdb_service.search_tv_shows(query, user_streaming_platforms)
+      else
+        response = tmdb_service.search_movies(query, user_streaming_platforms)
+      end
+
+      Rails.logger.debug("API Response: #{response}")
+
+      @search_results = response.parsed_response
+
+      if @search_results['results'].is_a?(Array)
+        @filtered_results = @search_results['results'].select do |result|
+          providers = tmdb_service.get_streaming_providers(result['id'], search_type)
+          user_providers = providers.map { |provider| provider['provider_id'] }
+          (user_providers & user_streaming_platforms).any?
+        end
+
+        @search_results['results'] = @filtered_results
+      else
+        @search_results['results'] = []
+      end
+    else
+      @search_results = {"results" => []}
+    end
+
+    authorize Seance
+    response = { search_results: @search_results }
+  end
 
   private
 
