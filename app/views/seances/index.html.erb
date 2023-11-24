@@ -5,6 +5,8 @@
       <p>Date de sortie: <%= movie["release_date"] %></p>
       <p>Popularité: <%= movie["popularity"] %></p>
       <%= link_to image_tag("https://image.tmdb.org/t/p/w500/#{movie["poster_path"]}", alt: "#{movie["title"] || movie["name"]} poster"), seance_path(id: movie["id"], type: movie["media_type"]) %>
+      <%= button_to 'Add to Favorites', favorites_path, method: :post, params: { tmdb_id: movie["id"], media_type: movie["media_type"] } %>
+
     </div>
   <% end %>
 <% end %>

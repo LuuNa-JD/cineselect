@@ -21,7 +21,7 @@ class SeancesController < ApplicationController
         redirect_to seances_path, alert: "Ce film n'existe pas."
         return
       end
-    elsif seance_type == 'série'
+    elsif seance_type == 'serie'
       @item_details = tmdb_service.get_series_details(item_id)
       if @item_details
         authorize :series, :show?
@@ -72,7 +72,7 @@ class SeancesController < ApplicationController
       end
     elsif params[:seance][:seance_type] == 'Série'
       session[:recommendations] = tmdb_service.recommend_series(preferences, user, user_region, watch_provider_ids).first(20).map do |recommendation|
-        recommendation.merge({ "media_type" => "série" })
+        recommendation.merge({ "media_type" => "serie" })
       end
     end
 
