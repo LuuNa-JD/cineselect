@@ -1,14 +1,24 @@
 <div class="container">
   <div class="row mt-4">
     <div class="col">
-      <% if @item_details.present? %>
-        <h1><%= @item_details["title"] || @item_details["name"] %></h1>
-        <p><%= @item_details["overview"] %></p>
+<% Rails.logger.debug "Item Details: #{@item_details}" %>
 
-        <%= button_to 'Add to Favorites', favorites_path, method: :post, params: { tmdb_id: @item_details["id"], media_type: @item_details["media_type"] } %>
-      <% else %>
-        <p>Détails non disponibles.</p>
-      <% end %>
+<% if @item_details.present? %>
+  <% if @item_details["title"].present? %>
+
+    <h1><%= @item_details["title"] %></h1>
+    <p><%= @item_details["overview"] %></p>
+  <% elsif @item_details["name"].present? %>
+
+    <h1><%= @item_details["name"] %></h1>
+    <p><%= @item_details["overview"] %></p>
+  <% else %>
+    <p>Détails non disponibles.</p>
+  <% end %>
+<% else %>
+  <p>Détails non disponibles.</p>
+<% end %>
+  <%= link_to "Ajouter à mes favoris", new_favorite_path(@movie), class: "btn btn-secondary mt-3" %>
     </div>
   </div>
 </div>

@@ -16,7 +16,6 @@ class SeancesController < ApplicationController
     if seance_type == 'film'
       @item_details = tmdb_service.get_movie_details(item_id)
       if @item_details
-        @item_details["media_type"] = 'film' # Ajouter explicitement le media_type
         authorize :movie, :show?
       else
         redirect_to seances_path, alert: "Ce film n'existe pas."
@@ -25,7 +24,6 @@ class SeancesController < ApplicationController
     elsif seance_type == 'serie'
       @item_details = tmdb_service.get_series_details(item_id)
       if @item_details
-        @item_details["media_type"] = 'serie' # Ajouter explicitement le media_type
         authorize :series, :show?
       else
         redirect_to seances_path, alert: "Cette série n'existe pas."
@@ -37,6 +35,8 @@ class SeancesController < ApplicationController
       return
     end
   end
+
+
 
   def new
     @seance = Seance.new
