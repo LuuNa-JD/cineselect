@@ -1,30 +1,42 @@
-<%= form_with(model: current_user, url: user_platforms_path, method: :post, local: true) do |f| %>
-  <% ['Netflix', 'Amazon Prime Video', 'Disney'].each_with_index do |provider_name, index| %>
-    <div class="platform-selection">
-      <%= image_tag "#{provider_name.downcase.gsub(' ', '_')}_logo.png",
-                    alt: "#{provider_name} logo",
-                    class: "platform-logo #{'selected' if @user_streaming_ids.include?(provider_name)}",
-                    data: { platform: provider_name, target: "hiddenField#{index}" } %>
-      <%= f.hidden_field :selected_platforms,
+<div class="container mt-4 p-4">
+  <div class="row justify-content-center">
+    <div class="col-md-4 border shadow-sm mt-4 p-4">
+      <h1 class="text-center">Streaming Platforms</h1>
+      <%= form_with(model: current_user, url: user_platforms_path, method: :post, local: true) do |f| %>
+
+      <div data-controller="platform">
+        <div data-platform-target="platformElement">
+          <% PLATFORMS.each_with_index do |provider_name, index| %>
+          <div class="platform-selection">
+            <%= image_tag "#{provider_name[:name].downcase.gsub(' ', '_')}_logo.png",
+                    alt: "#{provider_name[:name]} logo",
+                    class: "platform-logo #{'selected' if @user_streaming_ids.include?(provider_name[:id])}",
+                    data: { platform: provider_name[:name], target: "hiddenField#{index}" } %>
+            <%= f.hidden_field :selected_platforms,
                         name: 'user[selected_platforms][]',
-                        value: provider_name,
+                        value: provider_name[:name],
                         id: "hiddenField#{index}",
-                        disabled: !@user_streaming_ids.include?(provider_name) %>
+                        disabled: !@user_streaming_ids.include?(provider_name[:id]) %>
+          </div>
+          <% end %>
+          <%= f.submit "Enregistrer les plateformes" %>
+        </div>
+      </div>
+      <% end %>
     </div>
-  <% end %>
-  <%= f.submit "Enregistrer les plateformes" %>
-<% end %>
+  </div>
+</div>
+
 
 <script>
-document.addEventListener('DOMContentLoaded', function() {
-  document.querySelectorAll('.platform-logo').forEach(function(logo) {
-    logo.addEventListener('click', function() {
-      this.classList.toggle('selected');
-      var targetFieldId = this.dataset.target;
-      var hiddenField = document.getElementById(targetFieldId);
-      hiddenField.disabled = !hiddenField.disabled;
+  document.addEventListener('DOMContentLoaded', function () {
+    document.querySelectorAll('.platform-logo').forEach(function (logo) {
+      logo.addEventListener('click', function () {
+        this.classList.toggle('selected');
+        var targetFieldId = this.dataset.target;
+        var hiddenField = document.getElementById(targetFieldId);
+        hiddenField.disabled = !hiddenField.disabled;
+      });
     });
   });
-});
-
 </script>
