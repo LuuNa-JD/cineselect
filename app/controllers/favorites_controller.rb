@@ -21,15 +21,14 @@ class FavoritesController < ApplicationController
     @favorite = Favorite.new(favorite_params)
     @favorite.user = current_user
 
-
     authorize @favorite
 
     if @favorite.save
-      redirect_to root_path, notice: 'La séance a été ajoutée aux favoris.'
+      flash[:notice] = 'La séance a été ajoutée aux favoris.'
     else
-      render :new
-    end
+      flash[:notice] = "La séance n'a pas été ajoutée aux favoris."
   end
+end
 
   def destroy
     @favorite = Favorite.find(params[:id])
