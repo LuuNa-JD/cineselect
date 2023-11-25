@@ -1,35 +1,23 @@
-<div class="container">
-  <div class="table-responsive">
-    <table class="table table-bordered">
-      <thead class="thead-dark">
-        <tr>
-          <th scope="col">Titre</th>
-          <th scope="col">Aperçu</th>
-          <th scope="col">Détails</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% @favorites_details.each do |favorite_detail| %>
-          <% if favorite_detail.present? %>
-            <tr>
-              <td>
-                <% if favorite_detail["title"].present? || favorite_detail["name"].present? %>
-                  <h5><%= favorite_detail["title"] || favorite_detail["name"] %></h5>
-                <% else %>
-                  <p class="text-muted">Détails non disponibles.</p>
-                <% end %>
-                <p><%= favorite_detail["overview"] %></p>
-              </td>
-              <td>
-                <%= image_tag "https://image.tmdb.org/t/p/w500/#{favorite_detail["poster_path"]}", alt: "#{favorite_detail["title"] || favorite_detail["name"]} poster", class: "img-fluid rounded" %>
-              </td>
-              <td class="text-center">
-                <a href="<%= seance_path(id: favorite_detail["id"], type: "film") %>" class="btn btn-primary btn-sm" style="max-width: 200px; width: 100%;">Voir les détails</a>
-              </td>
-            </tr>
-          <% end %>
-        <% end %>
-      </tbody>
-    </table>
+<div class="text-center">
+  <h1><strong>Mes Favoris</h1></strong>
+</div>
+
+<div class="container mt-4">
+  <div class="row">
+    <% @favorites.each do | favorite | %>
+      <div class="col-md-4 mb-4">
+        <div class="card">
+            <%= link_to(seance_path(id: favorite.tmdb_id, type: favorite.media_type)) do %>
+              <%= image_tag "https://image.tmdb.org/t/p/w500/#{favorite.image_url}", class: "card-img-top img-fluid rounded" %>
+            <% end %>
+            <div class="card-body">
+                <h5 class="card-title"><%= favorite.title%></h5>
+              <%= link_to(seance_path(id: favorite.tmdb_id, type: favorite.media_type)) do %>
+              <% end %>
+                <%= link_to 'Supprimer', favorite_path(favorite), data: { turbo_method: :delete, turbo_confirm: 'Êtes-vous sûr?' }, class: "btn btn-danger custom-button" %>
+            </div>
+        </div>
+      </div>
+    <% end %>
   </div>
 </div>
