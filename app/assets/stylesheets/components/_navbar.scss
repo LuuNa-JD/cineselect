@@ -19,15 +19,24 @@
 
 @media (max-width: 720px) {
   /* Pour un écran < 720px, cette classe CSS s'applique */
+  body{
+    margin: 0;
+    padding: 0;
+  }
   .navbar-nav-mobile {
     display: flex;
     align-items: center;
     padding: 15px;
     justify-content: space-around;
-    overflow: hidden;
+    overflow: auto;
     position: fixed;
+    white-space: nowrap;
     bottom: 0;
     width: 100%;
+    border-radius: 30px;
+    background: #151010 !important;
+    flex-shrink: 0;
+    z-index: 1000;
   }
   .navbar-lewagon {
     display: none;
