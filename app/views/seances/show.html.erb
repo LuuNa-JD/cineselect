@@ -1,24 +1,24 @@
-<div class="container">
-  <div class="row mt-4">
-    <div class="col">
-<% Rails.logger.debug "Item Details: #{@item_details}" %>
+<div class="container mt-4 p-4">
+  <div class="row justify-content-center">
+    <div class=" border shadow-sm mt-4 p-4">
+      <% Rails.logger.debug "Item Details: #{@item_details}" %>
 
-<% if @item_details.present? %>
-  <% if @item_details["title"].present? %>
+      <% if @item_details.present? %>
+      <% if @item_details["title"].present? %>
 
-    <h1><%= @item_details["title"] %></h1>
-    <p><%= @item_details["overview"] %></p>
-  <% elsif @item_details["name"].present? %>
+      <h1><%= @item_details["title"] %></h1>
+      <p><%= @item_details["overview"] %></p>
+      <% elsif @item_details["name"].present? %>
 
-    <h1><%= @item_details["name"] %></h1>
-    <p><%= @item_details["overview"] %></p>
-  <% else %>
-    <p>Détails non disponibles.</p>
-  <% end %>
-<% else %>
-  <p>Détails non disponibles.</p>
-<% end %>
-  <%= link_to "Ajouter à mes favoris", new_favorite_path(@movie), class: "btn btn-secondary mt-3" %>
+      <h1><%= @item_details["name"] %></h1>
+      <p><%= @item_details["overview"] %></p>
+      <% else %>
+      <p>Détails non disponibles.</p>
+      <% end %>
+      <% else %>
+      <p>Détails non disponibles.</p>
+      <% end %>
+      <%= link_to "Ajouter à mes favoris", new_favorite_path(@movie), class: "btn btn-secondary mt-3" %>
     </div>
   </div>
 </div>

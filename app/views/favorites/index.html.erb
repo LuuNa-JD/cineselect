@@ -1,23 +1,29 @@
-<div class="text-center">
-  <h1><strong>Mes Favoris</h1></strong>
-</div>
+<div class="container mt-4 p-4">
+  <div class="row justify-content-center">
+    <div class="border shadow-sm mt-4 p-4">
+      <div class="text-center">
+        <h1><strong>Mes Favoris</h1></strong>
+      </div>
 
-<div class="container mt-4">
-  <div class="row">
-    <% @favorites.each do | favorite | %>
-      <div class="col-md-4 mb-4">
-        <div class="card">
-            <%= link_to(seance_path(id: favorite.tmdb_id, type: favorite.media_type)) do %>
-              <%= image_tag "https://image.tmdb.org/t/p/w500/#{favorite.image_url}", class: "card-img-top img-fluid rounded" %>
-            <% end %>
-            <div class="card-body">
-                <h5 class="card-title"><%= favorite.title%></h5>
+      <div class="container mt-4">
+        <div class="row">
+          <% @favorites.each do | favorite | %>
+          <div class="col-md-4 mb-4">
+            <div class="card">
               <%= link_to(seance_path(id: favorite.tmdb_id, type: favorite.media_type)) do %>
+              <%= image_tag "https://image.tmdb.org/t/p/w500/#{favorite.image_url}", class: "card-img-top img-fluid rounded" %>
               <% end %>
+              <div class="card-body">
+                <h5 class="card-title"><%= favorite.title%></h5>
+                <%= link_to(seance_path(id: favorite.tmdb_id, type: favorite.media_type)) do %>
+                <% end %>
                 <%= link_to 'Supprimer', favorite_path(favorite), data: { turbo_method: :delete, turbo_confirm: 'Êtes-vous sûr?' }, class: "btn btn-danger custom-button" %>
+              </div>
             </div>
+          </div>
+          <% end %>
         </div>
       </div>
-    <% end %>
+    </div>
   </div>
 </div>
