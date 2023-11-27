@@ -7,12 +7,22 @@
       <% else %>
         <p>Détails non disponibles.</p>
       <% end %>
-      <%= button_to favorites_path, method: :post, params: { tmdb_id: @item_details["id"], media_type: @item_details["media_type"], title: @item_details["title"], image_url: @item_details["poster_path"] }, html: { class: "mt-3 ml-auto" } do %>
-        <i class="far fa-heart"></i>
+
+      <% if @item_in_favorites %>
+        <%= button_to favorite_path(@item_in_favorites), method: :delete, html: { class: "mt-3 ml-auto" } do %>
+          <i class="fa-solid fa-heart"></i> <!-- Utilisez la classe pour le cœur plein -->
+        <% end %>
+      <% else %>
+        <%= button_to favorites_path, method: :post, params: { tmdb_id: @item_details["id"], media_type: @item_details["media_type"], title: @item_details["title"], image_url: @item_details["poster_path"] }, html: { class: "mt-3 ml-auto" } do %>
+          <i class="far fa-heart"></i>
+        <% end %>
       <% end %>
     </div>
   </div>
 </div>
 
+
 # Je veux mettre un lien afin de remplacer le bouton et créer un nouveau favorites_pathS
 # si le film est deja dans la base de donnée coeur plein
+si le film est deja favoris alors mets coeur plein
+<i class="fa-solid fa-heart"></i>
