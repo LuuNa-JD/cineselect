@@ -34,6 +34,8 @@ class SeancesController < ApplicationController
       redirect_to seances_path, alert: "Type de média non spécifié ou non valide."
       return
     end
+    @item_in_favorites = Favorite.find_by(tmdb_id: @item_details["id"], user_id: current_user.id)
+
   end
 
 
