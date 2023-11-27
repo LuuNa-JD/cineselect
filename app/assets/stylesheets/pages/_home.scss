@@ -1,6 +1,5 @@
 /* styles.css */
 
-/* Styles généraux pour toutes les pages */
 body {
   background-image: url('#{asset_path('home_page.png')}');
   background-size: contain;
@@ -17,7 +16,6 @@ body {
   z-index: 0;
 }
 
-/* Styles spécifiques pour la page d'accueil */
 .home-page .cadre {
   position: fixed;
   top: 130px;
@@ -45,7 +43,7 @@ body {
 }
 
 @media only screen and (max-width: 768px) {
-  /* Styles spécifiques pour les écrans plus petits sur la page d'accueil */
+
   .home-page .cadre {
     height: 60px;
   }
