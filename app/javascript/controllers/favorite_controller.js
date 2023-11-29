@@ -33,7 +33,6 @@ export default class extends Controller {
     }
   }
 
-  // Méthode pour mettre à jour l'icône du cœur et la classe CSS
   updateFavoriteUI(favorited) {
     const icon = this.element.querySelector('.heart-icon');
     icon.src = favorited ? "heart_full.svg" : "heart_empty.svg";

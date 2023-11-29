@@ -151,41 +151,41 @@
   position: absolute;
   bottom: 10px;
   right: 10px;
-  z-index: 1; /* Pour s'assurer que les cœurs sont au-dessus de la carte du film */
+  z-index: 1;
 }
 
 .empty-heart,
 .full-heart {
-  width: 38px; /* Ajustez la taille des cœurs en fonction de vos besoins */
-  height: 38px; /* Transition pour l'animation du cœur */
+  width: 38px;
+  height: 38px;
 }
 
 .empty-heart {
   display: inline-block;
-  opacity: 1; /* Cœur vide initial visible */
-  transition: opacity 0.3s ease-in-out; /* Transition pour l'animation du cœur */
+  opacity: 1;
+  transition: opacity 0.3s ease-in-out;
 }
 
 .favorite-button {
-  background: none; // Remove background color if it's grey
-  border: none; // Remove border if it's contributing to the grey appearance
-  // other necessary styles...
+  background: none;
+  border: none;
+
 }
 
 .favorite-button .heart-icon {
-  display: inline-block; // or 'block' depending on your layout needs
-  // Add any specific styles you need for the heart icon here
+  display: inline-block;
+
 }
 
 .full-heart {
-  display: none; /* Cœur plein initial caché */
-  transition: opacity 0.3s ease-in-out; /* Transition pour l'animation du cœur */
+  display: none;
+  transition: opacity 0.3s ease-in-out;
 }
 
 .favorite-button.favorited .empty-heart {
-  opacity: 0; /* Cacher le cœur vide lorsqu'il est favorisé */
+  opacity: 0;
 }
 
 .favorite-button.favorited .full-heart {
-  display: inline-block; /* Afficher le cœur plein lorsqu'il est favorisé */
+  display: inline-block;
 }
