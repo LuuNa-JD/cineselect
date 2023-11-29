@@ -1,18 +1,44 @@
-<div class="container mt-4 p-4">
-  <div class="row justify-content-center">
-    <div class="col-md-4 border shadow-sm mt-4 p-4">
-      <% if session[:recommendations] %>
-      <% session[:recommendations].each do |movie| %>
-      <div class="movie">
-        <%= link_to movie["title"] || movie["name"], streaming_platforms_path(id: movie["id"], type: movie["media_type"]) %>
-        <p>Date de sortie: <%= movie["release_date"] %></p>
-        <p>Popularité: <%= movie["popularity"] %></p>
-        <%= link_to image_tag("https://image.tmdb.org/t/p/w500/#{movie["poster_path"]}", alt: "#{movie["title"] || movie["name"]} poster"), seance_path(id: movie["id"], type: movie["media_type"]) %>
-        <%= button_to 'Add to Favorites', favorites_path, method: :post, params: { tmdb_id: movie["id"], media_type: movie["media_type"], title: movie["title"], image_url: movie["poster_path"]} %>
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/hammer.js/2.0.8/hammer.min.js"></script>
+<div class="movie-screen-final">
+  <% if session[:recommendations] %>
+    <% session[:recommendations].each do |movie| %>
+      <div class="movie-card" data-controller="movie-card" data-url="<%= streaming_platforms_path(id: movie['id'], type: movie['media_type']) %>">
+        <div class="card-inner">
+          <div class="card-front">
+          <%= image_tag("https://image.tmdb.org/t/p/w500/#{movie["poster_path"]}", class: "rectangle") %>
+          </div>
+          <div class="card-back">
+            <div class="movie-details">
+              <div class="movie-title-section">
+                <%= image_tag('camera2.svg', class: 'camera-icon') %>
+                <div class="camera-icon">
+                    <h2 class="movie-title"><%= (movie["title"] || movie["name"]).upcase %></h2>
+                    <p class="movie-year"><%= movie["release_date"] %></p>
+                </div>
+              </div>
+              <div class="movie-description-section">
+                <p><%= movie["overview"] %></p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="favorite-button-container">
+          <button
+            data-controller="favorite"
+            data-action="click->favorite#toggle"
+            data-favorite-id-value="<%= movie["id"] %>"
+            data-favorite-title-value="<%= movie["title"] || movie["name"] %>"
+            data-favorite-image-url-value="<%= movie["poster_path"] %>"
+            data-favorite-media-type-value="<%= movie["media_type"] %>"
+            class="favorite-button <%= 'favorited' if current_user.movie_in_favorites?(movie["id"]) %>"
+            type="button">
+            <span class="heart-icon">
+              <img src="<%= image_path('heart_empty.svg') %>" alt="Empty Heart" class="empty-heart">
+              <img src="<%= image_path('heart_full.svg') %>" alt="Full Heart" class="full-heart">
+            </span>
+          </button>
+        </div>
       </div>
-      <% end %>
-      <% end %>
-    </div>
-  </div>
+    <% end %>
+  <% end %>
 </div>

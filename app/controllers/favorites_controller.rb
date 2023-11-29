@@ -1,4 +1,5 @@
 class FavoritesController < ApplicationController
+  before_action :authenticate_user!
 
   def index
     # tmdb_service = ThemoviedbService.new(api_key)
@@ -13,6 +14,25 @@ class FavoritesController < ApplicationController
     #   detail
     # end.compact
     @favorites = Favorite.where(user: current_user)
+  end
+
+  def toggle
+    favorite = current_user.favorites.find_by(tmdb_id: params[:tmdb_id])
+
+    if favorite
+      authorize favorite
+      favorite.destroy
+      favorited = false
+    else
+      favorite = current_user.favorites.build(favorite_params)
+      authorize favorite
+      favorite.save
+      favorited = true
+    end
+
+    render json: { favorited: favorited }
+  rescue Pundit::NotAuthorizedError => e
+    render json: { error: e.message }, status: :forbidden
   end
 
 
@@ -40,9 +60,8 @@ end
   private
 
   def favorite_params
-    params.permit(:tmdb_id, :media_type, :title, :image_url)
+    params.permit(:tmdb_id, :title, :image_url, :media_type)
   end
-
 
   def api_key
     ENV['TMDB_API_KEY']
