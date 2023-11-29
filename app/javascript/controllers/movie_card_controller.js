@@ -1,8 +1,32 @@
-import { Controller } from "@hotwired/stimulus"
+import { Controller } from "@hotwired/stimulus";
 
 export default class extends Controller {
-  connect() {
-    this.setupHammer();
+  initialize() {
+    console.log("Contrôleur Stimulus initialisé");
+    document.addEventListener('turbo:load', () => {
+      console.log("Turbo Frames a chargé le contenu");
+      this.loadHammerAndSetup();
+    });
+  }
+
+  async loadHammerAndSetup() {
+    try {
+
+      await this.loadScript('https://cdnjs.cloudflare.com/ajax/libs/hammer.js/2.0.8/hammer.min.js');
+      this.setupHammer();
+    } catch (error) {
+      console.error("Impossible de charger Hammer.js", error);
+    }
+  }
+
+  loadScript(url) {
+    return new Promise((resolve, reject) => {
+      const script = document.createElement('script');
+      script.src = url;
+      script.onload = resolve;
+      script.onerror = reject;
+      document.head.appendChild(script);
+    });
   }
 
   setupHammer() {
@@ -33,7 +57,6 @@ export default class extends Controller {
         setTimeout(() => {
           card.classList.add('hide');
         }, 300);
-
       }
     });
 
