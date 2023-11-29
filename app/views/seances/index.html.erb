@@ -1,18 +1,83 @@
-<div class="container mt-4 p-4">
-  <div class="row justify-content-center">
-    <div class="col-md-4 border shadow-sm mt-4 p-4">
-      <% if session[:recommendations] %>
-      <% session[:recommendations].each do |movie| %>
-      <div class="movie">
-        <%= link_to movie["title"] || movie["name"], streaming_platforms_path(id: movie["id"], type: movie["media_type"]) %>
-        <p>Date de sortie: <%= movie["release_date"] %></p>
-        <p>Popularité: <%= movie["popularity"] %></p>
-        <%= link_to image_tag("https://image.tmdb.org/t/p/w500/#{movie["poster_path"]}", alt: "#{movie["title"] || movie["name"]} poster"), seance_path(id: movie["id"], type: movie["media_type"]) %>
-        <%= button_to 'Add to Favorites', favorites_path, method: :post, params: { tmdb_id: movie["id"], media_type: movie["media_type"], title: movie["title"], image_url: movie["poster_path"]} %>
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/hammer.js/2.0.8/hammer.min.js"></script>
+<div class="movie-screen-final">
+  <% if session[:recommendations] %>
+    <% session[:recommendations].each do |movie| %>
+      <div class="movie-card" data-url="<%= streaming_platforms_path(id: movie['id'], type: movie['media_type']) %>">
+        <div class="card-inner">
+          <div class="card-front">
+          <%= image_tag("https://image.tmdb.org/t/p/w500/#{movie["poster_path"]}", class: "rectangle") %>
+          <%# <img class="iconoir-heart" src="i/iconoir_heart.svg" /> %>
+          </div>
+          <div class="card-back">
+            <div class="movie-details">
+              <div class="movie-title-section">
+                <%= image_tag('camera2.svg', class: 'camera-icon') %>
+                <div class="camera-icon">
+                    <h2 class="movie-title"><%= (movie["title"].upcase || movie["name"]).upcase %></h2>
+                    <p class="movie-year"><%= movie["release_date"] %></p>
+                </div>
+              </div>
+              <div class="movie-description-section">
+                <p><%= movie["overview"] %></p>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-      <% end %>
-      <% end %>
-    </div>
-  </div>
+    <% end %>
+  <% end %>
 </div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  var cards = document.querySelectorAll('.movie-card');
+  var currentIndex = 0;
+
+
+  cards.forEach((card, index) => {
+    var mc = new Hammer(card);
+    var cardInner = card.querySelector('.card-inner');
+
+    mc.on("doubletap", function() {
+        cardInner.classList.toggle('is-flipped');
+    });
+
+
+    mc.on("panleft", function(ev) {
+      if (Math.abs(ev.deltaX) > 100) {
+        card.style.transition = 'transform 0.7s ease-out';
+        card.style.transform = 'translateX(-120%)';
+        setTimeout(() => {
+          card.classList.add('hide-out');
+          var url = card.getAttribute('data-url');
+          window.location.href = url;
+        }, 300);
+      }
+    });
+
+    mc.on("panright", function(ev) {
+      if (ev.deltaX > 100) {
+        card.style.transition = 'transform 0.7s ease-out';
+        card.style.transform = 'translateX(120%)';
+        setTimeout(() => {
+          card.classList.add('hide');
+        }, 300);
+
+      }
+    });
+
+    mc.on("pan", function(ev) {
+      if (Math.abs(ev.deltaX) < window.innerWidth) {
+        card.style.transform = `translateX(${ev.deltaX}px)`;
+      }
+    });
+
+    mc.on("panend", function(ev) {
+      if (ev.deltaX <= 100) {
+        card.style.transition = 'transform 0.3s ease-out';
+        card.style.transform = '';
+      }
+    });
+  });
+});
+</script>
