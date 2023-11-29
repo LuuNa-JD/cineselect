@@ -17,11 +17,12 @@
 }
 
 
-@media (max-width: 720px) {
-  /* Pour un écran < 720px, cette classe CSS s'applique */
+@media (max-width: 960px) {
+  /* Pour un écran < 960px, cette classe CSS s'applique */
   body{
     margin: 0;
     padding: 0;
+    overflow-x: hidden;
   }
   .navbar-nav-mobile {
     display: flex;
