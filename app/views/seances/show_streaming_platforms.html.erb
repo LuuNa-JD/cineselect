@@ -1,16 +1,15 @@
-<div class="container mt-4 p-4">
-  <div class="row justify-content-center">
-    <div class="col-md-4 border shadow-sm mt-4 p-4">
-      <% if @available_platforms.any? %>
-      <h2>Available Streaming Platforms</h2>
-      <ul>
-        <% @available_platforms.each do |platform| %>
-        <li><%= platform["name"] %></li>
-        <% end %>
-      </ul>
-      <% else %>
-      <p>No streaming platforms are available for this content.</p>
-      <% end %>
+<div class="validation-screen">
+  <!-- La liste des plateformes disponibles -->
+  <div class="platforms-container">
+    <% if @available_platforms.any? %>
+    <% @available_platforms.each do |platform| %>
+    <div class="provider">
+      <%= link_to(platform_logo(platform["name"]), platform["url"], target: "_blank") %>
     </div>
+    <% end %>
+    <% else %>
+    <p class="no-platforms">No streaming platforms are available for this content.</p>
+    <% end %>
   </div>
+  <div class="session-text">Bonne Séance !</div>
 </div>
