@@ -119,15 +119,6 @@
   transform: rotateY(180deg);
 }
 
-.iconoir-heart {
-  position: absolute;
-  width: 44px;
-  height: 44px;
-  bottom: 20px;
-  right: 16px;
-  cursor: pointer;
-}
-
 .movie-screen-final .img {
   position: absolute;
   width: 27px;
@@ -154,4 +145,47 @@
 .box {
   width: 340px;
   height: 543px;
+}
+
+.heart-icon {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  z-index: 1; /* Pour s'assurer que les cœurs sont au-dessus de la carte du film */
+}
+
+.empty-heart,
+.full-heart {
+  width: 38px; /* Ajustez la taille des cœurs en fonction de vos besoins */
+  height: 38px; /* Transition pour l'animation du cœur */
+}
+
+.empty-heart {
+  display: inline-block;
+  opacity: 1; /* Cœur vide initial visible */
+  transition: opacity 0.3s ease-in-out; /* Transition pour l'animation du cœur */
+}
+
+.favorite-button {
+  background: none; // Remove background color if it's grey
+  border: none; // Remove border if it's contributing to the grey appearance
+  // other necessary styles...
+}
+
+.favorite-button .heart-icon {
+  display: inline-block; // or 'block' depending on your layout needs
+  // Add any specific styles you need for the heart icon here
+}
+
+.full-heart {
+  display: none; /* Cœur plein initial caché */
+  transition: opacity 0.3s ease-in-out; /* Transition pour l'animation du cœur */
+}
+
+.favorite-button.favorited .empty-heart {
+  opacity: 0; /* Cacher le cœur vide lorsqu'il est favorisé */
+}
+
+.favorite-button.favorited .full-heart {
+  display: inline-block; /* Afficher le cœur plein lorsqu'il est favorisé */
 }

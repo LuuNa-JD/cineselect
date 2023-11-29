@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   # root "articles#index"
   resources :seances, only: [:new, :create, :index, :show]
+  post '/favorites/toggle', to: 'favorites#toggle'
   resources :favorites, only: [:new, :create, :index, :destroy]
   resources :profiles, only: [:show]
   resources :user_platforms, only: [:new, :create, :destroy]

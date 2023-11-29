@@ -5,6 +5,10 @@ class FavoritePolicy < ApplicationPolicy
     end
   end
 
+  def toggle?
+    !user.nil?
+  end
+
   def create?
     !user.nil?
   end

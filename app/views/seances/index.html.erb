@@ -2,18 +2,17 @@
 <div class="movie-screen-final">
   <% if session[:recommendations] %>
     <% session[:recommendations].each do |movie| %>
-      <div class="movie-card" data-url="<%= streaming_platforms_path(id: movie['id'], type: movie['media_type']) %>">
+      <div class="movie-card" data-controller="movie-card" data-url="<%= streaming_platforms_path(id: movie['id'], type: movie['media_type']) %>">
         <div class="card-inner">
           <div class="card-front">
           <%= image_tag("https://image.tmdb.org/t/p/w500/#{movie["poster_path"]}", class: "rectangle") %>
-          <%# <img class="iconoir-heart" src="i/iconoir_heart.svg" /> %>
           </div>
           <div class="card-back">
             <div class="movie-details">
               <div class="movie-title-section">
                 <%= image_tag('camera2.svg', class: 'camera-icon') %>
                 <div class="camera-icon">
-                    <h2 class="movie-title"><%= (movie["title"].upcase || movie["name"]).upcase %></h2>
+                    <h2 class="movie-title"><%= (movie["title"] || movie["name"]).upcase %></h2>
                     <p class="movie-year"><%= movie["release_date"] %></p>
                 </div>
               </div>
@@ -23,12 +22,28 @@
             </div>
           </div>
         </div>
+        <div class="favorite-button-container">
+          <button
+            data-controller="favorite"
+            data-action="click->favorite#toggle"
+            data-favorite-id-value="<%= movie["id"] %>"
+            data-favorite-title-value="<%= movie["title"] || movie["name"] %>"
+            data-favorite-image-url-value="<%= movie["poster_path"] %>"
+            data-favorite-media-type-value="<%= movie["media_type"] %>"
+            class="favorite-button <%= 'favorited' if current_user.movie_in_favorites?(movie["id"]) %>"
+            type="button">
+            <span class="heart-icon">
+              <img src="<%= image_path('heart_empty.svg') %>" alt="Empty Heart" class="empty-heart">
+              <img src="<%= image_path('heart_full.svg') %>" alt="Full Heart" class="full-heart">
+            </span>
+          </button>
+        </div>
       </div>
     <% end %>
   <% end %>
 </div>
 
-<script>
+<%# <script>
 document.addEventListener("DOMContentLoaded", function() {
   var cards = document.querySelectorAll('.movie-card');
   var currentIndex = 0;
@@ -80,4 +95,4 @@ document.addEventListener("DOMContentLoaded", function() {
     });
   });
 });
-</script>
+</script> %>

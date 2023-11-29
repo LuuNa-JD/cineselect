@@ -85,7 +85,7 @@ class SeancesController < ApplicationController
   # "Nous n'avons pas trouvé votre bonheur... Veuillez réessayer"
     watch_providers_param = watch_provider_ids.join('|')
 
-    redirect_to seances_path, notice: 'Seance was successfully created.'
+    redirect_to seances_path
   end
 
 
