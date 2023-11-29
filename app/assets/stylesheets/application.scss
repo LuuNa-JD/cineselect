@@ -10,3 +10,13 @@
 // Your CSS partials
 @import "components/index";
 @import "pages/index";
+
+.background-standard {
+  @extend .main-background-color;
+  // Add more styles as needed for this specific container
+}
+
+html, body {
+  max-width: 100%;
+  overflow-x: hidden;
+ }
