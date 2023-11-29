@@ -24,4 +24,31 @@ module PlatformHelper
       platform_hash[:id]
     end
   end
+
+
+
+  def platform_logo(name)
+    platform_logo_mapping = {
+      "Netflix" => {
+        "logo_path" => asset_path("netflix_logo.png"),
+        "url" => "https://www.netflix.com/"
+      },
+      "Amazon Prime Video" => {
+        "logo_path" => asset_path("amazon_prime_video_logo.png"),
+        "url" => "https://www.primevideo.com/"
+      },
+      "Disney Plus" => {
+        "logo_path" => asset_path("disney_logo.png"),
+        "url" => "https://www.disneyplus.com/fr-fr"
+      },
+    }
+
+
+      if platform_logo_mapping.key?(name)
+        platform = platform_logo_mapping[name]
+        return link_to(image_tag(platform["logo_path"], alt: "#{name} Logo", class: "logo-image"), platform["url"])
+      else
+        return content_tag(:p, "Logo non trouvé pour #{name}")
+    end
+  end
 end

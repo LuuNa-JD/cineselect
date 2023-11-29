@@ -11,10 +11,11 @@ class ThemoviedbService
     @api_key = api_key
   end
 
-  def recommend_movies(preferences, user, watch_region, watch_provider_ids, sort_by = 'popularity.desc')
+  def recommend_movies(preferences, user, watch_region, watch_provider_ids, sort_by = 'popularity.desc', language = 'fr-FR')
     query_params = {
       api_key: @api_key,
       sort_by: sort_by,
+      language: language,
       watch_region: watch_region,
       with_watch_providers: watch_provider_ids.join('|')
     }
@@ -88,7 +89,7 @@ class ThemoviedbService
     end
   end
 
-  
+
 
   def get_streaming_providers(item_id, type)
     response = self.class.get("/#{type}/#{item_id}/watch/providers", query: { api_key: @api_key })

@@ -13,7 +13,8 @@
                   <%= image_tag('camera2.svg', class: 'camera-icon') %>
                   <div class="camera-icon">
                     <h2 class="movie-title"><%= (movie["title"] || movie["name"]).upcase %></h2>
-                    <p class="movie-year"><%= movie["release_date"] %></p>
+                    <p class="movie-year">Année de production : <%= (movie["release_date"] || movie["first_air_date"]).to_s.split("-").first %></p>
+                    <p class="movie-vote">Vote du public : <%= movie["vote_average"] %> / 10</p>
                   </div>
                 </div>
                 <div class="movie-description-section">
@@ -21,22 +22,22 @@
                 </div>
               </div>
             </div>
-          </div>
-          <div class="favorite-button-container">
-            <button
-              data-controller="favorite"
-              data-action="click->favorite#toggle"
-              data-favorite-id-value="<%= movie["id"] %>"
-              data-favorite-title-value="<%= movie["title"] || movie["name"] %>"
-              data-favorite-image-url-value="<%= movie["poster_path"] %>"
-              data-favorite-media-type-value="<%= movie["media_type"] %>"
-              class="favorite-button <%= 'favorited' if current_user.movie_in_favorites?(movie["id"]) %>"
-              type="button">
-              <span class="heart-icon">
-                <img src="<%= image_path('heart_empty.svg') %>" alt="Empty Heart" class="empty-heart">
-                <img src="<%= image_path('heart_full.svg') %>" alt="Full Heart" class="full-heart">
-              </span>
-            </button>
+            <div class="favorite-button-container">
+              <button
+                data-controller="favorite"
+                data-action="click->favorite#toggle"
+                data-favorite-id-value="<%= movie["id"] %>"
+                data-favorite-title-value="<%= movie["title"] || movie["name"] %>"
+                data-favorite-image-url-value="<%= movie["poster_path"] %>"
+                data-favorite-media-type-value="<%= movie["media_type"] %>"
+                class="favorite-button <%= 'favorited' if current_user.movie_in_favorites?(movie["id"]) %>"
+                type="button">
+                <span class="heart-icon">
+                  <img src="<%= image_path('heart_empty.svg') %>" alt="Empty Heart" class="empty-heart">
+                  <img src="<%= image_path('heart_full.svg') %>" alt="Full Heart" class="full-heart">
+                </span>
+              </button>
+            </div>
           </div>
         </div>
       <% end %>
