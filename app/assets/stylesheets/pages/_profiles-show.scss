@@ -23,4 +23,59 @@ height: 100%;
 
 body{
   margin: 0;
+  overflow: hidden;
+  position: relative;
+}
+
+.profile-avatar{
+  position: relative;
+  bottom: 50px;
+}
+
+.bottom-button{
+  display: none;
+}
+
+.avatar-large{
+  display: none;
+}
+.icon{
+  width: 28px;
+  height: 52px;
+}
+
+.icon-tv{
+  width: 27px;
+  height: 31px;
+}
+
+.text-typography{
+  color: #000;
+
+  font-family: Inter;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 150%; /* 30px */
+  letter-spacing: -0.22px;
+  }
+
+
+
+
+
+@media (max-width: 960px) {
+  /* Pour un écran < 960px, cette classe CSS s'applique */
+  .bottom-button{
+    display: revert;
+    position: absolute;
+    bottom: 110px;
+    right: 130px;
+    z-index: 1000;
+  }
+
+  .avatar-large{
+    display: revert;
+  }
+
 }
