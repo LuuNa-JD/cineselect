@@ -1,0 +1,16 @@
+.form-screen {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100vh;
+  margin: auto;
+  background: linear-gradient(180deg, rgb(96, 10, 10) 0%, rgb(28, 28, 28) 100%);
+  position: relative;
+}
+
+.text-center {
+  text-align: center;
+  color : white;
+}
