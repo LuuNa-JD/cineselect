@@ -1,16 +1,128 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap');
+
 .form-screen {
+  width: 375px;
+  height: 667px;
+  margin: auto;
+  background: #341111;
+  font-family: 'Inter', sans-serif;
+  box-sizing: border-box;
+}
+
+.title {
+  margin-bottom: 15px;
+  color: #FFF;
+  text-align: center;
+  font-family: Inter;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 150%;
+  letter-spacing: -0.264px;
+}
+
+
+.custom-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-control {
+  background: #FFF;
+  display: flex;
+  flex-direction: column;
+  border: 2px solid #000;
+  border-radius: 20px;
+  width: 302px;
+  height: 42px;
+  flex-shrink: 0;
+  color: #000;
+  font-family: Inter;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 150%;
+  letter-spacing: -0.154px;
+}
+.form-group {
+  margin-bottom: 5px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 100%;
-  height: 100vh;
-  margin: auto;
-  background: linear-gradient(180deg, rgb(96, 10, 10) 0%, rgb(28, 28, 28) 100%);
-  position: relative;
+}
+.form-label {
+  display: block;
+  color: #FFF;
+  font-family: Inter;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 150%;
+  letter-spacing: -0.154px;
+  text-transform: uppercase;
+  width: 132px;
+  height: 23px;
+  flex-shrink: 0;
+  margin-bottom: 10px;
 }
 
-.text-center {
-  text-align: center;
-  color : white;
+.btn.search {
+  color: #FFF;
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 150%;
+  letter-spacing: -0.176px;
+  width: 134px;
+  height: 44px;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 20px;
+  border: none;
+  background: #1C1C1C;
+  box-shadow: 0px 4px 4px 0px #000;
+  cursor: pointer;
+}
+
+.form-check-input {
+  margin-right: 5px;
+  margin-bottom: 5px;
+  color: #ffffff;
+}
+
+.form-check-label {
+  margin-bottom: 5px;
+  color: white;
+}
+
+#advanced-search-toggle-container {
+  margin-bottom: 5px;
+}
+
+#advanced-search-toggle {
+  color: white;
+  cursor: pointer;
+}
+
+.advanced-search-link {
+  color: white;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+#advanced-search-fields {
+  color: white;
+  display: none;
+  margin-bottom: 2px;
+}
+
+.form-check {
+  padding: 2px;
+  border-radius: 10px;
+  margin-bottom: 5px;
+  input[type="radio"] {
+    accent-color: black
+  }
 }
