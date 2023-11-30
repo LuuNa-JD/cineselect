@@ -82,7 +82,6 @@ class SeancesController < ApplicationController
       redirect_to new_seance_path, flash: { alert: "Nous n'avons pas trouvé votre bonheur... Veuillez réessayer" }
       return
     end
-  # "Nous n'avons pas trouvé votre bonheur... Veuillez réessayer"
     watch_providers_param = watch_provider_ids.join('|')
 
     redirect_to seances_path
@@ -145,11 +144,11 @@ class SeancesController < ApplicationController
   def build_preferences_hash(seance_params)
     {
       genre: seance_params[:genre],
+      runtime: seance_params[:runtime],
       keyword: seance_params[:keyword],
       actor: seance_params[:actor],
       year: seance_params[:year],
       origin_country: seance_params[:origin_country],
-      runtime: seance_params[:runtime],
     }
   end
 

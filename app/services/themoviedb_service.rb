@@ -21,6 +21,7 @@ class ThemoviedbService
     }
 
     query_params.merge!(map_preferences_to_query(preferences))
+    query_params[:primary_release_year] = preferences[:year] if preferences[:year].present?
     response = self.class.get("/discover/movie", query: query_params)
 
     if response.success?
@@ -31,15 +32,17 @@ class ThemoviedbService
     end
   end
 
-  def recommend_series(preferences, user, watch_region, watch_provider_ids, sort_by = 'popularity.desc')
+  def recommend_series(preferences, user, watch_region, watch_provider_ids, sort_by = 'popularity.desc', language: 'fr-FR')
     query_params = {
       api_key: @api_key,
       sort_by: sort_by,
+      language: language,
       watch_region: watch_region,
       with_watch_providers: watch_provider_ids.join('|')
     }
 
     query_params.merge!(map_preferences_to_query(preferences))
+    query_params[:first_air_date_year] = preferences[:year] if preferences[:year].present?
     response = self.class.get("/discover/tv", query: query_params)
 
     if response.success?
