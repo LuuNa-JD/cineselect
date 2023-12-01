@@ -21,7 +21,6 @@
   letter-spacing: -0.264px;
 }
 
-
 .custom-form {
   display: flex;
   flex-direction: column;
@@ -50,21 +49,6 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-}
-.form-label {
-  display: block;
-  color: #FFF;
-  font-family: Inter;
-  font-size: 14px;
-  font-style: normal;
-  font-weight: 500;
-  line-height: 150%;
-  letter-spacing: -0.154px;
-  text-transform: uppercase;
-  width: 132px;
-  height: 23px;
-  flex-shrink: 0;
-  margin-bottom: 10px;
 }
 
 .btn.search {

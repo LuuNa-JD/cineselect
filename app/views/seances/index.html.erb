@@ -13,13 +13,15 @@
                 <div class="movie-title-section">
                   <%= image_tag('camera2.svg', class: 'camera-icon') %>
                   <div class="camera-icon">
-                    <h2 class="movie-title"><%= (movie["title"] || movie["name"]).upcase %></h2>
-                    <p class="movie-year">Année de production : <%= (movie["release_date"] || movie["first_air_date"]).to_s.split("-").first %></p>
-                    <p class="movie-vote">Vote du public : <%= movie["vote_average"] %> / 10</p>
+                    <div class="movie-title-section">
+                      <h2 class="movie-title"><%= (movie["title"] || movie["name"]).upcase %></h2>
+                      <p class="movie-year">Année de production : <%= (movie["release_date"] || movie["first_air_date"]).to_s.split("-").first %></p>
+                      <p class="movie-vote">Vote du public : <%= movie["vote_average"] %> / 10</p>
+                    </div>
                   </div>
                 </div>
                 <div class="movie-description-section">
-                  <p><%= movie["overview"] %></p>
+                  <p class="movie-overview"><%= movie["overview"] %></p>
                 </div>
               </div>
             </div>

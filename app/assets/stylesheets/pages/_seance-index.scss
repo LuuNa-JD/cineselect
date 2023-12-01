@@ -88,19 +88,20 @@
   font-family: "Inter", sans-serif;
   font-weight: 700;
   font-size: 16px;
+  margin: 5px 0 0 0;
   line-height: 1.2;
   color: transparent;
   background: linear-gradient(90deg, #600A0A 13.38%, #EB0F0F 88.13%);
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  white-space: nowrap;
 }
 
 .movie-year, .movie-vote {
   display: flex;
   width: 164px;
   height: 15px;
+  margin: 5px 0 0 0;
   flex-direction: column;
   justify-content: center;
   flex-shrink: 0;
@@ -112,8 +113,27 @@
   font-weight: 700;
   line-height: normal;
   letter-spacing: -0.132px;
-
 }
+.movie-title-section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  top: 20px;
+  margin: 5px 0 0 0;
+  margin-top: 0px;
+  margin-left: 80px;
+}
+
+
+.movie-overview {
+  margin-top: 115px;
+  white-space: normal;
+  max-height: 290px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 
 .is-flipped {
   transform: rotateY(180deg);
