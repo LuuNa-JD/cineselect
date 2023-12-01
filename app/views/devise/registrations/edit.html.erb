@@ -1,46 +1,60 @@
-<div class="container mt-2 p-4 ">
+<div class="container-fluid main-container">
   <div class="row justify-content-center align-items-center">
-    <div class="col-md-4 border shadow-sm p-4">
-      <h2>Edit <%= resource_name.to_s.humanize %></h2>
-
-      <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-      <%= f.error_notification %>
-
-      <div class="form-inputs">
-        <div class="text-center">
-          <%= image_tag(resource.avatar, class: "avatar-large", alt: "avatar") if resource.avatar.attached? %>
+    <div class="col p-0">
+      <div class="second-container">
+        <div class="profile-header d-flex justify-content-center">
+          <h3 class="title-profile-style">Hello <%= current_user.username %></h3>
         </div>
-        <%= f.input :email, required: true, autofocus: true %>
-        <%= f.input :avatar, as: :file %>
-        <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-        <p>Currently waiting confirmation for: <%= resource.unconfirmed_email %></p>
-        <% end %>
-        <%= f.input :username, required: true, autofocus: true %>
-        <%= f.input :password,
-                hint: "leave it blank if you don't want to change it",
-                required: false,
-                input_html: { autocomplete: "new-password" } %>
-        <%= f.input :password_confirmation,
-                required: false,
-                input_html: { autocomplete: "new-password" } %>
-        <%= f.input :current_password,
-                hint: "we need your current password to confirm your changes",
-                required: true,
-                input_html: { autocomplete: "current-password" } %>
+        <div class="background-standard profile-body">
+          <div class="text-center profile-avatar">
+            <%= image_tag(current_user.avatar, class: "avatar-large", alt: "avatar")%>
+          </div>
+          <div>
+            <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+            <%= f.error_notification %>
+
+            <div class="form-inputs d-flex flex-column align-items-center">
+                <%= f.input :email, required: true, autofocus: true %>
+                <%= f.input :avatar, as: :file %>
+                <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+                <p>Currently waiting confirmation for: <%= resource.unconfirmed_email %></p>
+                <% end %>
+                <%= f.input :username, required: true, autofocus: true %>
+                <%= f.input :password,
+                  hint: "leave it blank if you don't want to change it",
+                  required: false,
+                  input_html: { autocomplete: "new-password" } %>
+                <%= f.input :password_confirmation,
+                  required: false,
+                  input_html: { autocomplete: "new-password" } %>
+                <%= f.input :current_password,
+                  hint: "we need your current password to confirm your changes",
+                  required: true,
+                  input_html: { autocomplete: "current-password" } %>
+
+            </div>
+
+            <div class="form-actions d-flex flex-column align-items-center">
+              <%= f.button :submit, "Enregistrer", class: "button-standard" %>
+            </div>
+            <% end %>
+
+            <h3>Cancel my account</h3>
+
+            <div>Unhappy?
+              <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, method: :delete %>
+            </div>
+
+            <%= link_to "Back", :back %>
+          </div>
+
+          <div class=" text-center bottom-button mt-5 d-flex justify-content-center">
+            <%= link_to "Se deconnecter", destroy_user_session_path, data: {turbo_method: :delete}, class: "button-standard" %>
+          </div>
+        </div>
       </div>
 
-      <div class="form-actions">
-        <%= f.button :submit, "Update" %>
-      </div>
-      <% end %>
-
-      <h3>Cancel my account</h3>
-
-      <div>Unhappy?
-        <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, method: :delete %>
-      </div>
-
-      <%= link_to "Back", :back %>
     </div>
+
   </div>
 </div>
