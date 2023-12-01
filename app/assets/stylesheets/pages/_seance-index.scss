@@ -22,6 +22,8 @@
   will-change: transform;
   perspective: 1000px;
   border-radius: 20px;
+  border-radius: var(--border-radius);
+  box-shadow: var(--card-shadow);
 }
 
 
