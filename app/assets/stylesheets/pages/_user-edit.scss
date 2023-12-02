@@ -7,23 +7,16 @@
   align-self: flex-start;
 }
 
-.profile-body{
-
-min-height: 100vh;
-color: #FFF!important;
-}
-.form-text{
-  color: #FFF!important;
-}
-
 .main-container{
   min-height: 100vh;
   overflow-y: auto !important;
 }
 
-.second-container{
-  min-height: 100vh;
-}
+.profile-body{
+
+  color: #FFF!important;
+  }
+
 
 body{
   margin: 0;
@@ -62,7 +55,15 @@ body{
   line-height: 150%; /* 30px */
   letter-spacing: -0.22px;
   }
-
+.user_current_password{
+  display: flex !important;
+  flex-direction: column!important;
+  align-items: center!important;
+}
+.form-text{
+  color: #FFF!important;
+  text-align: center;
+}
 
 
 

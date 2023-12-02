@@ -78,7 +78,7 @@ class SeancesController < ApplicationController
       end
     end
 
-    if session[:recommendations].empty?
+    if session[:recommendations].nil? || session[:recommendations].empty?
       redirect_to new_seance_path, flash: { alert: "Nous n'avons pas trouvé votre bonheur... Veuillez réessayer" }
       return
     end
