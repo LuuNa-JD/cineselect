@@ -42,16 +42,3 @@
   </div>
 
 </div>
-
-<script>
-  document.addEventListener('DOMContentLoaded', function () {
-    document.querySelectorAll('.platform-logo').forEach(function (logo) {
-      logo.addEventListener('click', function () {
-        this.classList.toggle('selected');
-        var targetFieldId = this.dataset.target;
-        var hiddenField = document.getElementById(targetFieldId);
-        hiddenField.disabled = !hiddenField.disabled;
-      });
-    });
-  });
-</script>
