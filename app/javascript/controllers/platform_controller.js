@@ -5,6 +5,7 @@ export default class extends Controller {
   static targets = ["logo", "hiddenField"];
 
   toggleSelection(event) {
+    console.log("Toggle Selection triggered");
     const logo = event.currentTarget;
     logo.classList.toggle("selected");
 
