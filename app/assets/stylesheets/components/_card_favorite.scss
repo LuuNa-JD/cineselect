@@ -1,0 +1,39 @@
+
+.movie-card {
+  position: absolute;
+  border: none;
+  border-radius: 8px;
+  overflow: hidden;
+  margin: 10px;
+  padding: 0;
+}
+
+
+.movie-details {
+  padding: 10px;
+}
+
+.col-4 {
+  position: relative;
+  min-height: 300px;
+}
+.container {
+  min-height: 100vh;
+}
+.movie-container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+.movie-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 8px;
+}
+.movie-delete {
+  width: 100%;
+  background-color: #341111;
+  box-sizing: border-box;
+}
