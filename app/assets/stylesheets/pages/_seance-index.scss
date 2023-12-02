@@ -56,14 +56,14 @@
 }
 
 .card-back {
-  background: linear-gradient(180deg, rgb(96, 10, 10) 0%, rgb(28, 28, 28) 100%);
+  background: linear-gradient(180deg, rgb(60, 20, 20) 0%, rgb(35, 35, 35) 100%);
   color: white;
   transform: rotateY(180deg);
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 20px;
+  padding: 30px;
   box-sizing: border-box;
   object-fit: cover;
   border-radius: var(--border-radius);
@@ -89,8 +89,9 @@
   text-align: center;
   font-family: "Inter", sans-serif;
   font-weight: 700;
-  font-size: 16px;
-  margin: 5px 0 0 0;
+  font-size: 15px;
+  margin: 5px 0 0 21px;
+  margin-right: 10px;
   line-height: 1.2;
   color: transparent;
   background: linear-gradient(90deg, #600A0A 13.38%, #EB0F0F 88.13%);
@@ -129,11 +130,11 @@
 
 
 .movie-overview {
-  margin-top: 115px;
+  margin-top: 140px;
   white-space: normal;
-  max-height: 290px;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  max-height: 300px;
+  overflow-y: auto;
+  font-size: 15px;
 }
 
 
