@@ -41,15 +41,15 @@
 
 <div class="navbar-nav-mobile  navbar-dark bg-dark">
   <%= link_to root_path, class: "nav-link text-light" do %>
-  <i class="fa-solid fa-house">Home</i>
+  <img src="<%= image_path('home.jpg') %>" alt="home" class="nav-icon">
   <% end %>
 
   <%= link_to favorites_path, class: "nav-link text-light" do%>
-  <i class="fa-regular fa-heart">Favorites</i>
+ <img src="<%= image_path('favorite_full.jpg') %>" alt="coeur" class="nav-icon">
   <% end %>
 <% if user_signed_in? %>
   <%= link_to profile_path(current_user), class: "nav-link text-light" do %>
-  <i class="fa-regular fa-user">Profil</i>
+  <img src="<%= image_path('user.jpg') %>" alt="user" class="nav-icon">
   <% end %>
 <% end %>
 </div>

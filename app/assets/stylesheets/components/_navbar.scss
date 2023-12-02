@@ -34,10 +34,13 @@
     white-space: nowrap;
     bottom: 0;
     width: 100%;
-    border-radius: 30px;
     background: #151010 !important;
     flex-shrink: 0;
     z-index: 1000;
+  }
+  .icon{
+    width: 36px;
+    height: 36px;
   }
   .navbar-lewagon {
     display: none;
