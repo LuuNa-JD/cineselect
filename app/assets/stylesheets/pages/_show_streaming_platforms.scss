@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Italianno&display=swap');
 .validation-screen {
   display: flex;
   flex-direction: column;
@@ -14,6 +15,13 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
+  height: calc(100vh - 20vh);
+  position: relative;
+  margin-bottom: 10vh;
+  padding-top: 10vh;
+  padding-bottom: 10vh;
+  box-sizing: border-box;
 }
 
 .provider {
@@ -22,7 +30,15 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 5%;
+  margin: 2.5vh 0;
+}
+
+.provider:first-child {
+  margin-top: 0;
+}
+
+.provider:last-child {
+  margin-bottom: 0;
 }
 
 .provider img {
@@ -37,21 +53,39 @@
 
 .session-text {
   position: absolute;
-  bottom: 10vh;
-  width: 90%;
+  bottom: 15vh;
+  width: 100%;
   text-align: center;
   font-size: 8vw;
   color: white;
-  font-family: Italianno;
+  font-family: 'Italianno', cursive;
   font-style: normal;
   font-weight: 400;
   line-height: 150%;
   letter-spacing: -0.396px;
 }
 
+.film-reel {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: auto;
+  height: 100vh;
+}
+
+.film-reel.left {
+  left: 0;
+
+}
+
+.film-reel.right {
+  right: 0;
+
+}
+
 /*  Media Query for smaller screens */
 @media (max-width: 600px) {
   .session-text {
-    font-size: 12vw;
+    font-size: 10vw;
   }
 }

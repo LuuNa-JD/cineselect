@@ -15,6 +15,7 @@ height: 100%;
 
 .main-container{
   height: 100vh;
+  overflow-y: auto !important;
 }
 
 .second-container{
@@ -23,7 +24,6 @@ height: 100%;
 
 body{
   margin: 0;
-  overflow: hidden;
   position: relative;
 }
 
