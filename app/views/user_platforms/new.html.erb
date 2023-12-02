@@ -1,32 +1,46 @@
-<div class="container mt-4 p-4">
-  <div class="row justify-content-center">
-    <div class="col-md-4 border shadow-sm mt-4 p-4">
-      <h1 class="text-center">Streaming Platforms</h1>
-      <%= form_with(model: current_user, url: user_platforms_path, method: :post, local: true) do |f| %>
-
-      <div data-controller="platform">
-        <div data-platform-target="platformElement">
-          <% PLATFORMS.each_with_index do |provider_name, index| %>
-          <div class="platform-selection">
-            <%= image_tag "#{provider_name[:name].downcase.gsub(' ', '_')}_logo.png",
+<div class="container-fluid main-container background-standard">
+  <div class="row justify-content-center align-items-center">
+    <div class="col p-0">
+      <div class="second-container">
+        <div class="profile-header">
+          <%= link_to :back, class: "m-4 back-button" do %>
+          <img src="<%= image_path('back.png') %>" alt="back" class="nav-icon">
+          <% end %>
+          <h3 class="title-profile-style text-center">Mes plateformes</h3>
+        </div>
+        <div class="profile-body">
+          <div class="text-center profile-avatar">
+            <%= image_tag(current_user.avatar, class: "avatar-large", alt: "avatar")%>
+          </div>
+          <%= form_with(model: current_user, url: user_platforms_path, method: :post, local: true) do |f| %>
+          <div data-controller="platform">
+            <div class="d-flex justify-content-around" data-platform-target="platformElement">
+              <% PLATFORMS.each_with_index do |provider_name, index| %>
+              <div class="platform-selection">
+                <%= image_tag "#{provider_name[:name].downcase.gsub(' ', '_')}_logo.png",
                     alt: "#{provider_name[:name]} logo",
                     class: "platform-logo #{'selected' if @user_streaming_ids.include?(provider_name[:id])}",
                     data: { platform: provider_name[:name], target: "hiddenField#{index}" } %>
-            <%= f.hidden_field :selected_platforms,
+                <%= f.hidden_field :selected_platforms,
                         name: 'user[selected_platforms][]',
                         value: provider_name[:name],
                         id: "hiddenField#{index}",
                         disabled: !@user_streaming_ids.include?(provider_name[:id]) %>
+              </div>
+              <% end %>
+            </div>
+          </div>
+          <div class="d-flex justify-content-center mt-4">
+            <%= f.submit "Enregistrer", class:"button-standard mt-5"%>
           </div>
           <% end %>
-          <%= f.submit "Enregistrer les plateformes" %>
         </div>
       </div>
-      <% end %>
     </div>
-  </div>
-</div>
 
+  </div>
+
+</div>
 
 <script>
   document.addEventListener('DOMContentLoaded', function () {
