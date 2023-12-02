@@ -5,22 +5,18 @@
   background: #FFF;
   align-items: center;
   align-self: flex-start;
-  overflow-x: hidden;
+}
+
+.main-container{
+  min-height: 100vh;
+  overflow-y: auto !important;
 }
 
 .profile-body{
 
-min-height: 100%;
-color: #FFF;
-}
+  color: #FFF!important;
+  }
 
-.main-container{
-  height: 100vh;
-}
-
-.second-container{
-  min-height: 100vh;
-}
 
 body{
   margin: 0;
@@ -30,6 +26,10 @@ body{
 .profile-avatar{
   position: relative;
   bottom: 50px;
+}
+.back-button{
+  position: relative;
+  top: 25px;
 }
 
 .bottom-button{
@@ -59,7 +59,15 @@ body{
   line-height: 150%; /* 30px */
   letter-spacing: -0.22px;
   }
-
+.user_current_password{
+  display: flex !important;
+  flex-direction: column!important;
+  align-items: center!important;
+}
+.form-text{
+  color: #FFF!important;
+  text-align: center;
+}
 
 
 
@@ -68,7 +76,6 @@ body{
   /* Pour un écran < 960px, cette classe CSS s'applique */
   .bottom-button{
     display: revert;
-
     z-index: 1000;
   }
 
