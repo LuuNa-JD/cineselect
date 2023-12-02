@@ -1,18 +1,16 @@
 import { Controller } from "@hotwired/stimulus"
 
-// Connects to data-controller="platform"
 export default class extends Controller {
-  static targets = ["logo", "hiddenField"];
+  static targets = ["platform", "hiddenField"];
 
   toggleSelection(event) {
-    console.log("Toggle Selection triggered");
     const logo = event.currentTarget;
-    logo.classList.toggle("selected");
+    logo.classList.toggle('selected');
 
-    const targetId = logo.dataset.target;
-    const hiddenField = this.hiddenFieldTargets.find((field) => field.id === targetId);
+    const hiddenField = this.hiddenFieldTargets.find(field => field.dataset.platform === logo.dataset.platform);
     if (hiddenField) {
       hiddenField.disabled = !hiddenField.disabled;
     }
   }
 }
+// hello from platform_controller.js
