@@ -54,15 +54,13 @@
   outline: none;
 }
 
-/* Add a custom focus style to indicate focus without the outline */
 .form-control:focus {
-  border: 2px solid rgb(255, 4, 4); /* Set your preferred custom border color */
-  box-shadow: 0 0 4px rgba(0, 0, 0, 0.3); /* Optional: Add a box shadow for better visibility */
+  border: 2px solid rgb(255, 4, 4);
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
 }
 
-/* Add transition for a smooth focus effect */
 .form-control {
-  transition: border-color 0.3s, box-shadow 0.3s; /* Adjust the duration as needed */
+  transition: border-color 0.3s, box-shadow 0.3s;
 }
 
 .form-group {

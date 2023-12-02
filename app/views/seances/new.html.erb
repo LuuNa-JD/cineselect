@@ -56,7 +56,7 @@
   $(document).ready(function () {
     $('#advanced-search-toggle').click(function (e) {
       e.preventDefault();
-      $('#advanced-search-fields').slideToggle(400); // 400 milliseconds animation duration
+      $('#advanced-search-fields').slideToggle(400);
       $('.hiding-logic').toggle();
     });
   });
@@ -66,8 +66,8 @@
   $(document).ready(function () {
     function toggleInputs() {
       if ($('#search-by-genre').is(':checked')) {
-        $('#genre-input').slideDown(400); // Slide down with 400 milliseconds animation duration
-        $('#keyword-input').slideUp(400); // Slide up with 400 milliseconds animation duration
+        $('#genre-input').slideDown(400);
+        $('#keyword-input').slideUp(400);
         $('#seance_keyword').prop('disabled', true);
         $('#seance_genre').prop('disabled', false);
       } else {
