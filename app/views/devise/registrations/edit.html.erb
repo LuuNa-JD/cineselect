@@ -2,8 +2,11 @@
   <div class="row justify-content-center align-items-center">
     <div class="col p-0">
       <div class="second-container">
-        <div class="profile-header d-flex justify-content-center">
-          <h3 class="title-profile-style">Hello <%= current_user.username %></h3>
+        <div class="profile-header">
+          <%= link_to :back, class: "m-4 back-button" do %>
+          <img src="<%= image_path('back.png') %>" alt="back" class="nav-icon">
+          <% end %>
+          <h3 class="title-profile-style text-center">Editer le Profile</h3>
         </div>
         <div class="profile-body">
           <div class="text-center profile-avatar">
@@ -27,11 +30,6 @@
             <%= f.button :submit, "Enregistrer", class: "button-standard mb-5" %>
           </div>
           <% end %>
-
-
-
-
-          <%= link_to "Back", :back %>
         </div>
       </div>
 
