@@ -13,3 +13,4 @@ export default class extends Controller {
     }
   }
 }
+// hello from platform_controller.js
