@@ -1,4 +1,13 @@
 
+.movie-card {
+  position: absolute;
+  border: none;
+  border-radius: 8px;
+  overflow: hidden;
+  margin: 10px;
+  padding: 0;
+}
+
 
 .movie-details {
   padding: 10px;
@@ -6,7 +15,7 @@
 
 .col-4 {
   position: relative;
-  min-height: 100px;
+  min-height: 300px;
 }
 .container {
   min-height: 100vh;
@@ -17,9 +26,9 @@
   flex-direction: column;
   height: 100%;
 }
-.movie-image {
+.movie-image img {
   width: 100%;
-  // height: %;
+  height: 100%;
   object-fit: cover;
   border-radius: 8px;
 }
@@ -27,9 +36,4 @@
   width: 100%;
   background-color: #341111;
   box-sizing: border-box;
-  text-align: center;
-  padding: 10px;
-  position: absolute;
-  bottom: 0;
-  left: 0;
 }
