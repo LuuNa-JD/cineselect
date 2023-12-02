@@ -1,40 +1,39 @@
 
+.movie-card {
+  position: absolute;
+  border: none;
+  border-radius: 8px;
+  overflow: hidden;
+  margin: 10px;
+  padding: 0;
+}
 
+
+.movie-details {
+  padding: 10px;
+}
+
+.col-4 {
+  position: relative;
+  min-height: 300px;
+}
 .container {
   min-height: 100vh;
 }
-
-
-.col-4 {
-  width: calc(33.33333333% - 10px); /* Ajustez en fonction de vos besoins */
-  margin-right: 10px !important;
-}
-
-
-  .movie-image {
-    width: 100% ;
-    height: 100% !important;
-  }
-
 .movie-container {
   position: relative;
   display: flex;
   flex-direction: column;
   height: 100%;
 }
-
-// .movie-image {
-//   width: 100%;
-//   height: auto;
-//   object-fit: cover;
-//   border-radius: 8px;
-// }
-// .movie-delete {
-//   position: absolute;
-//   top: 0;
-//   right: 0;
-//   width: 100%;
-//   background-color: #341111;
-//   box-sizing: border-box;
-//   padding: 10px; /* Ajout d'une marge intérieure pour un meilleur espacement */
-// }
+.movie-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 8px;
+}
+.movie-delete {
+  width: 100%;
+  background-color: #341111;
+  box-sizing: border-box;
+}
