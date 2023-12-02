@@ -5,17 +5,20 @@
   background: #FFF;
   align-items: center;
   align-self: flex-start;
-  overflow-x: hidden;
 }
 
 .profile-body{
 
-min-height: 100%;
-color: #FFF;
+min-height: 100vh;
+color: #FFF!important;
+}
+.form-text{
+  color: #FFF!important;
 }
 
 .main-container{
-  height: 100vh;
+  min-height: 100vh;
+  overflow-y: auto !important;
 }
 
 .second-container{
@@ -68,7 +71,6 @@ body{
   /* Pour un écran < 960px, cette classe CSS s'applique */
   .bottom-button{
     display: revert;
-
     z-index: 1000;
   }
 
