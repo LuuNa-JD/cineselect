@@ -28,8 +28,7 @@ body{
   bottom: 50px;
 }
 .back-button{
-  position: relative;
-  top: 25px;
+  display: none;
 }
 
 .bottom-button{
@@ -81,6 +80,11 @@ body{
 
   .avatar-large{
     display: revert;
+  }
+  .back-button{
+    display: revert;
+    position: relative;
+    top: 25px;
   }
 
 }
