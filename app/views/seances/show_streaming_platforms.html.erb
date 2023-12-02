@@ -1,4 +1,6 @@
 <div class="validation-screen">
+  <img src="<%= image_path('bobine.svg') %>" class="film-reel left" alt="Bobine de film gauche">
+  <img src="<%= image_path('bobine.svg') %>" class="film-reel right" alt="Bobine de film droite">
   <div class="platforms-container">
     <% if @available_platforms.any? %>
     <% @available_platforms.each do |platform| %>
