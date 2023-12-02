@@ -1,32 +1,39 @@
 
-// .movie-card {
-//   position: absolute;
-//   border: none;
-//   border-radius: 8px;
-//   overflow: hidden;
-//   margin: 10px;
-//   padding: 0; /* Ajout pour éviter le padding par défaut du Bootstrap */
-// }
+.movie-card {
+  position: absolute;
+  border: none;
+  border-radius: 8px;
+  overflow: hidden;
+  margin: 10px;
+  padding: 0;
+}
 
-// .movie-image {
-//   overflow: hidden;
-// }
 
-// .movie-image img {
-//   width: 110%; /* Ajustez la taille selon vos préférences */
-//   height: auto; /* Laissez la hauteur auto pour maintenir les proportions originales */
-//   object-fit: cover;
-// }
+.movie-details {
+  padding: 10px;
+}
 
-// .movie-details {
-//   padding: 10px;
-// }
-
-// .movie-delete {
-//   position: absolute;
-//   bottom: 0;
-//   left: 0;
-//   width: 100%;
-//   background-color: #341111;
-//   box-sizing: border-box;
-// }
+.col-4 {
+  position: relative;
+  min-height: 300px;
+}
+.container {
+  min-height: 100vh;
+}
+.movie-container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+.movie-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 8px;
+}
+.movie-delete {
+  width: 100%;
+  background-color: #341111;
+  box-sizing: border-box;
+}
