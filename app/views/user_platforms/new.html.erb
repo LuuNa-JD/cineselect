@@ -14,19 +14,20 @@
           </div>
           <%= form_with(model: current_user, url: user_platforms_path, method: :post, local: true) do |f| %>
           <div data-controller="platform">
-            <div class="d-flex justify-content-around" data-platform-target="platformElement">
+            <div class="d-flex justify-content-around">
               <% PLATFORMS.each_with_index do |provider_name, index| %>
               <div class="platform-selection">
                 <%= image_tag "#{provider_name[:name].downcase.gsub(' ', '_')}_logo.png",
                     alt: "#{provider_name[:name]} logo",
                     class: "platform-logo #{'selected' if @user_streaming_ids.include?(provider_name[:id])}",
-                    data: { platform: provider_name[:name], target: "hiddenField#{index}" } %>
-                <%= f.hidden_field :selected_platforms,
-                        name: 'user[selected_platforms][]',
-                        value: provider_name[:name],
-                        id: "hiddenField#{index}",
-                        disabled: !@user_streaming_ids.include?(provider_name[:id]) %>
-              </div>
+                     data: { action: "click->platform#toggleSelection", platform: provider_name[:name], target: "platform.platform" } %>
+            <%= f.hidden_field :selected_platforms,
+                  name: 'user[selected_platforms][]',
+                  value: provider_name[:name],
+                  id: "hiddenField#{index}",
+                  disabled: !@user_streaming_ids.include?(provider_name[:id]),
+                  data: { platform: provider_name[:name], target: "platform.hiddenField" } %>
+          </div>
               <% end %>
             </div>
           </div>
