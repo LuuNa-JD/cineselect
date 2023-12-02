@@ -1,1 +1,26 @@
-.colorindex {background-color: green;}
+
+.colorindex {
+  background-color: #341111;
+}
+
+.white-icon {
+  color: white !important;
+}
+.textecolor {
+  color: #FFF;
+  text-align: center;
+  font-family: Inter;
+  font-size: 40px;
+  font-style: bold;
+  font-weight: 700;
+  line-height: 150%;
+  letter-spacing: -0.264px;
+}
+
+.horizontal-line {
+  width: 270px;
+  height: 5px;
+  background-color: white;
+  margin: 10px 0;
+  margin: 20px auto;
+}
