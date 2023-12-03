@@ -1,10 +1,13 @@
 
 .colorindex {
-  background-color: #341111;
+  background: linear-gradient(to bottom, #990000, #341111, #990000);
 }
+
 
 .white-icon {
   color: white !important;
+  float: right;
+  // width: 25px;
 }
 .textecolor {
   color: #FFF;
