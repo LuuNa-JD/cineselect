@@ -17,9 +17,14 @@
                   <i class="far fa-trash-can white-icon"></i>
                 <% end %>
               </div>
+            <% end %>
+            <div class="mt-1">
+              <%= link_to favorite_path(favorite), data: { turbo_method: :delete, turbo_confirm: 'Êtes-vous sûr?' } do %>
+                <i class="far fa-trash-can white-icon movie-delete"></i>
+              <% end %>
             </div>
-          <% end %>
-        </div>
+          </div>
+        <% end %>
       </div>
     </div>
   </div>
