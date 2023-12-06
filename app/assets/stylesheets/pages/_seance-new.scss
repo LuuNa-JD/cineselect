@@ -5,8 +5,10 @@
 }
 
 .form-screen {
-  width: 375px;
-  height: 667px;
+  min-width: 375px;
+  min-height: 667px;
+  width: 100%;
+  height: 100vh;
   margin: auto;
   background: #341111;
   font-family: 'Inter', sans-serif;
@@ -19,7 +21,7 @@
   color: #FFF;
   text-align: center;
   font-family: Inter;
-  font-size: 24px;
+  font-size: 1.5em;
   font-style: normal;
   font-weight: 700;
   line-height: 150%;
@@ -43,7 +45,7 @@
   flex-shrink: 0;
   color: #000;
   font-family: Inter;
-  font-size: 14px;
+  font-size: 1em;
   font-style: normal;
   font-weight: 500;
   line-height: 150%;
