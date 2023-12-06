@@ -20,7 +20,7 @@
                 <%= image_tag "#{provider_name[:name].downcase.gsub(' ', '_')}_logo.png",
                     alt: "#{provider_name[:name]} logo",
                     class: "platform-logo #{'selected' if @user_streaming_ids.include?(provider_name[:id])}",
-                     data: { action: "click->platform#toggleSelection", platform: provider_name[:name], target: "platform.platform" } %>
+                    data: { action: "click->platform#toggleSelection", platform: provider_name[:name], target: "platform.platform" } %>
             <%= f.hidden_field :selected_platforms,
                   name: 'user[selected_platforms][]',
                   value: provider_name[:name],

@@ -3,7 +3,10 @@ module PlatformHelper
     watch_providers = {
       'Netflix' => 8,
       'Amazon Prime Video' => 119,
-      'Disney' => 337
+      'Disney' => 337,
+      'Apple' => 350,
+      'Paramount Plus' => 531,
+      'Crave' => 230,
     }
     watch_providers[provider_name]
   end
@@ -13,7 +16,10 @@ module PlatformHelper
     id_to_watch_providers = {
       8 => 'Netflix',
       119 => 'Amazon Prime Video',
-      337 => 'Disney'
+      337 => 'Disney',
+      350 => 'Apple',
+      531 => 'Paramount Plus',
+      230 => 'Crave',
     }
     id_to_watch_providers[provider_id]
   end
@@ -40,6 +46,18 @@ module PlatformHelper
       "Disney Plus" => {
         "logo_path" => asset_path("disney_logo.png"),
         "url" => "https://www.disneyplus.com/fr-fr"
+      },
+      "Apple TV Plus" => {
+        "logo_path" => asset_path("apple_logo.png"),
+        "url" => "https://www.apple.com/fr/apple-tv-plus/"
+      },
+      "Paramount Plus" => {
+        "logo_path" => asset_path("paramount_plus_logo.png"),
+        "url" => "https://www.paramountplus.com/"
+      },
+      "Crave" => {
+        "logo_path" => asset_path("crave_logo.png"),
+        "url" => "https://www.crave.ca/"
       },
     }
 
