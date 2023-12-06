@@ -8,7 +8,6 @@
 }
 
 .main-container{
-  min-height: 100vh;
   overflow-y: auto !important;
 }
 
@@ -17,11 +16,10 @@
   color: #FFF!important;
   }
 
-
-body{
-  margin: 0;
-  position: relative;
+.profile-footer{
+  padding-bottom: 25px;
 }
+
 
 .profile-avatar{
   position: relative;
@@ -31,9 +29,6 @@ body{
   display: none;
 }
 
-.bottom-button{
-  display: none;
-}
 
 .avatar-large{
   display: none;
@@ -73,10 +68,6 @@ body{
 
 @media (max-width: 960px) {
   /* Pour un écran < 960px, cette classe CSS s'applique */
-  .bottom-button{
-    display: revert;
-    z-index: 1000;
-  }
 
   .avatar-large{
     display: revert;
