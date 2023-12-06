@@ -5,19 +5,25 @@
 
 .movie-screen-final {
   position: relative;
-  width: 375px;
-  height: 667px;
+  min-width: 375px;
+  min-height: 667px;
+  width: 100%;
+  height: 100vh;
   background-color: rgba(255, 255, 255, 1);
   overflow: hidden;
   background: linear-gradient(180deg, rgb(96, 10, 10) 0%, rgb(28, 28, 28) 100%);
 }
 
+
 .movie-card {
   position: absolute;
   width: 340px;
   height: 543px;
-  top: 18px;
-  left: 8px;
+  top: 3%;
+  left: 0;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
   transition: transform 0.5s ease-out;
   will-change: transform;
   perspective: 1000px;
