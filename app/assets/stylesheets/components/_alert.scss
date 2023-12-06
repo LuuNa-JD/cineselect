@@ -4,3 +4,17 @@
 
   z-index: 1000;
 }
+.fade-out {
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+@media (max-width: 960px) {
+  /* Pour un écran < 960px, cette classe CSS s'applique */
+  .alert{
+    position: fixed;
+    top: 0;
+    max-height: 70px;
+    z-index: 1000;
+  }
+}
