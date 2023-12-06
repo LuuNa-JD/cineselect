@@ -12,11 +12,11 @@
     </div>
 
     <div class="form-group" id="genre-input">
-      <%= f.input :genre, label: "<span style='color: white;'>Genre</span>".html_safe, collection: @genres, prompt: 'Sélectionnez un genre', input_html: { class: 'form-control seance_genre' } %>
+      <%= f.input :genre, label: "<span style='color: white;'>Genre</span>".html_safe, collection: @genres, prompt: 'Sélectionnez un genre', input_html: { class: 'form-control seance_genre'  }, label_html: { class: 'custom-label' } %>
     </div>
 
     <div class="form-group" id="keyword-input" style="display: none;">
-      <%= f.input :keyword, label: "<span style='color: white;'>Mot Clé</span>".html_safe, input_html: { class: 'form-control' } %>
+      <%= f.input :keyword, label: "<span style='color: white;'>Mot Clé</span>".html_safe, input_html: { class: 'form-control' }, label_html: { class: 'custom-label' } %>
     </div>
 
     <div class="form-group">
@@ -42,10 +42,10 @@
     <div id="advanced-search-fields" style="display: none;">
 
       <div class="form-group">
-        <%= f.input :year, label: 'Année', as: :select, collection: (1980..2024).to_a.reverse, prompt: 'Sélectionnez une année', input_html: { class: 'form-control' } %>
-        <%= f.input :actor, label: 'Acteur', collection: @actors, prompt: 'Sélectionnez un acteur', input_html: { class: 'form-control' } %>
-        <%= f.input :runtime, label: 'Durée', collection: [['Moins de 60 min', 60], ['Moins de 90 min', 90], ['Moins de 120 min', 120]], prompt: 'Sélectionnez une durée', input_html: { class: 'form-control' } %>
-        <%= f.input :origin_country, label: "Pays d'origine", collection: @origin_country, prompt: 'Sélectionnez un pays', input_html: { class: 'form-control' } %>
+        <%= f.input :year, label: 'Année', as: :select, collection: (1980..2024).to_a.reverse, prompt: 'Sélectionnez une année', input_html: { class: 'form-control' }, label_html: { class: 'custom-label' } %>
+        <%= f.input :actor, label: 'Acteur', collection: @actors, prompt: 'Sélectionnez un acteur', input_html: { class: 'form-control' }, label_html: { class: 'custom-label' } %>
+        <%= f.input :runtime, label: 'Durée', collection: [['Moins de 60 min', 60], ['Moins de 90 min', 90], ['Moins de 120 min', 120]], prompt: 'Sélectionnez une durée', input_html: { class: 'form-control' }, label_html: { class: 'custom-label' } %>
+        <%= f.input :origin_country, label: "Pays d'origine", collection: @origin_country, prompt: 'Sélectionnez un pays', input_html: { class: 'form-control' }, label_html: { class: 'custom-label' }  %>
       </div>
     </div>
       <%= f.submit "Rechercher", class: "btn search" %>

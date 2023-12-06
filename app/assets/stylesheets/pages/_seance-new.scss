@@ -2,6 +2,8 @@
 
 .custom-label {
   content: none;
+  margin-left: 13px;
+  margin-bottom: 5px;
 }
 
 .form-screen {
@@ -141,10 +143,20 @@
   border-radius: 10px;
   margin-bottom: 5px;
   color: white;
+  cursor: pointer;
   input[type="radio"] {
-    accent-color: black
+    accent-color: black;
+    width: 14px; /* Ajuster la taille du bouton radio */
+    height: 14px;
   }
   z-index : 1;
+}
+
+.form-check input[type="radio"]:checked {
+  background-color: white;
+  width: 14px;
+  height: 14px;
+  color: #000000; /* Changer la couleur de fond lorsque sélectionné */
 }
 
 .ellipse {

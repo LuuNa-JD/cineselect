@@ -68,6 +68,11 @@ class SeancesController < ApplicationController
       hash[:id]
     end
 
+    if params[:seance][:seance_type].blank?
+      redirect_to new_seance_path, flash: { alert: "Veuillez sélectionner un type de média (Film ou Série) avant de lancer la recherche." }
+      return
+    end
+
     if params[:seance][:seance_type] == 'Film'
       session[:recommendations] = tmdb_service.recommend_movies(preferences, user, user_region, watch_provider_ids).first(20).map do |recommendation|
         recommendation.merge({ "media_type" => "film" })
