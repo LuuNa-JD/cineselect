@@ -6,7 +6,7 @@ export default class extends Controller {
 
     setTimeout(() => {
       this.redirect();
-    }, 5000);
+    }, 4000);
   }
 
   redirect() {

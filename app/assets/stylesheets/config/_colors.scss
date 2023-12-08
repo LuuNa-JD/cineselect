@@ -8,8 +8,9 @@ $orange: #E67E22;
 $green: #1EDD88;
 $gray: #0E0000;
 $light-gray: #F4F4F4;
-$main-background:linear-gradient(180deg, #600A0A 0%, #1C1C1C 100%);
+$main-background:linear-gradient(to bottom, #990000, #341111, #990000);
 
 .main-background-color {
   background: $main-background;
+
 }
