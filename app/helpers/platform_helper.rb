@@ -3,8 +3,8 @@ module PlatformHelper
     watch_providers = {
       'Netflix' => 8,
       'Amazon Prime Video' => 119,
-      'Disney' => 337,
       'Apple' => 350,
+      'Disney' => 337,
       'Paramount Plus' => 531,
       'Crave' => 230,
     }
@@ -16,8 +16,8 @@ module PlatformHelper
     id_to_watch_providers = {
       8 => 'Netflix',
       119 => 'Amazon Prime Video',
-      337 => 'Disney',
       350 => 'Apple',
+      337 => 'Disney',
       531 => 'Paramount Plus',
       230 => 'Crave',
     }
@@ -44,7 +44,7 @@ module PlatformHelper
         "url" => "https://www.primevideo.com/"
       },
       "Disney Plus" => {
-        "logo_path" => asset_path("disney_logo.png"),
+        "logo_path" => asset_path("disney_logo.jpg"),
         "url" => "https://www.disneyplus.com/fr-fr"
       },
       "Apple TV Plus" => {
