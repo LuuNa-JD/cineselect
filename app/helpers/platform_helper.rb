@@ -44,7 +44,7 @@ module PlatformHelper
         "url" => "https://www.primevideo.com/"
       },
       "Disney Plus" => {
-        "logo_path" => asset_path("disney_logo.jpg"),
+        "logo_path" => asset_path("disney_logo.png"),
         "url" => "https://www.disneyplus.com/fr-fr"
       },
       "Apple TV Plus" => {
