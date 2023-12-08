@@ -28,7 +28,8 @@
     display: flex;
     align-items: center;
     padding: 15px;
-    justify-content: space-around;
+    max-height: 55px;
+    justify-content: space-between;
     position: fixed;
     white-space: nowrap;
     bottom: 0;
