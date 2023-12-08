@@ -8,7 +8,7 @@
   <turbo-frame id="movie-frame">
     <% if session[:recommendations] %>
       <% session[:recommendations].each do |movie| %>
-        <div class="movie-card" data-controller="movie-card" data-url="<%= streaming_platforms_path(id: movie['id'], type: movie['media_type']) %>">
+        <div class="movie-card" data-controller="movie-card" data-url="<%= streaming_platforms_path(id: movie['id'], type: movie['media_type']) %>" data-card-id="<%= movie['id'] %>" data-action="swipe-left->movie-card#swipeLeft">
           <div class="card-inner">
             <div class="card-front">
               <%= image_tag("https://image.tmdb.org/t/p/w500/#{movie["poster_path"]}", class: "rectangle") %>
@@ -51,5 +51,11 @@
       <% end %>
     <% end %>
   </turbo-frame>
+  <div id="end-of-cards-message">
+    <p>Vous avez vu toutes les recommandations.</p>
+    <button class="btn_restart" onclick="location.href='<%= new_seance_path %>'">
+      Recommencer
+    </button>
+  </div>
 </div>
 </body>
