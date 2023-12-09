@@ -34,12 +34,12 @@ export default class extends Controller {
   }
 
   updateFavoriteUI(favorited) {
-    const icon = this.element.querySelector('.heart-icon');
-    icon.src = favorited ? "heart_full.svg" : "heart_empty.svg";
-
+    const heartPath = this.element.querySelector('#heart');
     if (favorited) {
+      heartPath.setAttribute('fill', '#E2264D');
       this.element.classList.add('favorited');
     } else {
+      heartPath.setAttribute('fill', '#AAB8C2');
       this.element.classList.remove('favorited');
     }
   }
