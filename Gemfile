@@ -57,6 +57,8 @@ gem "sassc-rails"
 gem "pundit"
 gem "dotenv-rails"
 gem "cloudinary"
+gem "jquery-rails"
+gem "anime_js_rails"
 # gem "sweetalert2"
 
 group :development, :test do

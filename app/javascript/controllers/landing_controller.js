@@ -1,16 +1,16 @@
-import { Controller } from "@hotwired/stimulus"
+// import { Controller } from "@hotwired/stimulus"
 
-// Connects to data-controller="landing"
-export default class extends Controller {
-  connect() {
+// // Connects to data-controller="landing"
+// export default class extends Controller {
+//   connect() {
 
-    setTimeout(() => {
-      this.redirect();
-    }, 5000);
-  }
+//     setTimeout(() => {
+//       this.redirect();
+//     }, 5000);
+//   }
 
-  redirect() {
+//   redirect() {
 
-    window.location.href = "/seances/new";
-  }
-}
+//     window.location.href = "/seances/new";
+//   }
+// }
