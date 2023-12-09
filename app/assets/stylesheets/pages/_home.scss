@@ -2,7 +2,8 @@
 .landing-page {
 
   background: url("#{asset_path('home_page.png')}"), lightgray 50% / cover no-repeat;
-  background-size: contain;
+  background-size: cover;
+  background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   display: flex;
@@ -16,39 +17,43 @@
   flex-shrink: 0;
   z-index: 0;
   overflow-y:hidden;
-}
-  .cadre {
-    position: fixed;
-    top: 100px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 400px;
-    height: 90px;
-    border-radius: 30px;
-    background: rgba(0, 0, 0, 0.01);
-    mix-blend-mode: plus-darker;
-    box-shadow: 0px 4px 40px 0px rgba(0, 0, 0, 0.5);
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    overflow-y: visible; /* ou supprimez cette ligne */
   }
+
+
     h1 {
       color: #FF0303;
-      font-family: 'Italianno', cursive;
-      font-size: 84px;
-      font-style: light;
-      font-weight: 330;
-      line-height: 90px;
+
+      font-family: Italianno;
+      font-size: 64px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 100%; /* 64px */
       text-transform: capitalize;
     }
 
+.slogan-title
+{
+  color: white;
+  font-family: 'Italianno';
+  font-size: 2.8rem;
+}
+.loader {
+  width: 30px;
+  height: 30px;
+  border: 3px solid black;
+  border-top: 3px solid #FF0303;
+  border-bottom: 3px solid #000000;
+  border-radius: 50%;
+  animation: spin 1s infinite linear;
+  margin: 20px auto;
+}
 
-  @media only screen and (max-width: 768px) {
-    .cadre {
-      height: 60px;
-    }
-
-    h1 {
-      font-size: 40px;
-    }
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
   }
+  100% {
+    transform: rotate(360deg);
+  }
+}
