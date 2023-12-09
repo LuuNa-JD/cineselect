@@ -19,7 +19,7 @@
               <div class="platform-selection mb-5">
                 <%= image_tag "#{provider_name[:name].downcase.gsub(' ', '_')}_logo.png",
                     alt: "#{provider_name[:name]} logo",
-                    class: "mx-2 platform-logo #{'selected' if @user_streaming_ids.include?(provider_name[:id])}",
+                    class: "mx-2 platform-logo #{@user_streaming_ids.include?(provider_name[:id])? 'selected': 'unselected'}",
                     data: { action: "click->platform#toggleSelection", platform: provider_name[:name], target: "platform.platform" } %>
             <%= f.hidden_field :selected_platforms,
                   name: 'user[selected_platforms][]',
