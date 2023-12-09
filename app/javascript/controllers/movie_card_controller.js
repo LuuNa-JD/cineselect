@@ -51,7 +51,6 @@ export default class extends Controller {
         setTimeout(() => {
           card.classList.add('hide');
           this.cardsSwiped++;
-          this.checkEndOfCards();
         }, 300);
       }
     });
