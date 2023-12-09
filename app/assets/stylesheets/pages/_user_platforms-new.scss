@@ -4,18 +4,22 @@
   100% { transform: scale(1); }
 }
 
-.selected {
-  animation: pulse 0.5s infinite; /* Animation de pulsation */
-  transition: background-color 0.5s ease; /* Transition de couleur de fond */
 
+.selected {
+  opacity: 1;
+}
+
+.unselected{
+  opacity: 0.4;
 }
 
 .platform-logo {
   cursor: pointer;
   transition: transform 0.2s ease-in-out;
   margin-right: 10px;
-  width: 85px;
-  height: 87px;
+  width: 115px;
+  height: 110px;
+
 }
 
 .platform-selection{

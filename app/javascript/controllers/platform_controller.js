@@ -5,7 +5,14 @@ export default class extends Controller {
 
   toggleSelection(event) {
     const logo = event.currentTarget;
-    logo.classList.toggle('selected');
+    if (logo.classList.contains("selected")){
+
+      logo.classList.remove('selected');
+      logo.classList.add("unselected")
+    }else{
+      logo.classList.remove("unselected")
+      logo.classList.add("selected")
+    }
 
     const hiddenField = this.hiddenFieldTargets.find(field => field.dataset.platform === logo.dataset.platform);
     if (hiddenField) {
