@@ -6,4 +6,4 @@ import "controllers"
 import "@popperjs/core"
 import "bootstrap"
 import "@fortawesome/fontawesome-free";
-import "jquery3"
+// import "jquery3"
