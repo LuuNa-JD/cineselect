@@ -1,60 +1,62 @@
-<head>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-</head>
-
-<body>
-<div class="form-screen">
-  <h1 class="title">MES PREFERENCES</h1>
-  <%= simple_form_for @seance, html: { class: 'custom-form' } do |f| %>
-  <div class= "hiding-logic">
-    <div class="form-group">
-      <%= f.input :seance_type, collection: ['Film', 'Série'], prompt: 'Sélectionnez un type', input_html: { class: 'form-control seance_type', required: 'required' }, label_html: { class: 'custom-label' }, label: "<span style='color: white;'>Type</span>".html_safe %>
-    </div>
-
-    <div class="form-group" id="genre-input">
-      <%= f.input :genre, label: "<span style='color: white;'>Genre</span>".html_safe, collection: @genres, prompt: 'Sélectionnez un genre', input_html: { class: 'form-control seance_genre'  }, label_html: { class: 'custom-label' } %>
-    </div>
-
-    <div class="form-group" id="keyword-input" style="display: none;">
-      <%= f.input :keyword, label: "<span style='color: white;'>Mot Clé</span>".html_safe, input_html: { class: 'form-control' }, label_html: { class: 'custom-label' } %>
-    </div>
-
-    <div class="form-group">
-      <div class="form-check-group">
-        <div class="form-check-group">
-          <%= f.radio_button :search_type, 'genre', id: 'search-by-genre', checked: true %>
-          <%= f.label :search_type_genre, 'Rechercher par genre' %>
+<div class="form-screen container-fluid ">
+  <div class="row justify-content-center align-items-center">
+    <div class="col p-0">
+      <h1 class="title">MES PREFERENCES</h1>
+      <%= simple_form_for @seance, html: { class: 'custom-form' } do |f| %>
+      <div class="hiding-logic">
+        <div class="form-group">
+          <%= f.input :seance_type, collection: ['Film', 'Série'], prompt: 'Sélectionnez un type', input_html: { class: 'form-control seance_type', required: 'required' }, label_html: { class: 'custom-label' }, label: "<span style='color: white;'>Type</span>".html_safe %>
         </div>
-        <div class="form-check-group">
-          <%= f.radio_button :search_type, 'keyword', id: 'search-by-keyword' %>
-          <%= f.label :search_type_keyword, 'Rechercher par mot-clé' %>
+
+        <div class="form-group" id="genre-input">
+          <%= f.input :genre, label: "<span style='color: white;'>Genre</span>".html_safe, collection: @genres, prompt: 'Sélectionnez un genre', input_html: { class: 'form-control seance_genre'  }, label_html: { class: 'custom-label' } %>
+        </div>
+
+        <div class="form-group" id="keyword-input" style="display: none;">
+          <%= f.input :keyword, label: "<span style='color: white;'>Mot Clé</span>".html_safe, input_html: { class: 'form-control' }, label_html: { class: 'custom-label' } %>
+        </div>
+
+        <div class="form-group">
+          <div class="form-check-group">
+            <div class="form-check-group">
+              <%= f.radio_button :search_type, 'genre', id: 'search-by-genre', checked: true %>
+              <%= f.label :search_type_genre, 'Rechercher par genre' %>
+            </div>
+            <div class="form-check-group">
+              <%= f.radio_button :search_type, 'keyword', id: 'search-by-keyword' %>
+              <%= f.label :search_type_keyword, 'Rechercher par mot-clé' %>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
-  </div>
-  <div class="form-group">
-    <a href="#" id="advanced-search-toggle" class="advanced-search-link">
-      recherche avancée
-      <svg class="search-icon" width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M13.2878 11.0014H12.4935L12.212 10.7314C12.8403 10.0054 13.2995 9.15021 13.5568 8.22705C13.814 7.30389 13.8629 6.33559 13.7 5.39144C13.2274 2.61144 10.8949 0.39144 8.07976 0.0514397C7.09006 -0.0730946 6.08483 0.0292113 5.14099 0.350529C4.19715 0.671846 3.33973 1.20366 2.63432 1.90527C1.92891 2.60688 1.39423 3.4597 1.07117 4.39846C0.748119 5.33723 0.64526 6.33706 0.770468 7.32144C1.11231 10.1214 3.34431 12.4414 6.13933 12.9114C7.08859 13.0735 8.06213 13.0248 8.99027 12.769C9.91842 12.5131 10.7782 12.0564 11.5082 11.4314L11.7797 11.7114V12.5014L16.0526 16.7514C16.4648 17.1614 17.1385 17.1614 17.5507 16.7514C17.9629 16.3414 17.9629 15.6714 17.5507 15.2614L13.2878 11.0014ZM7.25533 11.0014C4.75187 11.0014 2.73101 8.99144 2.73101 6.50144C2.73101 4.01144 4.75187 2.00144 7.25533 2.00144C9.75879 2.00144 11.7797 4.01144 11.7797 6.50144C11.7797 8.99144 9.75879 11.0014 7.25533 11.0014Z" fill="white"/>
-      </svg>
-    </a>
-    <div id="advanced-search-fields" style="display: none;">
-
       <div class="form-group">
-        <%= f.input :year, label: 'Année', as: :select, collection: (1980..2024).to_a.reverse, prompt: 'Sélectionnez une année', input_html: { class: 'form-control' }, label_html: { class: 'custom-label' } %>
-        <%= f.input :actor, label: 'Acteur', collection: @actors, prompt: 'Sélectionnez un acteur', input_html: { class: 'form-control' }, label_html: { class: 'custom-label' } %>
-        <%= f.input :runtime, label: 'Durée', collection: [['Moins de 60 min', 60], ['Moins de 90 min', 90], ['Moins de 120 min', 120]], prompt: 'Sélectionnez une durée', input_html: { class: 'form-control' }, label_html: { class: 'custom-label' } %>
-        <%= f.input :origin_country, label: "Pays d'origine", collection: @origin_country, prompt: 'Sélectionnez un pays', input_html: { class: 'form-control' }, label_html: { class: 'custom-label' }  %>
+        <a href="#" id="advanced-search-toggle" class="advanced-search-link mb-5">
+          recherche avancée
+          <svg class="search-icon" width="18" height="18" viewBox="0 0 18 18" fill="none"
+            xmlns="http://www.w3.org/2000/svg">
+            <path
+              d="M13.2878 11.0014H12.4935L12.212 10.7314C12.8403 10.0054 13.2995 9.15021 13.5568 8.22705C13.814 7.30389 13.8629 6.33559 13.7 5.39144C13.2274 2.61144 10.8949 0.39144 8.07976 0.0514397C7.09006 -0.0730946 6.08483 0.0292113 5.14099 0.350529C4.19715 0.671846 3.33973 1.20366 2.63432 1.90527C1.92891 2.60688 1.39423 3.4597 1.07117 4.39846C0.748119 5.33723 0.64526 6.33706 0.770468 7.32144C1.11231 10.1214 3.34431 12.4414 6.13933 12.9114C7.08859 13.0735 8.06213 13.0248 8.99027 12.769C9.91842 12.5131 10.7782 12.0564 11.5082 11.4314L11.7797 11.7114V12.5014L16.0526 16.7514C16.4648 17.1614 17.1385 17.1614 17.5507 16.7514C17.9629 16.3414 17.9629 15.6714 17.5507 15.2614L13.2878 11.0014ZM7.25533 11.0014C4.75187 11.0014 2.73101 8.99144 2.73101 6.50144C2.73101 4.01144 4.75187 2.00144 7.25533 2.00144C9.75879 2.00144 11.7797 4.01144 11.7797 6.50144C11.7797 8.99144 9.75879 11.0014 7.25533 11.0014Z"
+              fill="white" />
+          </svg>
+        </a>
+        <div id="advanced-search-fields" style="display: none;">
+
+          <div class="form-group">
+            <%= f.input :year, label: 'Année', as: :select, collection: (1980..2024).to_a.reverse, prompt: 'Sélectionnez une année', input_html: { class: 'form-control' }, label_html: { class: 'custom-label' } %>
+            <%= f.input :actor, label: 'Acteur', collection: @actors, prompt: 'Sélectionnez un acteur', input_html: { class: 'form-control' }, label_html: { class: 'custom-label' } %>
+            <%= f.input :runtime, label: 'Durée', collection: [['Moins de 60 min', 60], ['Moins de 90 min', 90], ['Moins de 120 min', 120]], prompt: 'Sélectionnez une durée', input_html: { class: 'form-control' }, label_html: { class: 'custom-label' } %>
+            <%= f.input :origin_country, label: "Pays d'origine", collection: @origin_country, prompt: 'Sélectionnez un pays', input_html: { class: 'form-control' }, label_html: { class: 'custom-label' }  %>
+          </div>
+        </div>
+
+        <%= f.submit "Rechercher", class: "btn search" %>
+        <% end %>
       </div>
     </div>
-      <%= f.submit "Rechercher", class: "btn search" %>
-  <% end %>
   </div>
 </div>
 <div class="ellipse ellipse-left"></div>
 <div class="ellipse ellipse-right"></div>
-</body>
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>

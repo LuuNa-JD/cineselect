@@ -8,24 +8,19 @@
   overflow-x: hidden;
 }
 
-.profile-body{
-
-height: 100%;
+.main-container{
+  min-height: 100vh;
 }
 
-.main-container{
-  height: 100vh;
-  overflow-y: auto !important;
+.profile-body{
+  color: #FFF!important;
+  min-height: 100%;
 }
 
 .second-container{
-  height: 100vh;
+  min-height: 100%;
 }
 
-body{
-  margin: 0;
-  position: relative;
-}
 
 .profile-avatar{
   position: relative;
@@ -40,14 +35,31 @@ body{
   display: none;
 }
 .icon{
-  width: 28px;
-  height: 52px;
+  width: 26px;
+  height: 64px;
+  margin-left: 3px;
 }
 
 .icon-tv{
   width: 27px;
   height: 31px;
+  margin-left: 5px;
 }
+
+.icon_next_1 {
+  width: 28px;
+  height: 52px;
+  margin-left : 49px;
+  right : 20px;
+}
+
+.icon_next_2 {
+  width: 28px;
+  height: 52px;
+  margin-left : 5px;
+}
+
+
 
 .text-typography{
   color: #000;
