@@ -14,12 +14,21 @@
   cursor: pointer;
   transition: transform 0.2s ease-in-out;
   margin-right: 10px;
-  width: 90px;
+  width: 85px;
   height: 87px;
 }
 
 .platform-selection{
   flex-grow: 1;
   width: 33%;
+
+}
+
+@media (max-width: 375px){
+
+  .platform-logo{
+    width: 60px;
+    height: 67px;
+  }
 
 }
