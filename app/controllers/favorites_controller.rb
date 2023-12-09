@@ -56,7 +56,7 @@ end
     authorize @favorite
     redirect_to favorites_path, notice: 'votre film a été supprimé de vos favoris'
 
-  rescue ActiveRecord::RecordNotFound
+    rescue ActiveRecord::RecordNotFound
     flash[:alert] = 'votre film a été supprimé de vos favoris'
     redirect_to favorites_path
   end

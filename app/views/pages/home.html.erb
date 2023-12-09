@@ -15,6 +15,13 @@
       </div>
     </div>
     <div class="loader mx-auto" style="margin-top: 59vh; display: none;"></div>
+    <% if current_user && current_user.selected_platforms.empty? %>
+       <%= link_to "Allons-y", new_user_platform_path, class: "btn btn-primary" %>
+    <% elsif current_user %>
+      <%= link_to "Allons-y", new_seance_path, class: "btn btn-primary" %>
+      <% else %>
+      <%= link_to "Allons-y", new_user_session_path, class:"btn btn-primary"%>
+    <% end %>
   </div>
 </div>
 <%# <% if current_user %>

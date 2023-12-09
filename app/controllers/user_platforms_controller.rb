@@ -21,6 +21,11 @@ class UserPlatformsController < ApplicationController
       render :new
     end
     authorize current_user, :create?
+
+    rescue NoMethodError
+    flash[:alert] = 'Vous devez au moins selectionner une plateforme'
+    redirect_to new_user_platform_path
+    authorize current_user, :create?
   end
 
   private
