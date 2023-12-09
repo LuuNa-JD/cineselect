@@ -21,11 +21,11 @@
 
     <div class="form-group">
       <div class="form-check-group">
-        <div class="form-check">
+        <div class="form-check-group">
           <%= f.radio_button :search_type, 'genre', id: 'search-by-genre', checked: true %>
           <%= f.label :search_type_genre, 'Rechercher par genre' %>
         </div>
-        <div class="form-check">
+        <div class="form-check-group">
           <%= f.radio_button :search_type, 'keyword', id: 'search-by-keyword' %>
           <%= f.label :search_type_keyword, 'Rechercher par mot-clé' %>
         </div>

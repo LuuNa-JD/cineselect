@@ -69,7 +69,7 @@ class SeancesController < ApplicationController
     end
 
     if params[:seance][:seance_type].blank?
-      redirect_to new_seance_path, flash: { alert: "Veuillez sélectionner un type de média (Film ou Série) avant de lancer la recherche." }
+      redirect_to new_seance_path, flash: { alert: "Veuillez sélectionner un type de média (Film ou Série)." }
       return
     end
 

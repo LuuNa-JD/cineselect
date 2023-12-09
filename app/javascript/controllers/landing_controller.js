@@ -4,10 +4,10 @@
 // export default class extends Controller {
 //   connect() {
 
-//     setTimeout(() => {
-//       this.redirect();
-//     }, 5000);
-//   }
+    setTimeout(() => {
+      this.redirect();
+    }, 4000);
+  }
 
 //   redirect() {
 
