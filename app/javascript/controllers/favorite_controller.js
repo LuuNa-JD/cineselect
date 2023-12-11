@@ -35,7 +35,7 @@ export default class extends Controller {
   }
 
   updateFavoriteUI(favorited) {
-    const checkboxId = this.element.querySelector("input[type='checkbox']").id;
+    const checkboxId = `favorite-checkbox-${this.idValue}`;
     const checkboxBackId = `favorite-checkbox-back-${this.idValue}`;
 
     if (favorited) {
@@ -55,7 +55,6 @@ export default class extends Controller {
 
     this.element.dispatchEvent(event);
   }
-
 
   getMetaValue(name) {
     const element = document.head.querySelector(`meta[name="${name}"]`);

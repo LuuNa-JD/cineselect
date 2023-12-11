@@ -13,12 +13,20 @@ document.addEventListener("turbo:load", () => {
     controller.addEventListener("favorite:toggle", (event) => {
       const { favorited } = event.detail;
 
-
-      const otherFavoritesControllers = document.querySelectorAll("[data-controller='favorite']:not(.controller-uuid-" + controller.dataset.uuid + ")");
-
-      otherFavoritesControllers.forEach((otherController) => {
-        otherController.querySelector("input[type='checkbox']").checked = favorited;
-      });
+      updateFavoriteButtonUI(controller, favorited);
     });
   });
 });
+
+function updateFavoriteButtonUI(controller, favorited) {
+  const checkboxId = `favorite-checkbox-${controller.idValue}`;
+  const checkboxBackId = `favorite-checkbox-back-${controller.idValue}`;
+
+  if (favorited) {
+    document.getElementById(checkboxId).checked = true;
+    document.getElementById(checkboxBackId).checked = true;
+  } else {
+    document.getElementById(checkboxId).checked = false;
+    document.getElementById(checkboxBackId).checked = false;
+  }
+}
