@@ -69,14 +69,6 @@
   height: 100%;
 }
 
-.movie-card .card-front,
-.movie-card .card-back {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  backface-visibility: hidden; /* Cache le dos de la carte */
-}
-
 .card-back {
   background: linear-gradient(180deg, rgb(152, 51, 51) 0%, rgb(20, 20, 20) 100%);
   color: white;
@@ -187,54 +179,6 @@
   overflow: hidden;
 }
 
-// .box {
-//   width: 340px;
-//   height: 543px;
-// }
-
-// .heart-icon {
-//   position: absolute;
-//   bottom: 10px;
-//   right: 10px;
-//   z-index: 1;
-// }
-
-// .empty-heart,
-// .full-heart {
-//   width: 38px;
-//   height: 38px;
-// }
-
-// .empty-heart {
-//   display: inline-block;
-//   opacity: 1;
-//   transition: opacity 0.3s ease-in-out;
-// }
-
-// .favorite-button {
-//   background: none;
-//   border: none;
-
-// }
-
-// .favorite-button .heart-icon {
-//   display: inline-block;
-
-// }
-
-// .full-heart {
-//   display: none;
-//   transition: opacity 0.3s ease-in-out;
-// }
-
-// .favorite-button.favorited .empty-heart {
-//   opacity: 0;
-// }
-
-// .favorite-button.favorited .full-heart {
-//   display: inline-block;
-// }
-
 #end-of-cards-message {
   color: white;
   position: fixed;
@@ -270,8 +214,11 @@
   cursor: pointer;
   overflow: visible;
   width: 60px;
-  margin: 20px;
+  margin: 0;
+  bottom: 1px;
+  right: 1px;
   z-index: 1;
+  transform: scale(1.2);
 }
 
 svg #heart {
@@ -290,7 +237,7 @@ svg #main-circ {
 
 .checkbox:checked+label svg #heart {
   transform: scale(0.2);
-  fill: #E2264D;
+  fill: #fc0404;
   animation: animateHeart .3s linear forwards .25s;
 }
 
@@ -453,44 +400,44 @@ svg #main-circ {
   40% {
     transform: scale(10);
     opacity: 1;
-    fill: #DD4688;
+    fill: #dd4646;
   }
   55% {
     transform: scale(11);
     opacity: 1;
-    fill: #D46ABF;
+    fill: #d46a6a;
   }
   65% {
     transform: scale(12);
     opacity: 1;
-    fill: #CC8EF5;
+    fill: #f58e8e;
   }
   75% {
     transform: scale(13);
     opacity: 1;
     fill: transparent;
-    stroke: #CC8EF5;
+    stroke: #f58e8e;
     stroke-width: .5;
   }
   85% {
     transform: scale(17);
     opacity: 1;
     fill: transparent;
-    stroke: #CC8EF5;
+    stroke: #f58e8e;
     stroke-width: .2;
   }
   95% {
     transform: scale(18);
     opacity: 1;
     fill: transparent;
-    stroke: #CC8EF5;
+    stroke: #f58e8e;
     stroke-width: .1;
   }
   100% {
     transform: scale(19);
     opacity: 1;
     fill: transparent;
-    stroke: #CC8EF5;
+    stroke: #f58e8e;
     stroke-width: 0;
   }
 }
