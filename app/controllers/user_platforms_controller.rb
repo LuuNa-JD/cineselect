@@ -16,7 +16,7 @@ class UserPlatformsController < ApplicationController
 
     current_user.update(selected_platforms: selected_platforms)
     if current_user.save
-      redirect_to profile_path(current_user), notice: "Vos sélections de plateformes ont été enregistrées."
+      redirect_to new_seance_path, notice: "Vos sélections de plateformes ont été enregistrées."
     else
       render :new
     end
