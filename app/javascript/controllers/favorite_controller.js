@@ -25,6 +25,7 @@ export default class extends Controller {
       if (response.ok) {
         const data = await response.json();
         this.updateFavoriteUI(data.favorited);
+        this.dispatchToggleEvent(data.favorited);
       } else {
         console.error("Erreur lors de la demande de basculement des favoris.");
       }
@@ -34,14 +35,25 @@ export default class extends Controller {
   }
 
   updateFavoriteUI(favorited) {
-    const icon = this.element.querySelector('.heart-icon');
-    icon.src = favorited ? "heart_full.svg" : "heart_empty.svg";
+    const checkboxId = this.element.querySelector("input[type='checkbox']").id;
+    const checkboxBackId = `favorite-checkbox-back-${this.idValue}`;
 
     if (favorited) {
-      this.element.classList.add('favorited');
+      document.getElementById(checkboxId).checked = true;
+      document.getElementById(checkboxBackId).checked = true;
     } else {
-      this.element.classList.remove('favorited');
+      document.getElementById(checkboxId).checked = false;
+      document.getElementById(checkboxBackId).checked = false;
     }
+  }
+
+  dispatchToggleEvent(favorited) {
+    const event = new CustomEvent("favorite:toggle", {
+      bubbles: true,
+      detail: { favorited }
+    });
+
+    this.element.dispatchEvent(event);
   }
 
 

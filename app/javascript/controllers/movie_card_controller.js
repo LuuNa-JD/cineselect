@@ -40,6 +40,7 @@ export default class extends Controller {
     const cardInner = card.querySelector('.card-inner');
     const mc = new Hammer(card);
 
+
     mc.on("doubletap", () => {
       cardInner.classList.toggle('is-flipped');
     });
@@ -69,13 +70,14 @@ export default class extends Controller {
 
     mc.on("pan", (ev) => {
       if (Math.abs(ev.deltaX) < window.innerWidth) {
-        card.style.transform = `translateX(${ev.deltaX}px)`;
+        card.style.transition = 'none';
+        card.style.transform = `translate3d(${ev.deltaX}px, 0, 0)`;
       }
     });
 
     mc.on("panend", (ev) => {
       if (ev.deltaX <= 100 && ev.deltaX >= -100) {
-        card.style.transition = 'transform 0.3s ease-out';
+        card.style.transition = 'transform 0.6s ease-out';
         card.style.transform = '';
       }
     });
