@@ -22,11 +22,6 @@ function updateFavoriteButtonUI(controller, favorited) {
   const checkboxId = `favorite-checkbox-${controller.idValue}`;
   const checkboxBackId = `favorite-checkbox-back-${controller.idValue}`;
 
-  if (favorited) {
-    document.getElementById(checkboxId).checked = true;
-    document.getElementById(checkboxBackId).checked = true;
-  } else {
-    document.getElementById(checkboxId).checked = false;
-    document.getElementById(checkboxBackId).checked = false;
-  }
+  const checkbox = document.getElementById(checkboxId);
+  const checkboxBack = document.getElementById(checkboxBackId);
 }

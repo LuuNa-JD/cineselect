@@ -38,6 +38,9 @@ export default class extends Controller {
     const checkboxId = `favorite-checkbox-${this.idValue}`;
     const checkboxBackId = `favorite-checkbox-back-${this.idValue}`;
 
+    const checkbox = document.getElementById(checkboxId);
+    const checkboxBack = document.getElementById(checkboxBackId);
+
     if (favorited) {
       document.getElementById(checkboxId).checked = true;
       document.getElementById(checkboxBackId).checked = true;
