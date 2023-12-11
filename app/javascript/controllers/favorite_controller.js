@@ -13,8 +13,7 @@ export default class extends Controller {
 
     const currentlyFavorited = this.checkbox.checked;
 
-    // Mise à jour optimiste de l'UI
-    this.updateFavoriteUI(!currentlyFavorited); // Mettez à jour l'interface utilisateur pour refléter le nouvel état
+    this.updateFavoriteUI(!currentlyFavorited);
 
     try {
       const response = await fetch('/favorites/toggle', {
@@ -35,13 +34,11 @@ export default class extends Controller {
       if (!response.ok) throw new Error("Request failed");
 
       const data = await response.json();
-      // La mise à jour de l'UI est déjà faite, vérifiez seulement si l'état doit être annulé
       if (data.favorited !== !currentlyFavorited) {
         this.updateFavoriteUI(currentlyFavorited);
       }
       this.dispatchToggleEvent(data.favorited);
     } catch (error) {
-      // Annuler la mise à jour de l'UI en cas d'échec
       this.updateFavoriteUI(currentlyFavorited);
       console.error("Une erreur s'est produite lors de la demande de basculement des favoris.", error);
     }

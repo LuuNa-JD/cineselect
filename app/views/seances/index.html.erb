@@ -9,7 +9,7 @@
     <% if session[:recommendations] %>
       <% session[:recommendations].each do |movie| %>
       <turbo-frame id="movie-frame-<%= movie['id'] %>">
-        <div class="movie-card" data-controller="movie-card" data-url="<%= streaming_platforms_path(id: movie['id'], type: movie['media_type']) %>" data-card-id="<%= movie['id'] %>" data-action="swipe-left->movie-card#swipeLeft">
+        <div class="movie-card movie-card-<%= movie['id'] %>" data-controller="movie-card" data-url="<%= streaming_platforms_path(id: movie['id'], type: movie['media_type']) %>" data-card-id="<%= movie['id'] %>" data-action="swipe-left->movie-card#swipeLeft">
           <div class="card-inner">
             <div class="card-front">
               <%= image_tag("https://image.tmdb.org/t/p/w500/#{movie["poster_path"]}",
@@ -86,7 +86,11 @@
                   </div>
                 </div>
                 <div class="movie-description-section">
-                  <p class="movie-overview"><%= movie["overview"] %></p>
+                  <div class="movie-overview">
+                    <div class="overview-container">
+                      <p class="overview-text"><%= movie["overview"] %></p>
+                    </div>
+                  </div>
                 </div>
               </div>
               <div class="favorite-container"
@@ -156,4 +160,14 @@
     </button>
   </div>
 </div>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  const descriptions = document.querySelectorAll(".movie-overview");
+  descriptions.forEach((description) => {
+    if (description.scrollHeight > description.clientHeight) {
+      description.classList.add("auto-scroll");
+    }
+  });
+});
+</script>
 </body>

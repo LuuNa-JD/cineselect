@@ -105,7 +105,7 @@
   font-weight: 700;
   font-size: 15px;
   margin: 5px 0 0 21px;
-  margin-right: 10px;
+  padding: 0 20px;
   line-height: 1.2;
   color: transparent;
   background: linear-gradient(90deg, #600A0A 13.38%, #EB0F0F 88.13%);
@@ -143,14 +143,37 @@
 }
 
 
-.movie-overview {
-  margin-top: 140px;
-  white-space: normal;
-  max-height: 300px;
-  overflow-y: auto;
-  font-size: 15px;
+.movie-overview.auto-scroll .overview-container {
+  position: absolute;
+  width: 100%;
+  top: 100%;
+  left: 0;
+  padding: 10px;
+  box-sizing: border-box;
+}
+.movie-overview.auto-scroll .overview-container .overview-text {
+  animation: none;
+}
+.movie-overview.auto-scroll .overview-container .overview-text.scrolling {
+  animation: scrollText 23s linear infinite;
 }
 
+.movie-overview {
+  position: relative;
+  height: 300px;
+  width: 300px;
+  overflow: hidden;
+  top: 75px;
+}
+
+@keyframes scrollText {
+  0% {
+    transform: translateY(-5%);
+  }
+  100% {
+    transform: translateY(-150%);
+  }
+}
 
 .is-flipped {
   transform: rotateY(180deg);

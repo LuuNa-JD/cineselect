@@ -2,18 +2,29 @@ import { Controller } from "@hotwired/stimulus";
 
 export default class extends Controller {
   static targets = ['movieCard'];
+  isCardFlipped = false;
 
   initialize() {
     console.log("Contrôleur Stimulus initialisé");
     document.addEventListener('turbo:load', () => {
       console.log("Turbo Frames a chargé le contenu");
-      this.loadHammerAndSetup();
     });
   }
 
   connect() {
     this.cardsSwiped = 0;
     this.totalCards = this.movieCardTargets.length;
+    this.loadHammerAndSetup();
+    this.applyAutoScrolling();
+  }
+
+
+  applyAutoScrolling() {
+    // Appliquez le scrolling automatique à l'élément de description
+    const description = this.element.querySelector('.movie-overview');
+    if (description && description.scrollHeight > description.clientHeight) {
+      description.classList.add('auto-scroll');
+    }
   }
 
   async loadHammerAndSetup() {
@@ -40,8 +51,17 @@ export default class extends Controller {
     const cardInner = card.querySelector('.card-inner');
     const mc = new Hammer(card);
 
+    const overviewText = card.querySelector('.overview-text');
+
     mc.on("doubletap", () => {
       cardInner.classList.toggle('is-flipped');
+      this.isCardFlipped = !this.isCardFlipped;
+
+      if (this.isCardFlipped) {
+        overviewText.classList.add('scrolling');
+      } else {
+        overviewText.classList.remove('scrolling');
+      }
     });
 
     mc.on("panleft", (ev) => {
