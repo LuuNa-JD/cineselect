@@ -20,13 +20,13 @@
                 <%= image_tag "#{provider_name[:name].downcase.gsub(' ', '_')}_logo.png",
                     alt: "#{provider_name[:name]} logo",
                     class: "mx-2 platform-logo #{@user_streaming_ids.include?(provider_name[:id])? 'selected': 'unselected'}",
-                    data: { action: "click->platform#toggleSelection", platform: provider_name[:name], target: "platform.platform" } %>
+                    data: { action: "click->platform#toggleSelection", platform: provider_name[:name], platform_target: "platform" } %>
             <%= f.hidden_field :selected_platforms,
                   name: 'user[selected_platforms][]',
                   value: provider_name[:name],
                   id: "hiddenField#{index}",
                   disabled: !@user_streaming_ids.include?(provider_name[:id]),
-                  data: { platform: provider_name[:name], target: "platform.hiddenField" } %>
+                  data: { platform: provider_name[:name], platform_target: "hiddenField" } %>
           </div>
               <% end %>
             </div>
@@ -40,7 +40,5 @@
         </div>
       </div>
     </div>
-
   </div>
-
 </div>

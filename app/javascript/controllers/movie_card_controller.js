@@ -40,32 +40,16 @@ export default class extends Controller {
     const cardInner = card.querySelector('.card-inner');
     const mc = new Hammer(card);
 
-
     mc.on("doubletap", () => {
       cardInner.classList.toggle('is-flipped');
     });
 
     mc.on("panleft", (ev) => {
-      if (ev.deltaX < -100) {
-        card.style.transition = 'transform 0.7s ease-out';
-        card.style.transform = 'translateX(-120%)';
-        setTimeout(() => {
-          card.classList.add('hide');
-          this.cardsSwiped++;
-        }, 300);
-      }
+      this.handleSwipeLeft(ev, card);
     });
 
     mc.on("panright", (ev) => {
-      if (ev.deltaX > 100) {
-        card.style.transition = 'transform 0.7s ease-out';
-        card.style.transform = 'translateX(120%)';
-        setTimeout(() => {
-          card.classList.add('hide-out');
-          var url = card.getAttribute('data-url');
-          window.location.href = url;
-        }, 300);
-      }
+      this.handleSwipeRight(ev, card);
     });
 
     mc.on("pan", (ev) => {
@@ -76,10 +60,42 @@ export default class extends Controller {
     });
 
     mc.on("panend", (ev) => {
-      if (ev.deltaX <= 100 && ev.deltaX >= -100) {
-        card.style.transition = 'transform 0.6s ease-out';
+      if (Math.abs(ev.deltaX) <= 100) {
+        card.style.transition = 'transform 0.4s ease-out';
         card.style.transform = '';
       }
     });
+  }
+
+  handleSwipeLeft(ev, card) {
+    const swipeThreshold = -100;
+    if (ev.deltaX < swipeThreshold) {
+      card.style.transition = 'transform 0.4s ease-out';
+      card.style.transform = 'translateX(-120%)';
+      setTimeout(() => {
+        card.classList.add('hide');
+        this.cardsSwiped++;
+        this.removeCardFromDOM(card);
+      }, 300);
+    }
+  }
+
+  handleSwipeRight(ev, card) {
+    const swipeThreshold = 100;
+    if (ev.deltaX > swipeThreshold) {
+      card.style.transition = 'transform 0.4s ease-out';
+      card.style.transform = 'translateX(120%)';
+      setTimeout(() => {
+        card.classList.add('hide-out');
+        var url = card.getAttribute('data-url');
+        window.location.href = url;
+      }, 300);
+    }
+  }
+
+  removeCardFromDOM(card) {
+    if (card && card.parentNode) {
+      card.parentNode.removeChild(card);
+    }
   }
 }

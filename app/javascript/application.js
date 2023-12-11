@@ -7,21 +7,21 @@ import "@fortawesome/fontawesome-free";
 
 
 document.addEventListener("turbo:load", () => {
-  const favoritesControllers = document.querySelectorAll("[data-controller='favorite']");
-
-  favoritesControllers.forEach((controller) => {
-    controller.addEventListener("favorite:toggle", (event) => {
+  document.body.addEventListener("favorite:toggle", (event) => {
+    const controller = event.target.closest("[data-controller='favorite']");
+    if (controller) {
       const { favorited } = event.detail;
-
       updateFavoriteButtonUI(controller, favorited);
-    });
+    }
   });
 });
 
 function updateFavoriteButtonUI(controller, favorited) {
-  const checkboxId = `favorite-checkbox-${controller.idValue}`;
-  const checkboxBackId = `favorite-checkbox-back-${controller.idValue}`;
+  if (!controller.checkbox || !controller.checkboxBack) {
+    controller.checkbox = document.getElementById(`favorite-checkbox-${controller.idValue}`);
+    controller.checkboxBack = document.getElementById(`favorite-checkbox-back-${controller.idValue}`);
+  }
 
-  const checkbox = document.getElementById(checkboxId);
-  const checkboxBack = document.getElementById(checkboxBackId);
+  controller.checkbox.checked = favorited;
+  controller.checkboxBack.checked = favorited;
 }
