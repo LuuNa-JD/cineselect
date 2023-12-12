@@ -1,17 +1,35 @@
 {
-  "background_color": "white",
-  "description": "CinéSelect est un site de recommandation de films et séries.",
-  "display": "fullscreen",
   "name": "CinéSelect",
+  "short_name": "CinéSelect",
+  "description": "CinéSelect est un site de recommandation de films et séries.",
+  "start_url": "/",
+  "display": "fullscreen",
+  "orientation": "portrait",
+  "scope": "/",
   "icons": [
     <% files = Dir.entries(Rails.root.join("app/assets/images/icons/")).select {|f| !File.directory? f} %>
-    <% files.each_with_index do |file, index| %>
-      <% match = file.match(/.+-(?<size>\d{2,3}x\d{2,3}).png/) %>
-      {
-        "src": "<%= image_path "icons/#{file}" %>",
-        "sizes": "<%= match && match[:size] %>",
-        "type": "image/png"
-      }<%= "," unless (files.size - 1) == index %>
+    <% icons = [] %>
+    <% files.each do |file| %>
+      <% match = file.match(/(\d{2,3}x\d{2,3})/) %>
+      <% if match %>
+        {
+          "src": "<%= image_path "icons/#{file}" %>",
+          "sizes": "<%= match[0] %>",
+          "type": "image/png"
+        }<%= "," unless file == files.last %>
+      <% end %>
     <% end %>
+    <%= icons.to_json %>
+  ],
+  "permissions": [
+    "geolocation"
+  ],
+  "screenshots": [
+    {
+      "src": "<%= image_path('screenshot-mobile.png') %>",
+      "sizes": "439x883",
+      "type": "image/png",
+      "platform": "mobile"
+    }
   ]
 }
