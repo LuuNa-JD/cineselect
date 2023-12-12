@@ -8,18 +8,14 @@
   "scope": "/",
   "icons": [
     <% files = Dir.entries(Rails.root.join("app/assets/images/icons/")).select {|f| !File.directory? f} %>
-    <% icons = [] %>
-    <% files.each do |file| %>
-      <% match = file.match(/(\d{2,3}x\d{2,3})/) %>
-      <% if match %>
-        {
-          "src": "<%= image_path "icons/#{file}" %>",
-          "sizes": "<%= match[0] %>",
-          "type": "image/png"
-        }<%= "," unless file == files.last %>
-      <% end %>
+    <% files.each_with_index do |file, index| %>
+      <% match = file.match(/.+-(?<size>\d{2,3}x\d{2,3}).png/) %>
+      {
+        "src": "<%= image_path "icons/#{file}" %>",
+        "sizes": "<%= match && match[:size] %>",
+        "type": "image/png"
+      }<%= "," unless (files.size - 1) == index %>
     <% end %>
-    <%= icons.to_json %>
   ],
   "permissions": [
     "geolocation"
