@@ -3,6 +3,8 @@ import { Controller } from "@hotwired/stimulus";
 export default class extends Controller {
   static targets = ['movieCard'];
   isCardFlipped = false;
+  cardsPerPage = 10;
+  currentIndex = 0;
 
   initialize() {
     console.log("Contrôleur Stimulus initialisé");
@@ -13,14 +15,42 @@ export default class extends Controller {
 
   connect() {
     this.cardsSwiped = 0;
-    this.totalCards = this.movieCardTargets.length;
+    this.hideAllCards();
     this.loadHammerAndSetup();
     this.applyAutoScrolling();
+    this.loadInitialCards();
   }
 
+  hideAllCards() {
+    this.movieCardTargets.forEach((card, index) => {
+      card.style.display = 'none';
+    });
+  }
+
+  showCardAtIndex(index) {
+    if (index < this.movieCardTargets.length) {
+      this.movieCardTargets[index].style.display = 'block';
+    }
+  }
+
+  loadNextCard() {
+    this.showCardAtIndex(this.currentIndex);
+    this.currentIndex++;
+  }
+
+  loadInitialCards() {
+    const initialCards = this.movieCardTargets.slice(0, this.cardsPerPage);
+    this.loadCards(initialCards);
+    this.currentIndex = this.cardsPerPage;
+  }
+
+  loadMoreCards() {
+    const remainingCards = this.movieCardTargets.slice(this.currentIndex, this.currentIndex + this.cardsPerPage);
+    this.loadCards(remainingCards);
+    this.currentIndex += this.cardsPerPage;
+  }
 
   applyAutoScrolling() {
-    // Appliquez le scrolling automatique à l'élément de description
     const description = this.element.querySelector('.movie-overview');
     if (description && description.scrollHeight > description.clientHeight) {
       description.classList.add('auto-scroll');
@@ -114,8 +144,8 @@ export default class extends Controller {
   }
 
   removeCardFromDOM(card) {
-    if (card && card.parentNode) {
-      card.parentNode.removeChild(card);
-    }
+    card.style.display = 'none';
+    this.cardsSwiped++;
+    this.loadNextCard();
   }
 }

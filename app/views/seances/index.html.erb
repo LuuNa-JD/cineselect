@@ -13,10 +13,12 @@
           <div class="card-inner">
             <div class="card-front">
               <%= image_tag("https://image.tmdb.org/t/p/w500/#{movie["poster_path"]}",
-              class: "rectangle",
-              srcset: "https://image.tmdb.org/t/p/w300/#{movie["poster_path"]} 300w, https://image.tmdb.org/t/p/w500/#{movie["poster_path"]} 500w",
-              sizes: "(max-width: 768px) 300px, 500px",
-              onload: "this.parentElement.style.background='none'") %>
+                class: "rectangle",
+                srcset: "https://image.tmdb.org/t/p/w300/#{movie["poster_path"]} 300w,
+                https://image.tmdb.org/t/p/w500/#{movie["poster_path"]} 500w",
+                sizes: "(max-width: 768px) 300px, 500px",
+                onload: "this.parentElement.style.background='none'",
+                loading: "lazy") %>
 
             <div class="favorite-container"
               data-controller="favorite"
