@@ -13,14 +13,37 @@ export default class extends Controller {
 
   connect() {
     this.cardsSwiped = 0;
-    this.totalCards = this.movieCardTargets.length;
+    this.hideAllCards();
     this.loadHammerAndSetup();
     this.applyAutoScrolling();
+    this.loadInitialCards();
   }
 
+  hideAllCards() {
+    this.movieCardTargets.forEach((card, index) => {
+      card.style.display = 'none';
+    });
+  }
+
+  showCardAtIndex(index) {
+    if (index < this.movieCardTargets.length) {
+      this.movieCardTargets[index].style.display = 'block';
+    }
+  }
+
+  loadNextCard() {
+    this.showCardAtIndex(this.currentIndex);
+    this.currentIndex++;
+  }
+
+  loadInitialCards() {
+    for (let i = 0; i < this.initialLoadCount; i++) {
+      this.showCardAtIndex(i);
+    }
+    this.currentIndex = this.initialLoadCount;
+  }
 
   applyAutoScrolling() {
-    // Appliquez le scrolling automatique à l'élément de description
     const description = this.element.querySelector('.movie-overview');
     if (description && description.scrollHeight > description.clientHeight) {
       description.classList.add('auto-scroll');
@@ -114,8 +137,8 @@ export default class extends Controller {
   }
 
   removeCardFromDOM(card) {
-    if (card && card.parentNode) {
-      card.parentNode.removeChild(card);
-    }
+    card.style.display = 'none';
+    this.cardsSwiped++;
+    this.loadNextCard();
   }
 }
