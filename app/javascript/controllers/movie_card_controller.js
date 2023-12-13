@@ -3,6 +3,8 @@ import { Controller } from "@hotwired/stimulus";
 export default class extends Controller {
   static targets = ['movieCard'];
   isCardFlipped = false;
+  cardsPerPage = 10;
+  currentIndex = 0;
 
   initialize() {
     console.log("Contrôleur Stimulus initialisé");
@@ -37,10 +39,15 @@ export default class extends Controller {
   }
 
   loadInitialCards() {
-    for (let i = 0; i < this.initialLoadCount; i++) {
-      this.showCardAtIndex(i);
-    }
-    this.currentIndex = this.initialLoadCount;
+    const initialCards = this.movieCardTargets.slice(0, this.cardsPerPage);
+    this.loadCards(initialCards);
+    this.currentIndex = this.cardsPerPage;
+  }
+
+  loadMoreCards() {
+    const remainingCards = this.movieCardTargets.slice(this.currentIndex, this.currentIndex + this.cardsPerPage);
+    this.loadCards(remainingCards);
+    this.currentIndex += this.cardsPerPage;
   }
 
   applyAutoScrolling() {
