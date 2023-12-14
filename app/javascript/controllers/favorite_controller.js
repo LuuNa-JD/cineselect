@@ -3,8 +3,17 @@ import { Controller } from "@hotwired/stimulus"
 export default class extends Controller {
   static values = { id: Number, title: String, imageUrl: String, mediaType: String }
 
+  connect() {
+    this.checkbox = document.getElementById(`favorite-checkbox-${this.idValue}`);
+    this.checkboxBack = document.getElementById(`favorite-checkbox-back-${this.idValue}`);
+  }
+
   async toggle(event) {
     event.preventDefault();
+
+    const currentlyFavorited = this.checkbox.checked;
+
+    this.updateFavoriteUI(!currentlyFavorited);
 
     try {
       const response = await fetch('/favorites/toggle', {
@@ -22,28 +31,33 @@ export default class extends Controller {
         })
       });
 
-      if (response.ok) {
-        const data = await response.json();
-        this.updateFavoriteUI(data.favorited);
-      } else {
-        console.error("Erreur lors de la demande de basculement des favoris.");
+      if (!response.ok) throw new Error("Request failed");
+
+      const data = await response.json();
+      if (data.favorited !== !currentlyFavorited) {
+        this.updateFavoriteUI(currentlyFavorited);
       }
+      this.dispatchToggleEvent(data.favorited);
     } catch (error) {
+      this.updateFavoriteUI(currentlyFavorited);
       console.error("Une erreur s'est produite lors de la demande de basculement des favoris.", error);
     }
   }
 
   updateFavoriteUI(favorited) {
-    const icon = this.element.querySelector('.heart-icon');
-    icon.src = favorited ? "heart_full.svg" : "heart_empty.svg";
-
-    if (favorited) {
-      this.element.classList.add('favorited');
-    } else {
-      this.element.classList.remove('favorited');
-    }
+    this.checkbox.checked = favorited;
+    this.checkboxBack.checked = favorited;
   }
 
+
+  dispatchToggleEvent(favorited) {
+    const event = new CustomEvent("favorite:toggle", {
+      bubbles: true,
+      detail: { favorited }
+    });
+
+    this.element.dispatchEvent(event);
+  }
 
   getMetaValue(name) {
     const element = document.head.querySelector(`meta[name="${name}"]`);

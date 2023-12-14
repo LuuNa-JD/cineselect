@@ -17,6 +17,7 @@
 
 .movie-card {
   position: absolute;
+  transform-style: preserve-3d;
   width: 340px;
   height: 543px;
   top: 3%;
@@ -24,8 +25,8 @@
   right: 0;
   margin-left: auto;
   margin-right: auto;
-  transition: transform 0.5s ease-out;
-  will-change: transform;
+  transition: filter 0.3s ease, transform 0.5s ease-out, z-index 0s;
+  will-change: transform, filter, opacity;
   perspective: 1000px;
   border-radius: 20px;
   border-radius: var(--border-radius);
@@ -36,18 +37,24 @@
 
 .movie-card.dragging {
   transition: transform 0.2s ease-out;
+  z-index: 30;
+  filter: none;
 }
 .movie-card.hide {
-  transform: translateX(100%);
-  transition: transform 0.5s ease-in-out;
+  transform: translate3d(100%, 0, 0);
+  transition: transform 0.9s ease-in-out;
 }
 .movie-card.hide-out {
-  transform: translateX(-100%);
-  transition: transform 0.5s ease-in-out;
+  transform: translate3d(-100%, 0, 0);
+  transition: transform 0.9s ease-in-out;
+}
+
+.blur-effect {
+  filter: blur(4px);
 }
 
 .card-inner {
-  transition: transform 1s;
+  transition: transform 1.2s cubic-bezier(0.175, 0.885, 0.320, 1.275);
   transform-style: preserve-3d;
   transform-origin: center;
   position: relative;
@@ -98,7 +105,7 @@
   font-weight: 700;
   font-size: 15px;
   margin: 5px 0 0 21px;
-  margin-right: 10px;
+  padding: 0 20px;
   line-height: 1.2;
   color: transparent;
   background: linear-gradient(90deg, #600A0A 13.38%, #EB0F0F 88.13%);
@@ -136,14 +143,37 @@
 }
 
 
-.movie-overview {
-  margin-top: 140px;
-  white-space: normal;
-  max-height: 300px;
-  overflow-y: auto;
-  font-size: 15px;
+.movie-overview.auto-scroll .overview-container {
+  position: absolute;
+  width: 100%;
+  top: 100%;
+  left: 0;
+  padding: 10px;
+  box-sizing: border-box;
+}
+.movie-overview.auto-scroll .overview-container .overview-text {
+  animation: none;
+}
+.movie-overview.auto-scroll .overview-container .overview-text.scrolling {
+  animation: scrollText 23s linear infinite;
 }
 
+.movie-overview {
+  position: relative;
+  height: 300px;
+  width: 300px;
+  overflow: hidden;
+  top: 75px;
+}
+
+@keyframes scrollText {
+  0% {
+    transform: translateY(-5%);
+  }
+  100% {
+    transform: translateY(-150%);
+  }
+}
 
 .is-flipped {
   transform: rotateY(180deg);
@@ -170,54 +200,6 @@
   box-shadow: var(--card-shadow);
   position: relative;
   overflow: hidden;
-}
-
-.box {
-  width: 340px;
-  height: 543px;
-}
-
-.heart-icon {
-  position: absolute;
-  bottom: 10px;
-  right: 10px;
-  z-index: 1;
-}
-
-.empty-heart,
-.full-heart {
-  width: 38px;
-  height: 38px;
-}
-
-.empty-heart {
-  display: inline-block;
-  opacity: 1;
-  transition: opacity 0.3s ease-in-out;
-}
-
-.favorite-button {
-  background: none;
-  border: none;
-
-}
-
-.favorite-button .heart-icon {
-  display: inline-block;
-
-}
-
-.full-heart {
-  display: none;
-  transition: opacity 0.3s ease-in-out;
-}
-
-.favorite-button.favorited .empty-heart {
-  opacity: 0;
-}
-
-.favorite-button.favorited .full-heart {
-  display: inline-block;
 }
 
 #end-of-cards-message {
@@ -248,4 +230,258 @@
   background: #1C1C1C;
   box-shadow: 0px 4px 4px 0px #000;
   cursor: pointer;
+}
+
+#heart-svg {
+  position: absolute;
+  cursor: pointer;
+  overflow: visible;
+  width: 60px;
+  margin: 0;
+  bottom: 1px;
+  right: 1px;
+  z-index: 1;
+  transform: scale(1.2);
+}
+
+svg #heart {
+  transform-origin: center;
+  animation: animateHeartOut .3s linear forwards;
+  z-index: 1;
+}
+
+svg #main-circ {
+  transform-origin: 29.5px 29.5px;
+}
+
+.checkbox {
+  display: none;
+}
+
+.checkbox:checked+label svg #heart {
+  transform: scale(0.2);
+  fill: #fc0404;
+  animation: animateHeart .3s linear forwards .25s;
+}
+
+.checkbox:checked+label svg #main-circ {
+  transition: all 2s;
+  animation: animateCircle .3s linear forwards;
+  opacity: 1;
+}
+
+.checkbox:checked+label svg #grp1 {
+  opacity: 1;
+  transition: .1s all .3s;
+}
+
+.checkbox:checked+label svg #grp1 #oval1 {
+  transform: scale(0) translate(0, -30px);
+  transform-origin: 0 0 0;
+  transition: .5s transform .3s;
+}
+
+.checkbox:checked+label svg #grp1 #oval2 {
+  transform: scale(0) translate(10px, -50px);
+  transform-origin: 0 0 0;
+  transition: 1.5s transform .3s;
+}
+
+.checkbox:checked+label svg #grp2 {
+  opacity: 1;
+  transition: .1s all .3s;
+}
+
+.checkbox:checked+label svg #grp2 #oval1 {
+  transform: scale(0) translate(30px, -15px);
+  transform-origin: 0 0 0;
+  transition: .5s transform .3s;
+}
+
+.checkbox:checked+label svg #grp2 #oval2 {
+  transform: scale(0) translate(60px, -15px);
+  transform-origin: 0 0 0;
+  transition: 1.5s transform .3s;
+}
+
+.checkbox:checked+label svg #grp3 {
+  opacity: 1;
+  transition: .1s all .3s;
+}
+
+.checkbox:checked+label svg #grp3 #oval1 {
+  transform: scale(0) translate(30px, 0px);
+  transform-origin: 0 0 0;
+  transition: .5s transform .3s;
+}
+
+.checkbox:checked+label svg #grp3 #oval2 {
+  transform: scale(0) translate(60px, 10px);
+  transform-origin: 0 0 0;
+  transition: 1.5s transform .3s;
+}
+
+.checkbox:checked+label svg #grp4 {
+  opacity: 1;
+  transition: .1s all .3s;
+}
+
+.checkbox:checked+label svg #grp4 #oval1 {
+  transform: scale(0) translate(30px, 15px);
+  transform-origin: 0 0 0;
+  transition: .5s transform .3s;
+}
+
+.checkbox:checked+label svg #grp4 #oval2 {
+  transform: scale(0) translate(40px, 50px);
+  transform-origin: 0 0 0;
+  transition: 1.5s transform .3s;
+}
+
+.checkbox:checked+label svg #grp5 {
+  opacity: 1;
+  transition: .1s all .3s;
+}
+
+.checkbox:checked+label svg #grp5 #oval1 {
+  transform: scale(0) translate(-10px, 20px);
+  transform-origin: 0 0 0;
+  transition: .5s transform .3s;
+}
+
+.checkbox:checked+label svg #grp5 #oval2 {
+  transform: scale(0) translate(-60px, 30px);
+  transform-origin: 0 0 0;
+  transition: 1.5s transform .3s;
+}
+
+.checkbox:checked+label svg #grp6 {
+  opacity: 1;
+  transition: .1s all .3s;
+}
+
+.checkbox:checked+label svg #grp6 #oval1 {
+  transform: scale(0) translate(-30px, 0px);
+  transform-origin: 0 0 0;
+  transition: .5s transform .3s;
+}
+
+.checkbox:checked+label svg #grp6 #oval2 {
+  transform: scale(0) translate(-60px, -5px);
+  transform-origin: 0 0 0;
+  transition: 1.5s transform .3s;
+}
+
+.checkbox:checked+label svg #grp7 {
+  opacity: 1;
+  transition: .1s all .3s;
+}
+
+.checkbox:checked+label svg #grp7 #oval1 {
+  transform: scale(0) translate(-30px, -15px);
+  transform-origin: 0 0 0;
+  transition: .5s transform .3s;
+}
+
+.checkbox:checked+label svg #grp7 #oval2 {
+  transform: scale(0) translate(-55px, -30px);
+  transform-origin: 0 0 0;
+  transition: 1.5s transform .3s;
+}
+
+.checkbox:checked+label svg #grp2 {
+  opacity: 1;
+  transition: .1s opacity .3s;
+}
+
+.checkbox:checked+label svg #grp3 {
+  opacity: 1;
+  transition: .1s opacity .3s;
+}
+
+.checkbox:checked+label svg #grp4 {
+  opacity: 1;
+  transition: .1s opacity .3s;
+}
+
+.checkbox:checked+label svg #grp5 {
+  opacity: 1;
+  transition: .1s opacity .3s;
+}
+
+.checkbox:checked+label svg #grp6 {
+  opacity: 1;
+  transition: .1s opacity .3s;
+}
+
+.checkbox:checked+label svg #grp7 {
+  opacity: 1;
+  transition: .1s opacity .3s;
+}
+
+@keyframes animateCircle {
+  40% {
+    transform: scale(10);
+    opacity: 1;
+    fill: #dd4646;
+  }
+  55% {
+    transform: scale(11);
+    opacity: 1;
+    fill: #d46a6a;
+  }
+  65% {
+    transform: scale(12);
+    opacity: 1;
+    fill: #f58e8e;
+  }
+  75% {
+    transform: scale(13);
+    opacity: 1;
+    fill: transparent;
+    stroke: #f58e8e;
+    stroke-width: .5;
+  }
+  85% {
+    transform: scale(17);
+    opacity: 1;
+    fill: transparent;
+    stroke: #f58e8e;
+    stroke-width: .2;
+  }
+  95% {
+    transform: scale(18);
+    opacity: 1;
+    fill: transparent;
+    stroke: #f58e8e;
+    stroke-width: .1;
+  }
+  100% {
+    transform: scale(19);
+    opacity: 1;
+    fill: transparent;
+    stroke: #f58e8e;
+    stroke-width: 0;
+  }
+}
+
+@keyframes animateHeart {
+  0% {
+    transform: scale(0.2);
+  }
+  40% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes animateHeartOut {
+  0% {
+    transform: scale(1.4);
+  }
+  100% {
+    transform: scale(1);
+  }
 }

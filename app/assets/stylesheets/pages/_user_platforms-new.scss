@@ -4,16 +4,35 @@
   100% { transform: scale(1); }
 }
 
-.selected {
-  animation: pulse 0.5s infinite; /* Animation de pulsation */
-  transition: background-color 0.5s ease; /* Transition de couleur de fond */
 
+.selected {
+  opacity: 1;
+}
+
+.unselected{
+  opacity: 0.4;
 }
 
 .platform-logo {
   cursor: pointer;
   transition: transform 0.2s ease-in-out;
   margin-right: 10px;
-  width: 50px;
-  height: auto;
+  width: 90px;
+  height: 87px;
+
+}
+
+.platform-selection{
+  flex-grow: 1;
+  width: 33%;
+
+}
+
+@media (max-width: 375px){
+
+  .platform-logo{
+    width: 60px;
+    height: 67px;
+  }
+
 }

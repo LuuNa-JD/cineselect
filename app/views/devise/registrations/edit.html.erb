@@ -1,6 +1,6 @@
 <div class="container-fluid main-container background-standard">
   <div class="row justify-content-center align-items-center">
-    <div class="col p-0">
+    <div class="col pt-lg-5 px-0">
       <div class="second-container">
         <div class="profile-header">
           <%= link_to :back, class: "m-4 back-button" do %>
@@ -21,7 +21,7 @@
             <p>Currently waiting confirmation for: <%= resource.unconfirmed_email %></p>
             <% end %>
             <%= f.input :username, required: true, autofocus: true %>
-            <%= f.input :current_password, hint: "we need your current password to confirm your changes", required: true,input_html: { autocomplete: "current-password" }%>
+            <%= f.input :current_password, class: "form-hint", hint: "we need your current password to confirm your changes", required: true,input_html: { autocomplete: "current-password" }%>
             <%= f.input :password, hint: "leave it blank if you don't want to change it", required: false, input_html: { autocomplete: "new-password" }%>
             <%= f.input :password_confirmation, required: false, input_html: { autocomplete: "new-password" }%>
           </div>

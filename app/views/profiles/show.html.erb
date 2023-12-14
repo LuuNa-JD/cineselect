@@ -1,33 +1,35 @@
-<div class="container-fluid main-container">
+<div class="container-fluid main-container background-standard">
   <div class="row justify-content-center align-items-center">
-    <div class="col p-0">
+    <div class="col pt-lg-5 px-0">
       <div class="second-container">
         <div class="profile-header d-flex justify-content-center">
           <h3 class="title-profile-style">Hello <%= current_user.username %></h3>
         </div>
-        <div class="background-standard profile-body">
+        <div class=" profile-body">
           <div class="text-center profile-avatar">
             <%= image_tag(current_user.avatar, class: "avatar-large", alt: "avatar")%>
             <div class="edit-profile text-center mt-4">
-              <%= link_to "Editer le profile", edit_user_registration_path, class: "button-standard" %>
+              <%= link_to "Editer le profil", edit_user_registration_path, class: "button-standard" %>
             </div>
           </div>
           <div class="d-flex flex-column align-items-center mb-3">
             <div class="mt-2 profile-body-button d-flex align-items-center justify-content-around">
-              <img src="<%= image_path('favorite.png') %>" alt="tv" class="icon">
+              <img src="<%= image_path('favorite.png') %>" alt="favorite" class="icon">
               <%= link_to "Mes Favoris", favorites_path, class: "text-decoration-none text-typography" %>
-              <a href="/favorites"> <img src="<%= image_path('next-page.png') %>" alt="next" class="icon"></a>
+              <a href="/favorites"> <img src="<%= image_path('next-page.png') %>" alt="next" class="icon_next_1"></a>
             </div>
 
             <div class="mt-5 profile-body-button d-flex align-items-center justify-content-around">
               <img src="<%= image_path('tv.png') %>" alt="tv" class="icon-tv">
               <%= link_to "Mes plateformes", new_user_platform_path, class: "text-decoration-none text-typography" %>
-              <a href="/user_platforms/new"> <img src="<%= image_path('next-page.png') %>" alt="next" class="icon"></a>
+              <a href="/user_platforms/new"> <img src="<%= image_path('next-page.png') %>" alt="next" class="icon_next_2"></a>
             </div>
           </div>
 
-          <div class=" text-center bottom-button  mt-5 justify-content-center">
+          <div class=" text-center bottom-button mt-5 mb-5 justify-content-center">
             <%= link_to "Se deconnecter", destroy_user_session_path, data: {turbo_method: :delete}, class: "button-standard " %>
+          </div>
+          <div class="profile-footer mt-2">
           </div>
         </div>
       </div>

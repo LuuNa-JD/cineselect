@@ -1,15 +1,23 @@
 .button-standard {
 
-  width: 159px;
-  height: 42px;
+
+  color: #FFF;
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 150%;
+  letter-spacing: -0.176px;
+  width: 134px;
+  height: 54px;
   padding: 10px;
-  gap: 10px;
-  flex-shrink: 0;
+  margin-bottom: 10px;
   border-radius: 20px;
-  color: #FFFFFF;
+  border: none;
   background: #1C1C1C;
-  box-shadow: 0px 4px 4px 0px rgba(255, 254, 254, 0.58);
+  box-shadow: 0px 4px 4px 0px #000;
   text-decoration: none;
+
 }
 
 .profile-body-button {

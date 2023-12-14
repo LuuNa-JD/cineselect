@@ -16,10 +16,15 @@ class UserPlatformsController < ApplicationController
 
     current_user.update(selected_platforms: selected_platforms)
     if current_user.save
-      redirect_to profile_path(current_user), notice: "Vos sélections de plateformes ont été enregistrées."
+      redirect_to new_seance_path, notice: "Vos sélections de plateformes ont été enregistrées."
     else
       render :new
     end
+    authorize current_user, :create?
+
+    rescue NoMethodError
+    flash[:alert] = 'Vous devez au moins selectionner une plateforme'
+    redirect_to new_user_platform_path
     authorize current_user, :create?
   end
 

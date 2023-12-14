@@ -1,0 +1,31 @@
+{
+  "name": "CinéSelect",
+  "short_name": "CinéSelect",
+  "description": "CinéSelect est un site de recommandation de films et séries.",
+  "start_url": "/",
+  "display": "fullscreen",
+  "orientation": "portrait",
+  "scope": "/",
+  "icons": [
+    <% files = Dir.entries(Rails.root.join("app/assets/images/icons/")).select {|f| !File.directory? f} %>
+    <% files.each_with_index do |file, index| %>
+      <% match = file.match(/.+-(?<size>\d{2,3}x\d{2,3}).png/) %>
+      {
+        "src": "<%= image_path "icons/#{file}" %>",
+        "sizes": "<%= match && match[:size] %>",
+        "type": "image/png"
+      }<%= "," unless (files.size - 1) == index %>
+    <% end %>
+  ],
+  "permissions": [
+    "geolocation"
+  ],
+  "screenshots": [
+    {
+      "src": "<%= image_path('screenshot-mobile.png') %>",
+      "sizes": "439x883",
+      "type": "image/png",
+      "platform": "mobile"
+    }
+  ]
+}
