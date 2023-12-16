@@ -47,6 +47,8 @@
   border-radius: 50%;
   animation: spin 1s infinite linear;
   margin: 20px auto;
+  position: fixed;
+  bottom:65px ;
 }
 
 @keyframes spin {

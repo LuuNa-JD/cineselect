@@ -7,18 +7,18 @@
       <div class="col mt-2">
         <div class="text-center cadre pt-4 mt-1">
           <h1><strong>CineSelect</strong></h1>
-          <h2 class="slogan-title" id="slogan" style="display: none;"><strong>Vos critères, notre sélection ! </strong></h2>
+          <h2 class="slogan-title" id="slogan" style="display: none;" data-landing-target="slogan"><strong>Vos critères, notre sélection ! </strong></h2>
         </div>
       </div>
     </div>
-    <div class="loader mx-auto" style="margin-top: 60vh; display: none;"></div>
-    <div class="container btn-container d-flex justify-content-center align-items-center">
+    <div class="loader mx-auto" style="margin-top: 60vh;" data-landing-target="loader"></div>
+    <div class="container btn-container  d-flex justify-content-center align-items-center d-none" id="bouton" data-landing-target="start">
       <% if current_user && current_user.selected_platforms.empty? %>
-        <%= link_to "Allons-y", new_user_platform_path, class: "btn d-none", id: "bouton" %>
+        <%= link_to "Allons-y", new_user_platform_path, class: "btn text-light" %>
       <% elsif current_user %>
-        <%= link_to "Allons-y", new_seance_path, class: "btn d-none", id: "bouton" %>
+        <%= link_to "Allons-y", new_seance_path, class: "btn text-light" %>
       <% else %>
-        <%= link_to "Allons-y", new_user_session_path, class: "btn d-none", id: "bouton" %>
+        <%= link_to "Allons-y", new_user_session_path, class: "btn text-light" %>
       <% end %>
     </div>
   </div>
