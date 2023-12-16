@@ -27,13 +27,9 @@
   bottom: 50px;
 }
 
-.bottom-button{
-  display: none;
-}
 
-.avatar-large{
-  display: none;
-}
+
+
 .icon{
   width: 26px;
   height: 64px;
@@ -78,9 +74,7 @@
 
 @media (max-width: 960px) {
   /* Pour un écran < 960px, cette classe CSS s'applique */
-  .bottom-button{
-    display: block;
-  }
+
 
   .avatar-large{
     display: revert;
